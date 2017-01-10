@@ -5,34 +5,39 @@ void testApp::setup(){
     voice = "Tom";
     
     eliza.load();
-    eliza.start();
+    elizaResponse = eliza.start();
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
-    
-    string userSays;
-    std::getline(std::cin, userSays);
 
-    elizaResponse = eliza.ask(userSays);
-    cout << elizaResponse;
-
-    
-    string cmd = "say -v "+voice+" "+elizaResponse+" ";   // create the command
-    system(cmd.c_str());
+//    std::getline(std::cin, userSays);
 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 
+    ofDrawBitmapStringHighlight( elizaResponse, 100, 100);
+
+    if ( shouldSpeak )
+    {
+        string cmd = "say -v "+voice+" "+elizaResponse+" ";   // create the command
+        system(cmd.c_str());
+        shouldSpeak = false;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    textInput += key;
+    if ( key == OF_KEY_RETURN )
+    {
+        elizaResponse = eliza.ask( textInput );
+        shouldSpeak = true;
+
+    }
 }
 
 //--------------------------------------------------------------

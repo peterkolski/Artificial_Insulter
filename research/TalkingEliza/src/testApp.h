@@ -22,8 +22,9 @@ class testApp : public ofBaseApp{
 
 
         ofxEliza eliza;
+
         string voice;
 		string elizaResponse;
         string textInput = {};
-        ofTrueTypeFont font;
+        bool    shouldSpeak = false;
 };
