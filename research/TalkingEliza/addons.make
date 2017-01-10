@@ -1,2 +1,0 @@
-ofxEliza
-ofxSpeech
