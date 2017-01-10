@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxEliza.h"
-#include "ofxSpeech.h"
 
 class testApp : public ofBaseApp{
 
@@ -20,19 +19,11 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
+
+
         ofxEliza eliza;
         string voice;
 		string elizaResponse;
+        string textInput = {};
         ofTrueTypeFont font;
-    
-        //-- Define function to handle the speech recognition event
-        void speechRecognized(string & wordRecognized);
-    
-    
-//        ofxSpeechRecognizer         recognizer;
-        bool                        drawCircle;
-        int                         circle_x;
-        int                         circle_y;
-        int                         circle_radius;
 };
