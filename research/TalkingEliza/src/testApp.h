@@ -30,7 +30,7 @@ class testApp : public ofBaseApp{
         void speechRecognized(string & wordRecognized);
     
     
-        ofxSpeechRecognizer         recognizer;
+//        ofxSpeechRecognizer         recognizer;
         bool                        drawCircle;
         int                         circle_x;
         int                         circle_y;

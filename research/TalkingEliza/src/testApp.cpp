@@ -6,7 +6,7 @@ static string voices[24] = {"Agnes", "Albert", "Alex", "Bad News", "Bahh", "Bell
 void testApp::setup(){
     
     font.loadFont("verdana.ttf", 12);
-    voice = "Vicki";
+    voice = "Tom";
     
     eliza.load();
     eliza.start();
