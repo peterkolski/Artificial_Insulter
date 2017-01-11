@@ -6,17 +6,23 @@
 
 arstu::ConversationEliza::ConversationEliza()
 {
+//    talkerVec_.resize( talkerMaxAmount_ );
+//    TalkerEliza elisa;
+//    TalkerEliza kora;
     talkerVec_.resize( talkerMaxAmount_ );
+    talkerVec_[ 0 ] = make_unique< TalkerEliza >();
+    talkerVec_[ 1 ] = make_unique< TalkerEliza >();
+
     talkerNames_.resize( talkerMaxAmount_ );
     talkerNames_[ 0 ] = "Elisa";
     talkerNames_[ 1 ] = "Kora";
 
     for ( auto &&talker : talkerVec_ )
     {
-        talker.start();
+        talker->start();
     }
 
-    answerCurrent_ = talkerVec_[ 0 ].getAnswer();
+    answerCurrent_ = talkerVec_[ 0 ]->getAnswer();
 }
 
 string arstu::ConversationEliza::getName( int id )
@@ -39,4 +45,9 @@ int arstu::ConversationEliza::getTalkerCurrentID() const
 const string &arstu::ConversationEliza::getAnswerCurrent()
 {
     return answerCurrent_;
+}
+
+string arstu::ConversationEliza::getName()
+{
+    return getName( talkerCurrentID_ );
 }

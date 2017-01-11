@@ -15,6 +15,7 @@ public:
     ConversationEliza();
 
     int     getTalkerCurrentID() const;
+    string  getName();
     string  getName( int id );
 
     const string &getAnswerCurrent();
@@ -22,7 +23,7 @@ public:
 
 private:
     string  logNameClass_       = "arstu::ConversationEliza => ";
-    vector< TalkerEliza >       talkerVec_;
+    vector< std::unique_ptr< TalkerEliza > >       talkerVec_;
     vector< string >            talkerNames_;
 
     int     talkerMaxAmount_    = 2;
