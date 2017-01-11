@@ -13,7 +13,14 @@ namespace arstu
 
 class TalkerEliza
 {
+public:
+    TalkerEliza();
 
+    string  start();
+    string  ask( string text );
+
+private:
+        ofxEliza eliza_;
 };
 
 }

@@ -3,9 +3,8 @@
 //--------------------------------------------------------------
 void ElisaKoraApp::setup(){
     voice = "Tom";
-    
-    eliza.load();
-    elizaResponse = eliza.start();
+
+    elizaResponse = talkerOne.start();
 
 }
 
@@ -44,7 +43,7 @@ void ElisaKoraApp::keyPressed(int key){
 
     if ( key == OF_KEY_RETURN )
     {
-        elizaResponse = eliza.ask( textInput );
+        elizaResponse = talkerOne.ask( textInput );
         shouldSpeak = true;
     }
 }

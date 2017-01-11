@@ -15,8 +15,6 @@ class ElisaKoraApp : public ofBaseApp{
 
     arstu::TalkerEliza  talkerOne;
 
-        ofxEliza eliza;
-
         string voice;
 		string elizaResponse;
         string textInput = {};
