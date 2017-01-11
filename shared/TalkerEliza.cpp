@@ -16,7 +16,8 @@ arstu::TalkerEliza::TalkerEliza()
 /// \return
 string arstu::TalkerEliza::start()
 {
-    return eliza_.start();
+    answer_ = eliza_.start();
+    return getAnswer();
 }
 
 // -----------------------------------------------
@@ -25,5 +26,11 @@ string arstu::TalkerEliza::start()
 /// \return
 string arstu::TalkerEliza::ask( string text )
 {
-    return eliza_.ask( text );
+    answer_ = eliza_.ask( text );
+    return getAnswer();
+}
+
+const string &arstu::TalkerEliza::getAnswer()
+{
+    return answer_;
 }

@@ -16,11 +16,13 @@ class TalkerEliza
 public:
     TalkerEliza();
 
-    string  start();
-    string  ask( string text );
+    string          start();
+    string          ask( string text );
+    const string    &getAnswer();
 
 private:
-        ofxEliza eliza_;
+    ofxEliza eliza_;
+    string  answer_ = "";
 };
 
 }
