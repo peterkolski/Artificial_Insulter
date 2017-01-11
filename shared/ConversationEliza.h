@@ -17,6 +17,8 @@ public:
     int     getTalkerCurrentID() const;
     string  getName( int id );
 
+    const string &getAnswerCurrent();
+
 
 private:
     string  logNameClass_       = "arstu::ConversationEliza => ";
@@ -24,9 +26,8 @@ private:
     vector< string >            talkerNames_;
 
     int     talkerMaxAmount_    = 2;
-    int     talkerCurrentID_     = 0;
-
-
+    int     talkerCurrentID_    = 0;
+    string  answerCurrent_      = "";
 };
 }
 

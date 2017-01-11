@@ -15,6 +15,8 @@ arstu::ConversationEliza::ConversationEliza()
     {
         talker.start();
     }
+
+    answerCurrent_ = talkerVec_[ 0 ].getAnswer();
 }
 
 string arstu::ConversationEliza::getName( int id )
@@ -32,4 +34,9 @@ string arstu::ConversationEliza::getName( int id )
 int arstu::ConversationEliza::getTalkerCurrentID() const
 {
     return talkerCurrentID_;
+}
+
+const string &arstu::ConversationEliza::getAnswerCurrent()
+{
+    return answerCurrent_;
 }
