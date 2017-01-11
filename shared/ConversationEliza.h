@@ -11,8 +11,22 @@ namespace arstu
 {
 class ConversationEliza
 {
+public:
+    ConversationEliza();
+
+    int     getTalkerCurrentID() const;
+    string  getName( int id );
+
 
 private:
+    string  logNameClass_       = "arstu::ConversationEliza => ";
+    vector< TalkerEliza >       talkerVec_;
+    vector< string >            talkerNames_;
+
+    int     talkerMaxAmount_    = 2;
+    int     talkerCurrentID_     = 0;
+
+
 };
 }
 
