@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxEliza.h"
+#include "TalkerEliza.h"
 
 class ElisaKoraApp : public ofBaseApp{
 
@@ -21,6 +22,8 @@ class ElisaKoraApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 
+    ArStu::TalkerEliza  talkerOne;
+    
         ofxEliza eliza;
 
         string voice;
