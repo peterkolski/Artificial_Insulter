@@ -7,6 +7,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/main.cpp
         src/ElisaKoraApp.cpp
         ../../shared/TalkerEliza.cpp
+        ../../shared/ConversationEliza.cpp
         )
 
 # ------------------------ Shared ------------------------

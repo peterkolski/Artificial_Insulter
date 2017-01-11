@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxEliza.h"
 #include "TalkerEliza.h"
+#include "ConversationEliza.h"
 
 class ElisaKoraApp : public ofBaseApp{
 
@@ -13,7 +14,8 @@ class ElisaKoraApp : public ofBaseApp{
 
 		void keyPressed  (int key);
 
-    arstu::TalkerEliza  talkerOne;
+    arstu::TalkerEliza          talkerOne;
+    arstu::ConversationEliza    conversationEliza;
 
         string voice;
 		string elizaResponse;
