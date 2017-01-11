@@ -5,7 +5,10 @@
 #ifndef ELISAKORA_TALKERELIZA_H
 #define ELISAKORA_TALKERELIZA_H
 
-namespace ArStu
+#include "ofMain.h"
+#include "ofxEliza.h"
+
+namespace arstu
 {
 
 class TalkerEliza
