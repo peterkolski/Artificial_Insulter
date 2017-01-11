@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxEliza.h"
 
-class testApp : public ofBaseApp{
+class ElisaKoraApp : public ofBaseApp{
 
 	public:
 		void setup();
@@ -27,4 +27,6 @@ class testApp : public ofBaseApp{
 		string elizaResponse;
         string textInput = {};
         bool    shouldSpeak = false;
+
+	void speak();
 };

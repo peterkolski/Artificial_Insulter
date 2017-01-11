@@ -1,11 +1,11 @@
 #include "ofMain.h"
-#include "testApp.h"
+#include "ElisaKoraApp.h"
 #include "ofAppGlutWindow.h"
 
 //========================================================================
 int main( ){
 
 	ofSetupOpenGL(680,800, OF_WINDOW);			// <-------- setup the GL context
-	ofRunApp( new testApp() );
+	ofRunApp( new ElisaKoraApp() );
 
 }

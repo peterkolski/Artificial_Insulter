@@ -1,7 +1,7 @@
-#include "testApp.h"
+#include "ElisaKoraApp.h"
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void ElisaKoraApp::setup(){
     voice = "Tom";
     
     eliza.load();
@@ -10,7 +10,7 @@ void testApp::setup(){
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void ElisaKoraApp::update(){
 
 
 //    std::getline(std::cin, userSays);
@@ -18,64 +18,73 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void ElisaKoraApp::draw(){
 
     ofDrawBitmapStringHighlight( elizaResponse, 100, 100);
 
+    ofDrawBitmapStringHighlight( textInput, 100, 200);
+
+    speak( );
+}
+
+void ElisaKoraApp::speak()
+{
     if ( shouldSpeak )
     {
-        string cmd = "say -v "+voice+" "+elizaResponse+" ";   // create the command
+        string cmd = "say -v " + voice + " " + elizaResponse + " ";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
+        textInput = "";
     }
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void ElisaKoraApp::keyPressed(int key){
+    textInput += key;
+
     if ( key == OF_KEY_RETURN )
     {
         elizaResponse = eliza.ask( textInput );
         shouldSpeak = true;
-
     }
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void ElisaKoraApp::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ElisaKoraApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ElisaKoraApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ElisaKoraApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ElisaKoraApp::mouseReleased(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ElisaKoraApp::windowResized(int w, int h){
 
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
+void ElisaKoraApp::gotMessage(ofMessage msg){
 
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void ElisaKoraApp::dragEvent(ofDragInfo dragInfo){
 
 }
