@@ -24,7 +24,7 @@ void ElisaKoraApp::draw(){
 
     ofDrawBitmapStringHighlight( textInput, 100, 200);
 
-    speak( );
+//    speak( );
 }
 
 void ElisaKoraApp::speak()
