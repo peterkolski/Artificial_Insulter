@@ -5,12 +5,15 @@
 #ifndef ELISAKORA_TALKERELIZA_H
 #define ELISAKORA_TALKERELIZA_H
 
+namespace ArStu
+{
 
-
-class TalkerEliza {
+class TalkerEliza
+{
 
 };
 
+}
 
 
 #endif //ELISAKORA_TALKERELIZA_H
