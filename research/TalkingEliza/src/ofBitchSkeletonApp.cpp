@@ -9,7 +9,7 @@ void ofBitchSkeletonApp::setup(){
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::update(){
-
+    speak( );
 }
 
 //--------------------------------------------------------------
@@ -19,15 +19,13 @@ void ofBitchSkeletonApp::draw(){
     ofDrawBitmapStringHighlight( textCurrent, 100, 100);
     ofDrawBitmapStringHighlight( textLast, 100, 200);
     ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300);
-
-    speak( );
 }
 
 void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
     {
-        string cmd = "say -v " + voice + " " + textCurrent + " ";   // create the command
+        string cmd = "say -v " + voice + " " + textCurrent + " &";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
     }
