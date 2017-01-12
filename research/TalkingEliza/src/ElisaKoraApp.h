@@ -16,8 +16,8 @@ public:
     arstu::ConversationEliza    conversationEliza;
 
     string voice;
-    string elizaResponse;
-    string textInput = {};
+    string textCurrent = "";
+    string textLast = "";
     bool    shouldSpeak = false;
 
     void speak();

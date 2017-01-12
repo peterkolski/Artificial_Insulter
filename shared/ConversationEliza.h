@@ -15,6 +15,7 @@ public:
     ConversationEliza();
 
     void    next();
+    void    doConversation();
 
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();

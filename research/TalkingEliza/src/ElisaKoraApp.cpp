@@ -4,8 +4,8 @@
 void ElisaKoraApp::setup(){
     voice = "Tom";
 
-    ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< conversationEliza.getAnswerCurrent();
-
+    textCurrent = conversationEliza.getAnswerCurrent();
+    ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< textCurrent;
 }
 
 //--------------------------------------------------------------
@@ -16,11 +16,9 @@ void ElisaKoraApp::update(){
 //--------------------------------------------------------------
 void ElisaKoraApp::draw(){
 
-    ofDrawBitmapStringHighlight( elizaResponse, 100, 100);
-
-    ofDrawBitmapStringHighlight( textInput, 100, 200);
-
-    ofDrawBitmapStringHighlight( conversationEliza.getNameSpeaker() , 100, 300);
+    ofDrawBitmapStringHighlight( conversationEliza.getNameSpeaker() , 10, 100);
+    ofDrawBitmapStringHighlight( textCurrent, 100, 100);
+    ofDrawBitmapStringHighlight( textLast, 100, 200);
 
 //    speak( );
 }
@@ -29,26 +27,20 @@ void ElisaKoraApp::speak()
 {
     if ( shouldSpeak )
     {
-        string cmd = "say -v " + voice + " " + elizaResponse + " ";   // create the command
+        string cmd = "say -v " + voice + " " + textCurrent + " ";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
-        textInput = "";
     }
 }
 
 //--------------------------------------------------------------
 void ElisaKoraApp::keyPressed(int key){
-    textInput += key;
 
     if ( key == ' ' )
     {
         conversationEliza.next();
+        conversationEliza.doConversation();
+        textCurrent = conversationEliza.getAnswerCurrent();
+        textLast    = conversationEliza.getAnswerBefore();
     }
-
-//    if ( key == OF_KEY_RETURN ){}
-//    {
-//
-//        elizaResponse = talkerOne.ask( textInput );
-//        shouldSpeak = true;
-//    }
 }

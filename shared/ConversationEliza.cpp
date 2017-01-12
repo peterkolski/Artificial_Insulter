@@ -74,9 +74,12 @@ void arstu::ConversationEliza::next()
         idTalker_   = 0;
         idListener_ = 1;
     }
+}
 
-
-
+void arstu::ConversationEliza::doConversation()
+{
+    answerBefore_ = answerCurrent_;
+    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( answerBefore_ );
 }
 
 
