@@ -47,7 +47,12 @@ const string &arstu::ConversationEliza::getAnswerCurrent()
     return answerCurrent_;
 }
 
-string arstu::ConversationEliza::getName()
+string arstu::ConversationEliza::getNameSpeaker()
+{
+    return getName( talkerCurrentID_ );
+}
+
+string arstu::ConversationEliza::getNameListener()
 {
     return getName( talkerCurrentID_ );
 }

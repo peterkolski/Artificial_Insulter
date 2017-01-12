@@ -15,7 +15,8 @@ public:
     ConversationEliza();
 
     int     getTalkerCurrentID() const;
-    string  getName();
+    string  getNameSpeaker();
+    string  getNameListener();
     string  getName( int id );
 
     const string &getAnswerCurrent();
@@ -28,6 +29,7 @@ private:
 
     int     talkerMaxAmount_    = 2;
     int     talkerCurrentID_    = 0;
+    int     idListener_         = 1;
     string  answerCurrent_      = "";
 };
 }

@@ -5,7 +5,7 @@ void ElisaKoraApp::setup(){
     voice = "Tom";
 
     elizaResponse = talkerOne.start();
-    ofLogNotice() << conversationEliza.getName() << ": "<< conversationEliza.getAnswerCurrent();
+    ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< conversationEliza.getAnswerCurrent();
 
 }
 
