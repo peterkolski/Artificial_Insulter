@@ -4,7 +4,7 @@
 void ElisaKoraApp::setup(){
     voice = "Tom";
 
-    elizaResponse = talkerOne.start();
+//    elizaResponse = talkerOne.start();
     ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< conversationEliza.getAnswerCurrent();
 
 }
@@ -24,6 +24,8 @@ void ElisaKoraApp::draw(){
 
     ofDrawBitmapStringHighlight( textInput, 100, 200);
 
+    ofDrawBitmapStringHighlight( conversationEliza.getNameSpeaker() , 100, 300);
+
 //    speak( );
 }
 
@@ -42,9 +44,15 @@ void ElisaKoraApp::speak()
 void ElisaKoraApp::keyPressed(int key){
     textInput += key;
 
-    if ( key == OF_KEY_RETURN )
+    if ( key == ' ' )
     {
-        elizaResponse = talkerOne.ask( textInput );
-        shouldSpeak = true;
+        conversationEliza.next();
     }
+
+//    if ( key == OF_KEY_RETURN ){}
+//    {
+//
+//        elizaResponse = talkerOne.ask( textInput );
+//        shouldSpeak = true;
+//    }
 }

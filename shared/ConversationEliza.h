@@ -14,11 +14,13 @@ class ConversationEliza
 public:
     ConversationEliza();
 
+    void    next();
+
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();
     string  getNameListener();
     string  getName( int id );
-
+    const string &getAnswerBefore();
     const string &getAnswerCurrent();
 
 
@@ -28,9 +30,10 @@ private:
     vector< string >            talkerNames_;
 
     int     talkerMaxAmount_    = 2;
-    int     talkerCurrentID_    = 0;
+    int     idTalker_           = 0;
     int     idListener_         = 1;
     string  answerCurrent_      = "";
+    string  answerBefore_       = "";
 };
 }
 

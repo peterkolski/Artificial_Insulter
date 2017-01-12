@@ -39,7 +39,17 @@ string arstu::ConversationEliza::getName( int id )
 
 int arstu::ConversationEliza::getTalkerCurrentID() const
 {
-    return talkerCurrentID_;
+    return idTalker_;
+}
+
+string arstu::ConversationEliza::getNameSpeaker()
+{
+    return getName( idTalker_ );
+}
+
+string arstu::ConversationEliza::getNameListener()
+{
+    return getName( idListener_ );
 }
 
 const string &arstu::ConversationEliza::getAnswerCurrent()
@@ -47,12 +57,26 @@ const string &arstu::ConversationEliza::getAnswerCurrent()
     return answerCurrent_;
 }
 
-string arstu::ConversationEliza::getNameSpeaker()
+
+const string &arstu::ConversationEliza::getAnswerBefore()
 {
-    return getName( talkerCurrentID_ );
+    return answerBefore_;
 }
 
-string arstu::ConversationEliza::getNameListener()
+void arstu::ConversationEliza::next()
 {
-    return getName( talkerCurrentID_ );
+    if ( idTalker_ == 0 )
+    {
+        idTalker_   = 1;
+        idListener_ = 0;
+    }
+    else {
+        idTalker_   = 0;
+        idListener_ = 1;
+    }
+
+
+
 }
+
+
