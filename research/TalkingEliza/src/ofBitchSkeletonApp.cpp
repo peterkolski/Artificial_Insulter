@@ -31,8 +31,8 @@ void ofBitchSkeletonApp::draw(){
     ofDrawBitmapStringHighlight( conversationEliza.getName( 0 ) , ofGetWidth() / 4 , 100);
     ofDrawBitmapStringHighlight( conversationEliza.getName( 1 ) , ofGetWidth() * 3/4, 100);
     
-    ofDrawBitmapStringHighlight( textCurrent, 100, 200 );
-    ofDrawBitmapStringHighlight( textLast, 100, 200 );
+    ofDrawBitmapStringHighlight( conversationEliza.getAnswerFromID( 0 ), 100, 200 );
+    ofDrawBitmapStringHighlight( conversationEliza.getAnswerFromID( 1 ), 500, 200 );
     ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300 );
 
      

@@ -82,4 +82,18 @@ void arstu::ConversationEliza::doConversation()
     answerCurrent_ = talkerVec_[ idTalker_ ]->ask( answerBefore_ );
 }
 
+const string &arstu::ConversationEliza::getAnswerFromID( int id )
+{
+    if ( id < talkerMaxAmount_ )
+    {
+        return talkerVec_[ id ]->getAnswer();
+    }
+    else
+    {
+        ofLogError( ) << logNameClass_ << "Wrong ID";
+        return "";
+
+    }
+}
+
 

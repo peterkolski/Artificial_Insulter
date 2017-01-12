@@ -23,6 +23,7 @@ public:
     string  getName( int id );
     const string &getAnswerBefore();
     const string &getAnswerCurrent();
+    const string &getAnswerFromID( int id );
 
 
 private:
