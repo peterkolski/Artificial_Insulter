@@ -4,7 +4,7 @@
 void ofBitchSkeletonApp::setup(){
     chooseVoice();
 
-    textCurrent = conversationEliza.getAnswerCurrent();
+    textCurrent = bitches.getAnswerCurrent();
 }
 
 //--------------------------------------------------------------
@@ -16,7 +16,7 @@ void ofBitchSkeletonApp::update(){
 void ofBitchSkeletonApp::draw(){
     auto gap = 10;
     auto shift = 0;
-    if ( conversationEliza.getTalkerCurrentID() == 0 )
+    if ( bitches.getTalkerCurrentID() == 0 )
     {
         shift = 0;
     }
@@ -28,11 +28,11 @@ void ofBitchSkeletonApp::draw(){
         ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
     ofPopStyle( );
     
-    ofDrawBitmapStringHighlight( conversationEliza.getName( 0 ) , ofGetWidth() / 4 , 100);
-    ofDrawBitmapStringHighlight( conversationEliza.getName( 1 ) , ofGetWidth() * 3/4, 100);
+    ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
+    ofDrawBitmapStringHighlight( bitches.getName( 1 ) , ofGetWidth() * 3/4, 100);
     
-    ofDrawBitmapStringHighlight( conversationEliza.getAnswerFromID( 0 ), 100, 200 );
-    ofDrawBitmapStringHighlight( conversationEliza.getAnswerFromID( 1 ), 500, 200 );
+    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
+    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 500, 200 );
     ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300 );
 
      
@@ -53,10 +53,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == ' ' )
     {
-        conversationEliza.next();
-        conversationEliza.doConversation();
-        textCurrent = conversationEliza.getAnswerCurrent();
-        textLast    = conversationEliza.getAnswerBefore();
+        bitches.next();
+        bitches.doConversation();
+        textCurrent = bitches.getAnswerCurrent();
+        textLast    = bitches.getAnswerBefore();
         chooseVoice();
         shouldSpeak = true;
     }
@@ -64,7 +64,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
 void ofBitchSkeletonApp::chooseVoice()
 {
-    if ( conversationEliza.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
+    if ( bitches.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
     else {
         voice = "Tom";
     }

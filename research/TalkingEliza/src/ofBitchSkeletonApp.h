@@ -14,7 +14,7 @@ public:
     void keyPressed  (int key);
     void chooseVoice();
 
-    arstu::ConversationEliza    conversationEliza;
+    arstu::ConversationEliza    bitches;
 
     string voice;
     string textCurrent = "";
