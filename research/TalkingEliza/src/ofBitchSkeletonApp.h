@@ -5,7 +5,7 @@
 #include "TalkerEliza.h"
 #include "ConversationEliza.h"
 
-class ElisaKoraApp : public ofBaseApp{
+class ofBitchSkeletonApp : public ofBaseApp{
 
 public:
     void setup();

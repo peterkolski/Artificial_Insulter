@@ -1,19 +1,19 @@
-#include "ElisaKoraApp.h"
+#include "ofBitchSkeletonApp.h"
 
 //--------------------------------------------------------------
-void ElisaKoraApp::setup(){
+void ofBitchSkeletonApp::setup(){
     chooseVoice();
 
     textCurrent = conversationEliza.getAnswerCurrent();
 }
 
 //--------------------------------------------------------------
-void ElisaKoraApp::update(){
+void ofBitchSkeletonApp::update(){
 
 }
 
 //--------------------------------------------------------------
-void ElisaKoraApp::draw(){
+void ofBitchSkeletonApp::draw(){
 
     ofDrawBitmapStringHighlight( conversationEliza.getNameSpeaker() , 10, 100);
     ofDrawBitmapStringHighlight( textCurrent, 100, 100);
@@ -23,7 +23,7 @@ void ElisaKoraApp::draw(){
     speak( );
 }
 
-void ElisaKoraApp::speak()
+void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
     {
@@ -34,7 +34,7 @@ void ElisaKoraApp::speak()
 }
 
 //--------------------------------------------------------------
-void ElisaKoraApp::keyPressed(int key){
+void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == ' ' )
     {
@@ -47,7 +47,7 @@ void ElisaKoraApp::keyPressed(int key){
     }
 }
 
-void ElisaKoraApp::chooseVoice()
+void ofBitchSkeletonApp::chooseVoice()
 {
     if ( conversationEliza.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
     else {

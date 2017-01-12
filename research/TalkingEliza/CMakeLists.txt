@@ -5,7 +5,7 @@ set( APP_NAME   TalikngEliza )
 # --------------------- Source Files ---------------------
 set( ${APP_NAME}_SOURCE_FILES
         src/main.cpp
-        src/ElisaKoraApp.cpp
+        src/ofBitchSkeletonApp.cpp
         ../../shared/TalkerEliza.cpp
         ../../shared/ConversationEliza.cpp
         )
