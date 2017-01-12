@@ -2,10 +2,9 @@
 
 //--------------------------------------------------------------
 void ElisaKoraApp::setup(){
-    voice = "Tom";
+    chooseVoice();
 
     textCurrent = conversationEliza.getAnswerCurrent();
-    ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< textCurrent;
 }
 
 //--------------------------------------------------------------
@@ -19,8 +18,9 @@ void ElisaKoraApp::draw(){
     ofDrawBitmapStringHighlight( conversationEliza.getNameSpeaker() , 10, 100);
     ofDrawBitmapStringHighlight( textCurrent, 100, 100);
     ofDrawBitmapStringHighlight( textLast, 100, 200);
+    ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300);
 
-//    speak( );
+    speak( );
 }
 
 void ElisaKoraApp::speak()
@@ -42,5 +42,16 @@ void ElisaKoraApp::keyPressed(int key){
         conversationEliza.doConversation();
         textCurrent = conversationEliza.getAnswerCurrent();
         textLast    = conversationEliza.getAnswerBefore();
+        chooseVoice();
+        shouldSpeak = true;
     }
+}
+
+void ElisaKoraApp::chooseVoice()
+{
+    if ( conversationEliza.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
+    else {
+        voice = "Tom";
+    }
+
 }
