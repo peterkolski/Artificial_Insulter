@@ -53,7 +53,7 @@ void ofBitchSkeletonApp::speak()
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::keyPressed(int key){
 
-    if ( key == OF_KEY_RETURN )
+    if  ( key == OF_KEY_RETURN )
     {
         bitches.next();
         bitches.doConversation();
@@ -65,9 +65,12 @@ void ofBitchSkeletonApp::keyPressed(int key){
     }
 
     // delete one character
-    if(key==8 && str.size()>0) {
+    if (key==8 && str.size()>0)
+    {
         str = str.substr(0, str.size()-1);
-    } else {
+    }
+    else if ( key != OF_KEY_SHIFT )
+    {
         str.append (1, (char)key );
     }
 }
