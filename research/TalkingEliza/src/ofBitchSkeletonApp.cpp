@@ -34,6 +34,8 @@ void ofBitchSkeletonApp::draw(){
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 500, 200 );
     ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300 );
+    ofDrawBitmapStringHighlight( "Input: " + str, 100, 350 );
+
 
      
 }
@@ -51,7 +53,7 @@ void ofBitchSkeletonApp::speak()
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::keyPressed(int key){
 
-    if ( key == ' ' )
+    if ( key == OF_KEY_RETURN )
     {
         bitches.next();
         bitches.doConversation();
@@ -59,6 +61,14 @@ void ofBitchSkeletonApp::keyPressed(int key){
         textLast    = bitches.getAnswerBefore();
         chooseVoice();
         shouldSpeak = true;
+        str = "";
+    }
+
+    // delete one character
+    if(key==8 && str.size()>0) {
+        str = str.substr(0, str.size()-1);
+    } else {
+        str.append (1, (char)key );
     }
 }
 

@@ -19,6 +19,7 @@ public:
     string voice;
     string textCurrent = "";
     string textLast = "";
+    string str      = "";
     bool    shouldSpeak = false;
 
     void speak();
