@@ -4,16 +4,12 @@
 void ElisaKoraApp::setup(){
     voice = "Tom";
 
-//    elizaResponse = talkerOne.start();
     ofLogNotice() << conversationEliza.getNameSpeaker( ) << ": "<< conversationEliza.getAnswerCurrent();
 
 }
 
 //--------------------------------------------------------------
 void ElisaKoraApp::update(){
-
-
-//    std::getline(std::cin, userSays);
 
 }
 
