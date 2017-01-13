@@ -79,7 +79,12 @@ void arstu::ConversationEliza::next()
 void arstu::ConversationEliza::doConversation()
 {
     answerBefore_ = answerCurrent_;
-    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( answerBefore_ );
+    doConversation( answerBefore_ );
+}
+
+void arstu::ConversationEliza::doConversation( string txt )
+{
+    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );
 }
 
 const string &arstu::ConversationEliza::getAnswerFromID( int id )
@@ -93,6 +98,25 @@ const string &arstu::ConversationEliza::getAnswerFromID( int id )
         ofLogError( ) << logNameClass_ << "Wrong ID";
         return "";
 
+    }
+}
+
+void arstu::ConversationEliza::tell( string txt, int id )
+{
+    setTalkerActive( id );
+    doConversation( txt );
+}
+
+void arstu::ConversationEliza::setTalkerActive( int id )
+{
+    idTalker_ = id;
+    if ( idTalker_ == 0 )
+    {
+        idListener_ = 1;
+    }
+    else
+    {
+        idListener_ = 0;
     }
 }
 
