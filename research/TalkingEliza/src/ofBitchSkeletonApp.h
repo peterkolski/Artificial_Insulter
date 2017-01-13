@@ -15,7 +15,7 @@ public:
     void update();
     void draw();
     void keyPressed  (int key);
-    void chooseVoice();
+    void switchVoice();
 
     // --- CONVERSATION
     arstu::ConversationEliza    bitches;
@@ -34,4 +34,5 @@ public:
 
     // --- VISUALIZER
 
+    void drawText();
 };
