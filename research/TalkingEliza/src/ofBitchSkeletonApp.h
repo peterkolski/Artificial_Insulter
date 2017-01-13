@@ -1,9 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxEliza.h"
+#include "ofxUI.h"
+#include "ofxXmlSettings.h"
+
 #include "TalkerEliza.h"
 #include "ConversationEliza.h"
+
 
 class ofBitchSkeletonApp : public ofBaseApp{
 
@@ -14,14 +17,21 @@ public:
     void keyPressed  (int key);
     void chooseVoice();
 
+    // --- CONVERSATION
     arstu::ConversationEliza    bitches;
-
-    string voice;
     string textCurrent = "";
     string textLast = "";
     string str      = "";
+
+    // --- SEEING
+    ofxUITextInput *textInput;
+    ofxUISuperCanvas *gui2;
+
+    // --- SOUND
+    void speak();
+    string voice;
     bool    shouldSpeak = false;
 
-    void speak();
+    // --- VISUALIZER
 
 };

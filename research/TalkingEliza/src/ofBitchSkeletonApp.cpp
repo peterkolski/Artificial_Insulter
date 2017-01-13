@@ -5,11 +5,19 @@ void ofBitchSkeletonApp::setup(){
     chooseVoice();
 
     textCurrent = bitches.getAnswerCurrent();
+
+    gui2 = new ofxUISuperCanvas("PANEL 2: ADVANCED");
+    textInput = gui2->addTextInput("TEXT INPUT", "Input Text");
+    textInput->setAutoUnfocus(false);
+    textInput->setAutoClear( false );
+
+    ofLogNotice( ) << textInput->getTextString( );
 }
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::update(){
     speak( );
+
 }
 
 //--------------------------------------------------------------
@@ -36,8 +44,7 @@ void ofBitchSkeletonApp::draw(){
     ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300 );
     ofDrawBitmapStringHighlight( "Input: " + str, 100, 350 );
 
-
-     
+    gui2->draw( );
 }
 
 void ofBitchSkeletonApp::speak()
@@ -61,18 +68,12 @@ void ofBitchSkeletonApp::keyPressed(int key){
         textLast    = bitches.getAnswerBefore();
         chooseVoice();
         shouldSpeak = true;
-        str = "";
+        str = textInput->getTextString();
+        textInput->setTextString( "" );
+
+        ofLogNotice( ) << textInput->getTextString( );
     }
 
-    // delete one character
-    if (key==8 && str.size()>0)
-    {
-        str = str.substr(0, str.size()-1);
-    }
-    else if ( key != OF_KEY_SHIFT )
-    {
-        str.append (1, (char)key );
-    }
 }
 
 void ofBitchSkeletonApp::chooseVoice()

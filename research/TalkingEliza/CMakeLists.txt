@@ -18,6 +18,8 @@ set( ${APP_NAME}_SOURCE_FILES
 # ------------------------ AddOns ------------
 set( OFX_ADDONS_ACTIVE
         ofxEliza
+        ofxUI
+        ofxXmlSettings
         )
 
 # =========================================================================
