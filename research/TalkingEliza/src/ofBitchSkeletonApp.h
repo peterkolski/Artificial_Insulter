@@ -15,13 +15,13 @@ public:
     void update();
     void draw();
     void keyPressed  (int key);
-    void switchVoice();
+    void setVoice();
 
     // --- CONVERSATION
     arstu::ConversationEliza    bitches;
     string textCurrent = "";
     string textLast = "";
-    string str      = "";
+    string textFromInput      = "";
 
     // --- SEEING
     ofxUITextInput *textInput;
@@ -35,4 +35,5 @@ public:
     // --- VISUALIZER
 
     void drawText();
+    void reset();
 };

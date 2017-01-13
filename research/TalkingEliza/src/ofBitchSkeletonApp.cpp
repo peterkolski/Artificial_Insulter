@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setup(){
-    switchVoice( );
+    setVoice( );
 
     textCurrent = bitches.getAnswerCurrent();
 
@@ -47,25 +47,34 @@ void ofBitchSkeletonApp::keyPressed(int key){
         {
             bitches.next();
             bitches.doConversation();
-            textCurrent = bitches.getAnswerCurrent();
-            textLast    = bitches.getAnswerBefore();
-            switchVoice( );
-            shouldSpeak = true;
+
+            reset();
         }
     }
 
     if ( key == OF_KEY_RETURN )
     {
-        str = textInput->getTextString();
-        bitches.tell( std::string( ), 0 );
+        textFromInput = textInput->getTextString();
+        bitches.doConversation( textFromInput, 0 );
 
         textInput->setTextString( "" );
+
+        reset();
     }
 
 }
+
+void ofBitchSkeletonApp::reset()
+{
+    textCurrent = bitches.getAnswerCurrent();
+    textLast    = bitches.getAnswerBefore();
+    setVoice();
+    shouldSpeak = true;
+}
+
 //--------------------------------------------------------------
 //--------------------------------------------------------------
-void ofBitchSkeletonApp::switchVoice()
+void ofBitchSkeletonApp::setVoice()
 {
     if ( bitches.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
     else {
@@ -89,7 +98,7 @@ void ofBitchSkeletonApp::drawText()
     ofDrawBitmapStringHighlight( bitches.getName( 1 ) , ofGetWidth() * 3 / 4, 100);
 
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
-    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 500, 200 );
-    ofDrawBitmapStringHighlight( "voice: " + voice, 100, 300 );
-    ofDrawBitmapStringHighlight( "Said to Elisa: " + str, 10, ofGetHeight() - 20 );
+    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+    ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
+    ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }

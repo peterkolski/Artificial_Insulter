@@ -16,27 +16,26 @@ public:
 
     void    next();
     void    doConversation();
-    int     getTalkerCurrentID() const;
+    void    doConversation( string txt, int id );
 
+    int     getTalkerCurrentID() const;
     string  getNameSpeaker();
     string  getNameListener();
     string  getName( int id );
-    void tell( string txt, int id );
     const string &getAnswerBefore();
     const string &getAnswerCurrent();
     const string &getAnswerFromID( int id );
+
+
 private:
-
-
     string  logNameClass_       = "arstu::ConversationEliza => ";
     vector< std::unique_ptr< TalkerEliza > >       talkerVec_;
-    vector< string >            talkerNames_;
 
-    void    doConversation( string txt );
+    vector< string >            talkerNames_;
     void    setTalkerActive( int id );
     int     talkerMaxAmount_    = 2;
     int     idTalker_           = 0;
-    int     idListener_         = 1;
+    int     idOther_         = 1;
     string  answerCurrent_      = "";
     string  answerBefore_       = "";
 };
