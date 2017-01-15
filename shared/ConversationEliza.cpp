@@ -49,7 +49,7 @@ string arstu::ConversationEliza::getNameSpeaker()
 
 string arstu::ConversationEliza::getNameListener()
 {
-    return getName( idListener_ );
+    return getName( idOther_ );
 }
 
 const string &arstu::ConversationEliza::getAnswerCurrent()
@@ -68,18 +68,51 @@ void arstu::ConversationEliza::next()
     if ( idTalker_ == 0 )
     {
         idTalker_   = 1;
-        idListener_ = 0;
+        idOther_ = 0;
     }
     else {
         idTalker_   = 0;
-        idListener_ = 1;
+        idOther_ = 1;
     }
 }
 
 void arstu::ConversationEliza::doConversation()
 {
     answerBefore_ = answerCurrent_;
-    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( answerBefore_ );
+    doConversation( answerBefore_, idTalker_ );
+}
+
+void arstu::ConversationEliza::doConversation( string txt, int id )
+{
+    setTalkerActive( id );
+    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );
+}
+
+const string &arstu::ConversationEliza::getAnswerFromID( int id )
+{
+    if ( id < talkerMaxAmount_ )
+    {
+        return talkerVec_[ id ]->getAnswer();
+    }
+    else
+    {
+        ofLogError( ) << logNameClass_ << "Wrong ID";
+        return "";
+
+    }
+}
+
+void arstu::ConversationEliza::setTalkerActive( int id )
+{
+    idTalker_ = id;
+    if ( idTalker_ == 0 )
+    {
+        idOther_ = 1;
+    }
+    else
+    {
+        idOther_ = 0;
+    }
 }
 
 
