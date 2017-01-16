@@ -2,6 +2,7 @@
 #known issues: words like 'remote control' are detected separately
 #control gets detected as verb?
 #animals should be detected as persons?
+# I, YOU also not detected
 
 print "initializing..."
 
@@ -72,7 +73,7 @@ def get_terms(tree):
         yield term
 
 def get_tree_and_postoks(str_in):
-    tokens = nltk.regexp_tokenize(str_in, sentence_re) # problem with latest nltk
+    tokens = nltk.regexp_tokenize(str_in.lower(), sentence_re) # problem with latest nltk
     #tokens = nltk.word_tokenize(sentence)
     #tokens = nltk.wordpunct_tokenize(sentence)
     postoks = nltk.tag.pos_tag(tokens)
@@ -169,6 +170,7 @@ def pipe_in_loop(pname):
             insult=transform_sentence(line)
             print "transformed:",insult
             os.write(pipeout,insult+"\n")
+        time.sleep(10./1000.); # sleep for 10 milisseconds, cheap way to relax cpu usage
     return
 
 print "checking input pipe:", input_pipe_name

@@ -12,6 +12,9 @@
 		C5792E521E2AFC930080C0D5 /* ConversationEliza.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConversationEliza.h; path = ../../shared/ConversationEliza.h; sourceTree = "<group>"; };
 		C5792E531E2AFC930080C0D5 /* TalkerEliza.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TalkerEliza.cpp; path = ../../shared/TalkerEliza.cpp; sourceTree = "<group>"; };
 		C5792E541E2AFC930080C0D5 /* TalkerEliza.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TalkerEliza.h; path = ../../shared/TalkerEliza.h; sourceTree = "<group>"; };
+		C597545F1E2B050F00EA71D7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		C59754601E2B052000EA71D7 /* ofBitchSkeletonApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofBitchSkeletonApp.cpp; path = src/ofBitchSkeletonApp.cpp; sourceTree = "<group>"; };
+		C59754611E2B052000EA71D7 /* ofBitchSkeletonApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofBitchSkeletonApp.h; path = src/ofBitchSkeletonApp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -19,10 +22,13 @@
 			isa = PBXGroup;
 			children = (
 				C5792E501E2AFC930080C0D5 /* Insulter.py */,
+				C59754601E2B052000EA71D7 /* ofBitchSkeletonApp.cpp */,
+				C59754611E2B052000EA71D7 /* ofBitchSkeletonApp.h */,
 				C5792E511E2AFC930080C0D5 /* ConversationEliza.cpp */,
 				C5792E521E2AFC930080C0D5 /* ConversationEliza.h */,
 				C5792E531E2AFC930080C0D5 /* TalkerEliza.cpp */,
 				C5792E541E2AFC930080C0D5 /* TalkerEliza.h */,
+				C597545F1E2B050F00EA71D7 /* main.cpp */,
 			);
 			sourceTree = "<group>";
 		};

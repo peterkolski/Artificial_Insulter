@@ -1,4 +1,5 @@
 #include "ofBitchSkeletonApp.h"
+#include <fstream>  
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setup(){
@@ -86,9 +87,26 @@ void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
     {
+        ofstream finofs ("/Users/nesa/transformer_in", std::ofstream::out); //declare a file stream
+        finofs<<textCurrent;
+        finofs.close();
+
+/*      string line;
+        ifstream myfile ("/Users/nesa/transformer_out");
+        if (myfile.is_open())
+        {
+            while ( getline (myfile,line) )
+            {
+                cout << line << '\n';
+            }
+            myfile.close();
+        }
+ */
         string cmd = "say -v " + voice + " " + textCurrent + " &";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
+        
+
     }
 }
 
