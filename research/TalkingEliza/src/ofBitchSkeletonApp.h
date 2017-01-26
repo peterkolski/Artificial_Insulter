@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxUI.h"
 #include "ofxXmlSettings.h"
+#include "ofxSoundProcessor.h"
+
 
 #include "TalkerEliza.h"
 #include "ConversationEliza.h"
@@ -15,6 +17,8 @@ public:
     void update();
     void draw();
     void keyPressed  (int key);
+    void audioIn( float*input, int bufferSize, int nChannels );
+
     void setVoice();
 
     // --- CONVERSATION
@@ -33,7 +37,9 @@ public:
     bool    shouldSpeak = false;
 
     // --- VISUALIZER
+    ofxSoundAnalyser    analyser;
 
     void drawText();
     void reset();
+    void drawVoice( double scale );
 };
