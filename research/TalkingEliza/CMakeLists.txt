@@ -17,6 +17,7 @@ set( ${APP_NAME}_SOURCE_FILES
 
 # ------------------------ AddOns ------------
 set( OFX_ADDONS_ACTIVE
+        ofxSoundProcessor
         ofxEliza
         ofxUI
         ofxXmlSettings
