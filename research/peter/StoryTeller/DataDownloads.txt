@@ -1,0 +1,6 @@
+
+
+http://www.cs.toronto.edu/~rkiros/neural_storyteller.zip
+
+VGG-19 ConvNet parameters
+https://s3.amazonaws.com/lasagne/recipes/pretrained/imagenet/vgg19.pkl
