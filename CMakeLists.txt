@@ -12,7 +12,7 @@ set( OF_DIRECTORY_BY_USER ../../../../ )
 include_directories( shared )
 
 
-add_subdirectory( research/TalkingEliza )
+add_subdirectory( main/TalkingEliza )
 
 
 # =========================================================================
