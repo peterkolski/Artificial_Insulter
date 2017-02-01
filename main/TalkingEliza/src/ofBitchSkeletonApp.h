@@ -11,7 +11,8 @@
 #include "bitcherOSC.h"
 
 
-class ofBitchSkeletonApp : public ofBaseApp{
+class ofBitchSkeletonApp : public ofBaseApp
+{
 
 public:
     void setup();
@@ -31,9 +32,10 @@ public:
 //    bitcherOSC  bitchKora;
 
     // --- SEEING
-    ofVideoGrabber vidGrabber;
-    ofxUITextInput *textInput;
-    ofxUISuperCanvas *gui2;
+    ofVideoGrabber      vidGrabber;
+    string              imageNamePath = "out.jpg";
+    ofxUITextInput      *textInput;
+    ofxUISuperCanvas    *gui2;
 
     // --- SOUND
     void speak();
@@ -49,4 +51,5 @@ public:
     void setupOSC();
     void setupGUI();
     void setupSoundAnalysis();
+    void saveImage( string &fileNamePath );
 };

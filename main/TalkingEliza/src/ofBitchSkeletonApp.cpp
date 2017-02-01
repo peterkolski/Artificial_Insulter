@@ -63,9 +63,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == 'S' )
     {
-        ofImage img;
-        img.setFromPixels( vidGrabber.getPixels() );
-        img.save( "out.jpg" );
+        saveImage( imageNamePath );
     }
 
 
@@ -102,6 +100,13 @@ void ofBitchSkeletonApp::keyPressed(int key){
         reset();
     }
 
+}
+
+void ofBitchSkeletonApp::saveImage( string &fileNamePath )
+{
+    ofImage img;
+    img.setFromPixels( vidGrabber.getPixels() );
+    img.save( fileNamePath );
 }
 
 void ofBitchSkeletonApp::setupSoundAnalysis()
