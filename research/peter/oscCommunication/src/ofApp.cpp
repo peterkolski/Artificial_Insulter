@@ -2,23 +2,22 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    bitchElisa.setTextRecieved( "reciever" );
-    bitchElisa.setTextToSend( "sender" );
+    ofSetFrameRate( 4 );
 
-    ofLogNotice() << bitchElisa.isRecievable();
-    ofLogNotice() << bitchElisa.isSendable();
-    ofLogNotice() << bitchElisa.getTextRecieved();
-    ofLogNotice() << bitchElisa.getTextToSend();
+    bitchElisa.setTextRecieved( "WRONG" );
+    bitchKora.setTextRecieved( "WRONG" );
+    bitchElisa.setTextToSend( "Fuck off - from Elisa" );
+    bitchKora.setTextToSend( "Lick my ass - from Kora" );
 
     string host         = "localhost";
-    string adrSender    = "/transform";
-    string adrReciever  = "/python_here";   //TODO adress can be the same
+    string adressONE    = "/python_here";
+    string adressTWO    = "/transform";
 
     auto portONE  = 9000;
     auto portTWO  = 9001;
 
-    bitchElisa.setup( host, portONE, portTWO );
-    bitchKora.setup( host, portTWO, portONE );
+    bitchElisa.setup( host, portONE, portTWO, adressONE, adressTWO );
+    bitchKora.setup( host, portTWO, portONE, adressTWO, adressONE );
 }
 
 //--------------------------------------------------------------
@@ -31,6 +30,8 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw(){
 
+    ofDrawBitmapStringHighlight( "Elisa: " + bitchElisa.getTextRecieved(), 100, 100 );
+    ofDrawBitmapStringHighlight( "Kora: " + bitchKora.getTextRecieved(), 100, 200 );
 
 }
 

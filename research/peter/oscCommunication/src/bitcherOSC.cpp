@@ -4,11 +4,13 @@
 
 #include "bitcherOSC.h"
 
-void bitcherOSC::setup( string &hostSender, int portSender, int portReciever )
+void bitcherOSC::setup( string &hostSender, int portSender, int portReciever, string adrRecieve, string adrSender )
 {
     hostSenderToOther_  = hostSender;
     portSender_         = portSender;
     portReciever_       = portReciever;
+    adressReciever_     = adrRecieve;
+    adressSender_       = adrSender;
 
     sender_.setup( hostSenderToOther_, portSender_ );
     reciever_.setup( portReciever_ );
@@ -23,13 +25,14 @@ void bitcherOSC::update()
 void bitcherOSC::sendText( string &text )
 {
     ofxOscMessage m;
-    m.setAddress( adress_ );
+    m.setAddress( adressSender_ );
     m.addStringArg( text );
     sender_.sendMessage( m, false );
 }
 
 string bitcherOSC::recieveText()
 {
+    string result = "";
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
@@ -39,21 +42,18 @@ string bitcherOSC::recieveText()
         ofLogVerbose( "Server recvd msg " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
 
         // check the address of the incoming message
-        if ( _message.getAddress() == adress_ )
-        {
-            if ( _message.getNumArgs() > 0 )
-            {
-                if ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING )
-                {
-                    _message.getArgAsString( 0 );
-                }
-            }
-        }
+        if (    ( _message.getAddress() == adressReciever_ )
+            &&  ( _message.getNumArgs() > 0 )
+            &&  ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING ) )
+         {
+             result = _message.getArgAsString( 0 );
+         }
         else
         {
             ofLogWarning( "Server got weird message: " + _message.getAddress() );
         }
     }
+    return result;
 }
 
 const string &bitcherOSC::getTextRecieved()
@@ -121,5 +121,5 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
 
 void bitcherOSC::setAdress( const string &adress )
 {
-    bitcherOSC::adress_ = adress;
+    bitcherOSC::adressReciever_ = adress;
 }
