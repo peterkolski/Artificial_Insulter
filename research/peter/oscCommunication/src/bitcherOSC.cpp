@@ -119,7 +119,12 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
     return msg_string;
 }
 
-void bitcherOSC::setAdress( const string &adress )
+void bitcherOSC::setAdressReciever( const string &adress )
 {
     bitcherOSC::adressReciever_ = adress;
+}
+
+void bitcherOSC::setAdressSender( const string &adress )
+{
+    bitcherOSC::adressSender_ = adress;
 }

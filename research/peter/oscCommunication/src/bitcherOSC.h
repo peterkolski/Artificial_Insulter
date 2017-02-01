@@ -23,10 +23,10 @@ public:
     void            setTextRecieved( const string &textRecieved_ );
     const string    &getTextToSend() ;
     void            setTextToSend( const string &textToSend_ );
-    void            setAdress( const string &adress );
+    void            setAdressReciever( const string &adress );
+    void            setAdressSender( const string &adress );
 
 private:
-
     string getOscMsgAsString( ofxOscMessage m );
     ofxOscSender    sender_;
     ofxOscReceiver  reciever_;
