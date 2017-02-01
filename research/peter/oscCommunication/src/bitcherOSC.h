@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class oscBitcher
+class bitcherOSC
 {
 public:
     void setup( string &hostSender, int portSender, int portReciever );

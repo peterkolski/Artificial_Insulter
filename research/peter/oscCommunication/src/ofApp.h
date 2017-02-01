@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
-#include "oscBitcher.h"
+#include "bitcherOSC.h"
 
 class ofApp : public ofBaseApp {
 
@@ -11,8 +11,8 @@ public:
     void update();
     void draw();
     void keyPressed( int key ) override;
-    
-    oscBitcher  bitchElisa;
-    oscBitcher  bitchKora;
+
+    bitcherOSC  bitchElisa;
+    bitcherOSC  bitchKora;
 
 };
