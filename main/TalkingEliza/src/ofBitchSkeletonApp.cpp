@@ -11,43 +11,18 @@ void ofBitchSkeletonApp::setup(){
     setupGUI();
     setupOSC();
 
-}
+    auto camWidth = 160;  // try to grab at this size.
+    auto camHeight = 120;
+    vidGrabber.setDeviceID( 0 );
+    vidGrabber.setDesiredFrameRate( 30 );
+    vidGrabber.initGrabber(camWidth, camHeight);
 
-void ofBitchSkeletonApp::setupSoundAnalysis()
-{
-    auto bufferSize = 512;
-    auto sampleRate = 44100;
-
-    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
-    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
-}
-
-void ofBitchSkeletonApp::setupGUI()
-{
-    gui2 = new ofxUISuperCanvas( "Talk to Elisa", 400, 300, 200, 100 );
-    textInput = gui2->addTextInput( "TEXT: ", "Hello Elisa");
-    textInput->setAutoUnfocus( false);
-    textInput->setAutoClear( false );
-}
-
-void ofBitchSkeletonApp::setupOSC()
-{
-    string host             = "localhost";
-    string adressToPython   = "/transform";
-    string adressFromPython = "/python_here";
-
-    auto portToPython    = 33333;  // OF side
-    auto portFromPython  = 22222;  // Python side
-
-    bitchElisa.setup( host, portToPython, adressToPython, portFromPython, adressFromPython );
-//    bitchKora.setup( host, portFromPython, portToPython, adressFromPython, adressToPython );
 }
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::update(){
+    vidGrabber.update();
     speak( );
-
-
 }
 
 //--------------------------------------------------------------
@@ -69,6 +44,7 @@ void ofBitchSkeletonApp::draw(){
     auto scale = 1.0;
     drawVoice( scale );
 
+    vidGrabber.draw( ofGetWidth() / 2 - ( vidGrabber.getWidth() / 2 ), 20 );
     drawText( );
 
     gui2->draw( );
@@ -85,7 +61,15 @@ void ofBitchSkeletonApp::drawVoice( double scale )
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::keyPressed(int key){
 
-    if  ( key == ' ' )
+    if ( key == 'S' )
+    {
+        ofImage img;
+        img.setFromPixels( vidGrabber.getPixels() );
+        img.save( "out.jpg" );
+    }
+
+
+    if  ( key == ' ' ){}
     {
         if ( !textInput->isFocused() )
         {
@@ -118,6 +102,36 @@ void ofBitchSkeletonApp::keyPressed(int key){
         reset();
     }
 
+}
+
+void ofBitchSkeletonApp::setupSoundAnalysis()
+{
+    auto bufferSize = 512;
+    auto sampleRate = 44100;
+
+    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
+    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
+}
+
+void ofBitchSkeletonApp::setupGUI()
+{
+    gui2 = new ofxUISuperCanvas( "Talk to Elisa", 400, 300, 200, 100 );
+    textInput = gui2->addTextInput( "TEXT: ", "Hello Elisa");
+    textInput->setAutoUnfocus( false);
+    textInput->setAutoClear( false );
+}
+
+void ofBitchSkeletonApp::setupOSC()
+{
+    string host             = "localhost";
+    string adressToPython   = "/transform";
+    string adressFromPython = "/python_here";
+
+    auto portToPython    = 33333;  // OF side
+    auto portFromPython  = 22222;  // Python side
+
+    bitchElisa.setup( host, portToPython, adressToPython, portFromPython, adressFromPython );
+//    bitchKora.setup( host, portFromPython, portToPython, adressFromPython, adressToPython );
 }
 
 void ofBitchSkeletonApp::reset()
