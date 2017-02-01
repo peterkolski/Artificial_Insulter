@@ -18,8 +18,8 @@ import os, time,sys
 import OSC
 
 osc_to_of_address= ('127.0.0.1' , 22222) #OpenFrameworks
-osc_send_address = "/python_here"
-osc_transform_address = "/transform"
+osc_send_address = "/python_here"       #Sending   - python to OF
+osc_transform_address = "/transform"    #Recieving - OF to python
 osc_from_of_address = ('127.0.0.1' , 33333) #python
 
 # Python to openframeworks:
