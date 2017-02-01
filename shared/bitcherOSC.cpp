@@ -4,7 +4,7 @@
 
 #include "bitcherOSC.h"
 
-void bitcherOSC::setup( string &hostSender, int portSender, int portReciever, string adrRecieve, string adrSender )
+void bitcherOSC::setup( string &hostSender, int portSender, string adrSender, int portReciever, string adrRecieve )
 {
     hostSenderToOther_  = hostSender;
     portSender_         = portSender;
@@ -46,7 +46,7 @@ string bitcherOSC::recieveText()
             &&  ( _message.getNumArgs() > 0 )
             &&  ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING ) )
          {
-             result = _message.getArgAsString( 0 );
+             result = _message.getArgAsString( 0 ); // TODO chack all entries
          }
         else
         {

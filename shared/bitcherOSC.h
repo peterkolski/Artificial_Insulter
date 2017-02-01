@@ -14,7 +14,7 @@ using namespace std;
 class bitcherOSC
 {
 public:
-    void setup( string &hostSender, int portSender, int portReciever, string adrRecieve, string adrSender );
+    void setup( string &hostSender, int portSender, string adrSender, int portReciever, string adrRecieve );
     void update();
 
     bool            isRecievable() ;
