@@ -1,6 +1,17 @@
-
-
+pre-trained models and style vectors:
 http://www.cs.toronto.edu/~rkiros/neural_storyteller.zip
 
-VGG-19 ConvNet parameters
+——
+VGG-19 ConvNet parameters:
 https://s3.amazonaws.com/lasagne/recipes/pretrained/imagenet/vgg19.pkl
+
+——
+model files and word embeddings:
+wget http://www.cs.toronto.edu/~rkiros/models/dictionary.txt
+wget http://www.cs.toronto.edu/~rkiros/models/utable.npy
+wget http://www.cs.toronto.edu/~rkiros/models/btable.npy
+wget http://www.cs.toronto.edu/~rkiros/models/uni_skip.npz
+wget http://www.cs.toronto.edu/~rkiros/models/uni_skip.npz.pkl
+wget http://www.cs.toronto.edu/~rkiros/models/bi_skip.npz
+wget http://www.cs.toronto.edu/~rkiros/models/bi_skip.npz.pkl
+
