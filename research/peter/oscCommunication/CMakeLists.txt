@@ -20,6 +20,7 @@ set( OF_DIRECTORY_BY_USER "../../../../.." )
 # --------------------- Source Files ---------------------
 set( ${APP_NAME}_SOURCE_FILES
         src/main.cpp
+        src/oscBitcher.cpp
         src/ofApp.cpp )
 
 

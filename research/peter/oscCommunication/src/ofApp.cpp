@@ -2,6 +2,13 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    bitchElisa.setTextRecieved( "reciever" );
+    bitchElisa.setTextToSend( "sender" );
+
+    ofLogNotice() << bitchElisa.isRecievable();
+    ofLogNotice() << bitchElisa.isSendable();
+    ofLogNotice() << bitchElisa.getTextRecieved();
+    ofLogNotice() << bitchElisa.getTextToSend();
 
 }
 
