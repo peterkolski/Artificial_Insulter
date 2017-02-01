@@ -88,8 +88,15 @@ void ofBitchSkeletonApp::keyPressed(int key){
         textFromInput = textInput->getTextString();
         textInput->setTextString( "" );
 
-        bitches.doConversation( textFromInput, 0 );
-        bitchElisa.setTextToSend( textFromInput );
+        if ( textFromInput != "" )
+        {
+//            bitches.doConversation( textFromInput, 0 );
+            bitchElisa.setTextToSend( textFromInput );
+        }
+        else
+        {
+            ofLogError() << "No Text input";
+        }
 
         reset();
     }
