@@ -7,6 +7,12 @@ void ofBitchSkeletonApp::setup(){
 
     textCurrent = bitches.getAnswerCurrent();
 
+    auto bufferSize = 512;
+    auto sampleRate = 44100;
+
+    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
+    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
+
     gui2 = new ofxUISuperCanvas( "Talk to Elisa", 400, 300, 200, 100 );
     textInput = gui2->addTextInput("TEXT: ", "Hello Elisa");
     textInput->setAutoUnfocus(false);
@@ -34,9 +40,20 @@ void ofBitchSkeletonApp::draw(){
         ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
     ofPopStyle( );
 
+    auto scale = 1.0;
+    drawVoice( scale );
+
     drawText( );
 
     gui2->draw( );
+}
+
+void ofBitchSkeletonApp::drawVoice( double scale )
+{
+    ofPushStyle( );
+    ofSetColor( ofColor::red );
+    ofDrawRectangle( 0, ofGetHeight() / 2, ofGetWidth( ), ofGetHeight( ) * analyser.getAmplitude() * scale );
+    ofPopStyle( );
 }
 
 //--------------------------------------------------------------
@@ -119,4 +136,9 @@ void ofBitchSkeletonApp::drawText()
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
+}
+
+void ofBitchSkeletonApp::audioIn( float*input, int bufferSize, int nChannels )
+{
+    analyser.grabAudioBuffer( input );
 }
