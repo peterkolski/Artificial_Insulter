@@ -8,6 +8,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/ofBitchSkeletonApp.cpp
         ../../shared/TalkerEliza.cpp
         ../../shared/ConversationEliza.cpp
+        ../../shared/bitcherOSC.cpp
         )
 
 # ------------------------ Shared ------------------------
@@ -21,6 +22,7 @@ set( OFX_ADDONS_ACTIVE
         ofxEliza
         ofxUI
         ofxXmlSettings
+        ofxOsc
         )
 
 # =========================================================================

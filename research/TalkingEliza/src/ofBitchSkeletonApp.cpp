@@ -17,11 +17,24 @@ void ofBitchSkeletonApp::setup(){
     textInput = gui2->addTextInput("TEXT: ", "Hello Elisa");
     textInput->setAutoUnfocus(false);
     textInput->setAutoClear( false );
+
+    // OSC version
+    string host             = "localhost";
+    string adressToPython   = "/python_here";
+    string adressFromPython = "/transform";
+
+    auto portToPython    = 22222;  // OF side
+    auto portFromPython  = 33333;  // Python side
+
+    bitchElisa.setup( host, portToPython, portFromPython, adressToPython, adressFromPython );
+    bitchKora.setup( host, portFromPython, portToPython, adressFromPython, adressToPython );
 }
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::update(){
     speak( );
+    bitchElisa.update();
+    bitchKora.update();
 }
 
 //--------------------------------------------------------------
@@ -73,9 +86,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
     if ( key == OF_KEY_RETURN )
     {
         textFromInput = textInput->getTextString();
-        bitches.doConversation( textFromInput, 0 );
-
         textInput->setTextString( "" );
+
+        bitches.doConversation( textFromInput, 0 );
+        bitchElisa.setTextToSend( textFromInput );
 
         reset();
     }
@@ -134,6 +148,9 @@ void ofBitchSkeletonApp::drawText()
 
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+    ofDrawBitmapStringHighlight( "OSC: " + bitchElisa.getTextRecieved(), 100, 220 );
+    ofDrawBitmapStringHighlight( "OSC: " + bitchKora.getTextRecieved(), 600, 220 );
+
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }

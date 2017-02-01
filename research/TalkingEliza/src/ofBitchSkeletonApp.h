@@ -8,6 +8,7 @@
 
 #include "TalkerEliza.h"
 #include "ConversationEliza.h"
+#include "bitcherOSC.h"
 
 
 class ofBitchSkeletonApp : public ofBaseApp{
@@ -26,6 +27,8 @@ public:
     string textCurrent = "";
     string textLast = "";
     string textFromInput      = "";
+    bitcherOSC  bitchElisa;
+    bitcherOSC  bitchKora;
 
     // --- SEEING
     ofxUITextInput *textInput;
