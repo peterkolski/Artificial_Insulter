@@ -14,14 +14,23 @@ using namespace std;
 class oscBitcher
 {
 public:
-    bool isRecievable() ;
-    bool isSendable() ;
+    void setup( string &hostSender, int portSender, int portReciever );
+
+    bool            isRecievable() ;
+    bool            isSendable() ;
     const string    &getTextRecieved() ;
     void            setTextRecieved( const string &textRecieved_ );
     const string    &getTextToSend() ;
     void            setTextToSend( const string &textToSend_ );
 
 private:
+    ofxOscSender    sender_;
+    ofxOscReceiver  reciever_;
+    int             portSender_;
+    int             portReciever_;
+    std::string     hostSenderToOther_;
+
+
     bool    recievable_   = false;
     bool    sendable_     = false;
     string  textRecieved_   = "";

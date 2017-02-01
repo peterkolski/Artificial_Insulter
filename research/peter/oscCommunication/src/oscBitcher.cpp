@@ -4,6 +4,16 @@
 
 #include "oscBitcher.h"
 
+void oscBitcher::setup( string &hostSender, int portSender, int portReciever )
+{
+    hostSenderToOther_  = hostSender;
+    portSender_         = portSender;
+    portReciever_       = portReciever;
+
+    sender_.setup( hostSenderToOther_, portSender_ );
+    reciever_.setup( portReciever_ );
+}
+
 const string &oscBitcher::getTextRecieved()
 {
     return textRecieved_;

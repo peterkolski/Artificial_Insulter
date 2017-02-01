@@ -10,6 +10,12 @@ void ofApp::setup(){
     ofLogNotice() << bitchElisa.getTextRecieved();
     ofLogNotice() << bitchElisa.getTextToSend();
 
+    string host   = "localhost";
+    auto portONE  = 9000;
+    auto portTWO  = 9001;
+
+    bitchElisa.setup( host, portONE, portTWO );
+    bitchKora.setup( host, portTWO, portONE );
 }
 
 //--------------------------------------------------------------
