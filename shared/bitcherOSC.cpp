@@ -36,7 +36,7 @@ string bitcherOSC::recieveText()
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
-        reciever_.getNextMessage( &_message ); //TODO alternative code
+        reciever_.getNextMessage( _message ); //TODO alternative code
 
         //Log received message for easier debugging of participants' messages:
         ofLogVerbose( "Server recvd msg " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
@@ -46,7 +46,7 @@ string bitcherOSC::recieveText()
             &&  ( _message.getNumArgs() > 0 )
             &&  ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING ) )
          {
-             result = _message.getArgAsString( 0 ); // TODO chack all entries
+             result = _message.getArgAsString( 0 ); // TODO check all entries
          }
         else
         {

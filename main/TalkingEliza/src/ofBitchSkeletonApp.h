@@ -31,6 +31,7 @@ public:
 //    bitcherOSC  bitchKora;
 
     // --- SEEING
+    ofVideoGrabber vidGrabber;
     ofxUITextInput *textInput;
     ofxUISuperCanvas *gui2;
 
