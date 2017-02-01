@@ -19,8 +19,8 @@ set( OF_DIRECTORY_BY_USER "../../../../.." )
 
 # --------------------- Source Files ---------------------
 set( ${APP_NAME}_SOURCE_FILES
+        ../../../shared/bitcherOSC.cpp
         src/main.cpp
-        src/bitcherOSC.cpp
         src/ofApp.cpp )
 
 
