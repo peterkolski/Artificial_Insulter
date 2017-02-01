@@ -46,4 +46,7 @@ public:
     void drawText();
     void reset();
     void drawVoice( double scale );
+    void setupOSC();
+    void setupGUI();
+    void setupSoundAnalysis();
 };

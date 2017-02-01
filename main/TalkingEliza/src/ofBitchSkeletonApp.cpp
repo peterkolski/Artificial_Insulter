@@ -7,18 +7,31 @@ void ofBitchSkeletonApp::setup(){
 
     textCurrent = bitches.getAnswerCurrent();
 
+    setupSoundAnalysis();
+    setupGUI();
+    setupOSC();
+
+}
+
+void ofBitchSkeletonApp::setupSoundAnalysis()
+{
     auto bufferSize = 512;
     auto sampleRate = 44100;
 
     analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
     ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
+}
 
+void ofBitchSkeletonApp::setupGUI()
+{
     gui2 = new ofxUISuperCanvas( "Talk to Elisa", 400, 300, 200, 100 );
-    textInput = gui2->addTextInput("TEXT: ", "Hello Elisa");
-    textInput->setAutoUnfocus(false);
+    textInput = gui2->addTextInput( "TEXT: ", "Hello Elisa");
+    textInput->setAutoUnfocus( false);
     textInput->setAutoClear( false );
+}
 
-    // OSC version
+void ofBitchSkeletonApp::setupOSC()
+{
     string host             = "localhost";
     string adressToPython   = "/transform";
     string adressFromPython = "/python_here";
