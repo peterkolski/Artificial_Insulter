@@ -14,6 +14,21 @@ from nltk.corpus import wordnet as wn
 #pipe stuff
 import os, time,sys
 
+#osc stuff
+import OSC
+
+osc_to_of_address= ('127.0.0.1' , 22222) #OpenFrameworks
+osc_send_address = "/python_here"
+osc_transform_address = "/transform"
+osc_from_of_address = ('127.0.0.1' , 33333) #python
+
+# Python to openframeworks:
+oscSender = OSC.OSCClient()
+oscSender.connect(osc_to_of_address)
+
+# OpenFrameworks to python:
+oscReceiver = OSC.ThreadingOSCServer(osc_from_of_address)
+
 #globals
 
 input_pipe_name = os.path.expanduser("~/transformer_in")
@@ -173,21 +188,45 @@ def pipe_in_loop(pname):
         time.sleep(10./1000.); # sleep for 10 milisseconds, cheap way to relax cpu usage
     return
 
-print "checking input pipe:", input_pipe_name
-if not os.path.exists(input_pipe_name):
-    print "creating input pipe..."
-    os.mkfifo(input_pipe_name)
+def transformMessageCallback(addr, tags, stuff, source):
+    input_sentence=stuff[0]
+    print "received text to transform:",input_sentence
+    insult=transform_sentence(input_sentence)
+    print "transformed:",insult
+    newMessage = OSC.OSCMessage()
+    newMessage.setAddress(osc_send_address)
+    newMessage.append("transformed")
+    newMessage.append(insult);
+    oscSender.send(newMessage)
+    return
 
-print "checking output pipe:", output_pipe_name
-if not os.path.exists(output_pipe_name):
-    print "creating output pipe..."
-    os.mkfifo(output_pipe_name)
 
-print "opening output pipe..."
-pipeout = os.open(output_pipe_name, os.O_RDWR,os.O_NONBLOCK)
+# send ready message to openframeworks
+oscmsg = OSC.OSCMessage()
+oscmsg.setAddress(osc_send_address)
+oscmsg.append("READY");
+oscSender.send(oscmsg)
 
-print "waiting for input on:",input_pipe_name
-pipe_in_loop(input_pipe_name)
+print "listening to:",osc_transform_address
+# start osc listener:
+oscReceiver.addMsgHandler(osc_transform_address, transformMessageCallback)
+oscReceiver.serve_forever()
+
+#print "checking input pipe:", input_pipe_name
+#if not os.path.exists(input_pipe_name):
+#    print "creating input pipe..."
+#    os.mkfifo(input_pipe_name)
+#
+#print "checking output pipe:", output_pipe_name
+#if not os.path.exists(output_pipe_name):
+#    print "creating output pipe..."
+#    os.mkfifo(output_pipe_name)
+#
+#print "opening output pipe..."
+#pipeout = os.open(output_pipe_name, os.O_RDWR,os.O_NONBLOCK)
+#
+#print "waiting for input on:",input_pipe_name
+#pipe_in_loop(input_pipe_name)
 
 ###### say it:
 
