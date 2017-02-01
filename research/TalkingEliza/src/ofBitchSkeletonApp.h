@@ -28,7 +28,7 @@ public:
     string textLast = "";
     string textFromInput      = "";
     bitcherOSC  bitchElisa;
-    bitcherOSC  bitchKora;
+//    bitcherOSC  bitchKora;
 
     // --- SEEING
     ofxUITextInput *textInput;
