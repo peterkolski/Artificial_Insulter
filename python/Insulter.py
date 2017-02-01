@@ -195,7 +195,7 @@ def transformMessageCallback(addr, tags, stuff, source):
     print "transformed:",insult
     newMessage = OSC.OSCMessage()
     newMessage.setAddress(osc_send_address)
-    newMessage.append("transformed")
+    # newMessage.append("transformed")
     newMessage.append(insult);
     oscSender.send(newMessage)
     return
