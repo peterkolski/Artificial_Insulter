@@ -10,7 +10,10 @@ void ofApp::setup(){
     ofLogNotice() << bitchElisa.getTextRecieved();
     ofLogNotice() << bitchElisa.getTextToSend();
 
-    string host   = "localhost";
+    string host         = "localhost";
+    string adrSender    = "/transform";
+    string adrReciever  = "/python_here";   //TODO adress can be the same
+
     auto portONE  = 9000;
     auto portTWO  = 9001;
 
@@ -19,8 +22,10 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-
+void ofApp::update()
+{
+    bitchElisa.update();
+    bitchKora.update();
 }
 
 //--------------------------------------------------------------
@@ -56,48 +61,3 @@ void ofApp::keyPressed(int key){
 //		clientTyping = "";
 //	}
 }
-
-
-//--------------------------------------------------------------
-//string ofApp::getOscMsgAsString(ofxOscMessage m){
-//	string msg_string;
-//	msg_string = m.getAddress();
-//	msg_string += ":";
-//	for(int i = 0; i < m.getNumArgs(); i++){
-//		// get the argument type
-//		msg_string += " " + m.getArgTypeName(i);
-//		msg_string += ":";
-//		// display the argument - make sure we get the right type
-//		if(m.getArgType(i) == OFXOSC_TYPE_INT32){
-//			msg_string += ofToString(m.getArgAsInt32(i));
-//		}
-//		else if(m.getArgType(i) == OFXOSC_TYPE_FLOAT){
-//			msg_string += ofToString(m.getArgAsFloat(i));
-//		}
-//		else if(m.getArgType(i) == OFXOSC_TYPE_STRING){
-//			msg_string += m.getArgAsString(i);
-//		}
-//		else{
-//			msg_string += "unknown";
-//		}
-//	}
-//	return msg_string;
-//}
-//
-//void ofApp::broadcastReceivedMessage(string chatmessage){
-//
-//	//create a new OSC message
-//	ofxOscMessage m;
-//	m.setAddress("/chatlog");
-//	m.addStringArg(chatmessage);
-//
-//	//Send message to all known hosts
-//	// use another port to avoid a localhost loop
-//	for(unsigned int i = 0; i < knownClients.size(); i++){
-//		serverSender.setup(knownClients[i], serverRecvPort + 1);
-//		m.setRemoteEndpoint(knownClients[i], serverRecvPort + 1);
-//		serverSender.sendMessage(m, false);
-//		ofLogVerbose("Server broadcast message " + m.getArgAsString(0) + " to " + m.getRemoteIp()
-//					 + ":" + ofToString(m.getRemotePort()));
-//	}
-//}
