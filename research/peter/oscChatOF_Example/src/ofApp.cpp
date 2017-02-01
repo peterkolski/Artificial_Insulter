@@ -9,8 +9,9 @@ void ofApp::setup(){
 	ofBackground(150);
 
 	// load fonts to display stuff
-	font.load("futura_book.otf", 12);
-	titleFont.load("futura_book.otf", 20);
+    string fontPath = "../../futura_book.otf";
+    font.load( fontPath, 12);
+	titleFont.load( fontPath, 20);
 
 	// Enable some logging information
 	ofSetLogLevel(OF_LOG_VERBOSE);
