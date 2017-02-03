@@ -33,7 +33,9 @@ public:
 
     // --- SEEING
     ofVideoGrabber      vidGrabber;
-    string              imageNamePath = "out.jpg";
+    string              imageNamePath   = "imageFromTalkingElisa.jpg";
+    int                 widthView       = 160;
+    int                 heightView      = 120;
     ofxUITextInput      *textInput;
     ofxUISuperCanvas    *gui2;
 

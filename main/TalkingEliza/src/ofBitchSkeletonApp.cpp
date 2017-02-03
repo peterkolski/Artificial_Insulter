@@ -11,12 +11,12 @@ void ofBitchSkeletonApp::setup(){
     setupGUI();
     setupOSC();
 
-    auto camWidth = 160;  // try to grab at this size.
-    auto camHeight = 120;
+    auto camWidth = 1920;  // try to grab at this size.
+    auto camHeight = 1080;
     vidGrabber.setDeviceID( 0 );
     vidGrabber.setDesiredFrameRate( 30 );
     vidGrabber.initGrabber(camWidth, camHeight);
-
+    imageNamePath = "/Volumes/bloke/pictureOutput/picFromNetwork.jpg";
 }
 
 //--------------------------------------------------------------
@@ -44,7 +44,7 @@ void ofBitchSkeletonApp::draw(){
     auto scale = 1.0;
     drawVoice( scale );
 
-    vidGrabber.draw( ofGetWidth() / 2 - ( vidGrabber.getWidth() / 2 ), 20 );
+    vidGrabber.draw( ofGetWidth() / 2 - ( widthView / 2 ), 20, widthView, heightView );
     drawText( );
 
     gui2->draw( );
