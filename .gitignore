@@ -45,3 +45,4 @@ research/peter/StoryTeller/data/skip-thoughts/uni_skip.npz.pkl
 research/peter/StoryTeller/data/skip-thoughts/utable.npy
 research/peter/StoryTeller/data/vgg/vgg19.pkl
 out.jpg
+*.app
