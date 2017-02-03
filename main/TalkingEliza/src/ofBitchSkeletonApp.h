@@ -23,7 +23,9 @@ public:
 
     void setVoice();
 
+    // --- XML
     ofxXmlSettings  xml;
+    string defaultXMLError = "NIX";
 
     // --- CONVERSATION
     arstu::ConversationEliza    bitches;
