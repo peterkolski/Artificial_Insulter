@@ -19,14 +19,13 @@ def getKeywords( textIn ):
     return result
 
 # -----------------------------------
-"""Get Pandas row, extract keywords and put it into a dictionary [Key->List]"""
+"""Get Pandas dataFrame, extract keywords and put it into a dictionary [Key->List]"""
 
-def putRowKeywordsToDict( row_ ):
-    dict_ = defaultdict(list)
-    rowNum_ = row_[ 0 ]
-    text_ = row_[ 1 ]
-    keywords_ = getKeywords( text_ )
-    for _key in keywords_:
-        dict_[ _key ].append( rowNum_ )
+def putKeywordsToDict( dataFrame ):
+    dict_ = defaultdict( list )
+    for index, row_ in dataFrame.iterrows():
+        text_ = row_[ 1 ]
+        keywords_ = getKeywords( text_ )
+        for _key in keywords_:
+            dict_[ _key ].append( index )
     return dict_
-
