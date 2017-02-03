@@ -29,3 +29,11 @@ def putKeywordsToDict( dataFrame ):
         for _key in keywords_:
             dict_[ _key ].append( index )
     return dict_
+
+
+def answerFromText( textIn_, dict_, dataFrame_ ):
+    keysIn_ = getKeywords( textIn_ )
+    idKey = 1
+    idList = 0
+    rowNum = dict_[keysIn_[idKey]][idList]
+    return dataFrame_.iloc[rowNum]['Text']
