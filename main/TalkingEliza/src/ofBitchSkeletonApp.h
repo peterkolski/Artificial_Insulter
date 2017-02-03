@@ -25,7 +25,6 @@ public:
 
     ofxXmlSettings  xml;
 
-
     // --- CONVERSATION
     arstu::ConversationEliza    bitches;
     string textCurrent = "";

@@ -4,8 +4,21 @@
 void ofBitchSkeletonApp::setup(){
     setVoice( );
 
-    xml.load( "setting.txt" );
-    xml.
+//    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
+    string settingsPath = "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt";
+    ofLogNotice() << settingsPath;
+    if (!xml.loadFile( settingsPath ) )
+    {
+        ofLogError() << "No XML file loaded";
+    }
+
+    imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
+    ofLogNotice() << "Path to write file" << imageNamePath;
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:SEND:TEXT", "NIX" );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND", "NIX" );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", "NIX" );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE", "NIX" );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:HOST", "NIX" );
 
     textCurrent = bitches.getAnswerCurrent();
 
@@ -18,7 +31,7 @@ void ofBitchSkeletonApp::setup(){
     vidGrabber.setDeviceID( 0 );
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
-    imageNamePath = "/Volumes/bloke/pictureOutput/picFromNetwork.jpg";
+
 }
 
 //--------------------------------------------------------------

@@ -1,3 +1,25 @@
 <PATH>
     <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
 </PATH>
+
+<OSC>
+    <ADRESS>
+        <SEND>
+            <TEXT>
+                /transform
+            </TEXT>
+        </SEND>
+        <RECIEVE>
+            <TEXT>
+                /python_here
+            </TEXT>
+        </RECIEVE>
+    </ADRESS>
+    <HOST>
+            localhost
+    </HOST>
+    <PORT>
+        <SEND>      33333 </SEND>
+        <RECIEVE>   22222 </RECIEVE>
+    </PORT>
+</OSC>
