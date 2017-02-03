@@ -10,6 +10,25 @@ from random import randint
 tokenizer = RegexpTokenizer(r'\w+')
 
 
+_dictChangeUni  ={  "'re"     : "'s",
+                    "were": "was",
+                    "Were": "Was",
+                    "are": "is",
+                    "Are": "Is",
+                    }
+
+_changerMale ={"yours"   : "his",
+                "Yours"   : "His",
+                "your "    : "his ",
+                "Your "    : "His ",
+                "you "     : "he ",
+                "You "     : "He ",
+               }
+
+def changeToMale( text_ ):
+    tmpText = reduce(lambda x, y: x.replace(y, _dictChangeUni[y]), _dictChangeUni, text_ )
+    return reduce(lambda x, y: x.replace(y, _changerMale[y]), _changerMale, tmpText)
+
 # =========== Functions ===============
 
 # -----------------------------------
@@ -35,7 +54,7 @@ def putKeywordsToDict( dataFrame ):
 def answerFromText(textIn_, dict_, dataFrame_):
     entriesNumDF = len(dataFrame_.index)
     keysIn_ = getKeywords(textIn_)
-    idKey = 0
+    idKey = 0   #
 
     if ((len(keysIn_) != 0) and (keysIn_[idKey] in dict_)):
         list = dict_[keysIn_[idKey]]
