@@ -24,3 +24,6 @@ xcuserdata
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+research/peter/oscCommunication/bin/oscChatApp.app
+research/peter/oscChatOF_Example/bin/oscChatApp.app
+research/peter/oscCommunication/bin/oscSenderRecieverApp.app
