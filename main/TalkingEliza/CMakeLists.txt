@@ -1,5 +1,5 @@
 
-set( APP_NAME   TalikngEliza )
+set( APP_NAME   TalkingEliza )
 
 
 # --------------------- Source Files ---------------------
