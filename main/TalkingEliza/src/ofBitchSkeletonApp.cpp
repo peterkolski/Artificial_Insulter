@@ -16,10 +16,10 @@ void ofBitchSkeletonApp::setup(){
     ofLogNotice() << "Path to write file" << imageNamePath;
 
 
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
     ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
     ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
     ofLogNotice() << "INFO: " << xml.getValue( "OSC:HOST", defaultXMLError );
 
     textCurrent = bitches.getAnswerCurrent();
@@ -146,12 +146,14 @@ void ofBitchSkeletonApp::setupGUI()
 void ofBitchSkeletonApp::setupOSC()
 {
     string host             = xml.getValue( "OSC:HOST", defaultXMLError );
-    string adressToPython   = xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
     int    portToPython     = xml.getValue( "OSC:PORT:SEND", 9000 );
-    string adressFromPython = xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
     int    portFromPython   = xml.getValue( "OSC:PORT:RECIEVE", 9000 );
+    string adrSendText      = xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
+    string adrRecieveText   = xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
+    string adrSendPicDone   = xml.getValue( "OSC:ADRESS:SEND:PICSAVED", defaultXMLError );
+    string adrRecievePicDone = xml.getValue( "OSC:ADRESS:RECIEVE:PICSAVED", defaultXMLError );
 
-    bitchElisa.setup( host, portToPython, adressToPython, portFromPython, adressFromPython );
+    bitchElisa.setup( host, portToPython, adrSendText, portFromPython, adrRecieveText );
 //    bitchKora.setup( host, portFromPython, portToPython, adressFromPython, adressToPython );
 }
 

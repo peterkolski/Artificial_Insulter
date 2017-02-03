@@ -5,21 +5,23 @@
 <OSC>
     <ADRESS>
         <SEND>
-            <TEXT>
-                /transform
-            </TEXT>
+            <TEXT> /transform </TEXT>
+            <PICSAVED> /picture_saved </PICSAVED>
         </SEND>
+
         <RECIEVE>
-            <TEXT>
-                /python_here
-            </TEXT>
+            <TEXT> /python_here </TEXT>
+            <PICSAVED> /picture_saved </PICSAVED>
         </RECIEVE>
     </ADRESS>
+
     <HOST>
             localhost
     </HOST>
+
     <PORT>
         <SEND>      33333 </SEND>
         <RECIEVE>   22222 </RECIEVE>
     </PORT>
+
 </OSC>
