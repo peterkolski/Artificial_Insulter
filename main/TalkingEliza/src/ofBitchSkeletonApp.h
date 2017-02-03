@@ -23,6 +23,9 @@ public:
 
     void setVoice();
 
+    ofxXmlSettings  xml;
+
+
     // --- CONVERSATION
     arstu::ConversationEliza    bitches;
     string textCurrent = "";

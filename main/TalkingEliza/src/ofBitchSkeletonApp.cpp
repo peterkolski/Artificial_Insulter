@@ -1,9 +1,11 @@
 #include "ofBitchSkeletonApp.h"
-#include <fstream>  
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setup(){
     setVoice( );
+
+    xml.load( "setting.txt" );
+    xml.
 
     textCurrent = bitches.getAnswerCurrent();
 
@@ -11,10 +13,10 @@ void ofBitchSkeletonApp::setup(){
     setupGUI();
     setupOSC();
 
-    auto camWidth = 1920;  // try to grab at this size.
-    auto camHeight = 1080;
+    auto camWidth = 1280;  // try to grab at this size.
+    auto camHeight = 720;
     vidGrabber.setDeviceID( 0 );
-    vidGrabber.setDesiredFrameRate( 30 );
+    vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
     imageNamePath = "/Volumes/bloke/pictureOutput/picFromNetwork.jpg";
 }
