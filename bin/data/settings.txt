@@ -1,0 +1,3 @@
+<PATH>
+    <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
+</PATH>

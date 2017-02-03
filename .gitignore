@@ -1,4 +1,3 @@
-bin/*
 build/*
 .ipynb_checkpoints
 
@@ -27,3 +26,22 @@ xcuserdata
 research/peter/oscCommunication/bin/oscChatApp.app
 research/peter/oscChatOF_Example/bin/oscChatApp.app
 research/peter/oscCommunication/bin/oscSenderRecieverApp.app
+research/peter/StoryTeller/data/neural_storyteller/caption_style.npy
+research/peter/StoryTeller/data/neural_storyteller/coco_embedding.npz
+research/peter/StoryTeller/data/neural_storyteller/coco_embedding.npz.dictionary.pkl
+research/peter/StoryTeller/data/neural_storyteller/coco_embedding.npz.pkl
+research/peter/StoryTeller/data/neural_storyteller/coco_train_caps.txt
+research/peter/StoryTeller/data/neural_storyteller/romance.npz
+research/peter/StoryTeller/data/neural_storyteller/romance.npz.pkl
+research/peter/StoryTeller/data/neural_storyteller/romance_dictionary.pkl
+research/peter/StoryTeller/data/neural_storyteller/romance_style.npy
+research/peter/StoryTeller/data/neural_storyteller/swift_style.npy
+research/peter/StoryTeller/data/skip-thoughts/bi_skip.npz
+research/peter/StoryTeller/data/skip-thoughts/bi_skip.npz.pkl
+research/peter/StoryTeller/data/skip-thoughts/btable.npy
+research/peter/StoryTeller/data/skip-thoughts/dictionary.txt
+research/peter/StoryTeller/data/skip-thoughts/uni_skip.npz
+research/peter/StoryTeller/data/skip-thoughts/uni_skip.npz.pkl
+research/peter/StoryTeller/data/skip-thoughts/utable.npy
+research/peter/StoryTeller/data/vgg/vgg19.pkl
+out.jpg
