@@ -51,7 +51,7 @@ string bitcherOSC::recieveText()
     {
         ofxOscMessage _message;
         reciever_.getNextMessage( _message );
-        ofLogVerbose( "Server recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
+        ofLogVerbose() << logInfo_ << " Recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp();
 
         // check the address of the incoming message
         if (    ( _message.getAddress() == adressRecieverText_ )
