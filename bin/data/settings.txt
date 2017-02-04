@@ -5,18 +5,18 @@
 <OSC>
     <ADRESS>
         <SEND>
-            <TEXT> /transform </TEXT>
+            <TEXT> /recognize </TEXT>
             <PICSAVED> /picture_saved </PICSAVED>
         </SEND>
 
         <RECIEVE>
-            <TEXT> /python_here </TEXT>
+            <TEXT> /result </TEXT>
             <PICSAVED> /picture_saved </PICSAVED>
         </RECIEVE>
     </ADRESS>
 
     <HOST>
-            localhost
+            192.168.2.45
     </HOST>
 
     <PORT>

@@ -41,6 +41,17 @@ void ofBitchSkeletonApp::setup(){
 void ofBitchSkeletonApp::update(){
     vidGrabber.update();
     speak( );
+    //TODO HACK
+//    if ( ( ofGetFrameNum() % ( 60*10) ) == 0 )
+//    {
+//        processImage();
+////        bitchElisa.update();
+//    }
+//    if ( ( ofGetFrameNum() % ( 60*5) ) == 0 )
+//    {
+////        processImage();
+//        bitchElisa.update();
+//    }
 }
 
 //--------------------------------------------------------------
@@ -124,7 +135,7 @@ void ofBitchSkeletonApp::processImage()
 {
     saveImage( imageNamePath );
     bitchElisa.sendPicturePath();
-    bitchElisa.update();
+//    bitchElisa.update(); // TODO too fast, processing taes some time
 
     ofLogNotice() << "Sent picture";
 }
