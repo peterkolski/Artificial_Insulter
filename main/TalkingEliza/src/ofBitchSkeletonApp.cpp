@@ -81,9 +81,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == 'S' )
     {
-        saveImage( imageNamePath );
-        bitchElisa.sendPicturePath();
-        ofLogNotice() << "Sent picture";
+        processImage();
     }
 
 
@@ -120,6 +118,15 @@ void ofBitchSkeletonApp::keyPressed(int key){
         reset();
     }
 
+}
+
+void ofBitchSkeletonApp::processImage()
+{
+    saveImage( imageNamePath );
+    bitchElisa.sendPicturePath();
+    bitchElisa.update();
+
+    ofLogNotice() << "Sent picture";
 }
 
 void ofBitchSkeletonApp::saveImage( string &fileNamePath )

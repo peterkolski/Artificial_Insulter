@@ -58,4 +58,5 @@ public:
     void setupGUI();
     void setupSoundAnalysis();
     void saveImage( string &fileNamePath );
+    void processImage();
 };
