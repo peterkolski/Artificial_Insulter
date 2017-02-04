@@ -46,3 +46,4 @@ research/peter/StoryTeller/data/skip-thoughts/utable.npy
 research/peter/StoryTeller/data/vgg/vgg19.pkl
 out.jpg
 *.app
+log.txt
