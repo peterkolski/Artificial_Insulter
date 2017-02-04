@@ -32,9 +32,12 @@ void bitcherOSC::setup( string &hostSendingTo, int portSender, int portReciever 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-string bitcherOSC::update()
+string bitcherOSC::ask( string &text )
 {
-    sendText( textToSend_ );
+    textSent_ = text;
+    sendText( textSent_ );
+    // TODO This could take some time
+    sleep( 1 );
     textRecieved_ = recieveText();
     return textRecieved_;
 }

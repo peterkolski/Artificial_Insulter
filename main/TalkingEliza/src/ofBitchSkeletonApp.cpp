@@ -103,7 +103,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
             bitches.next();
             bitches.doConversation();
 
-            bitchElisa.update();
+            bitchElisa.ask( textFromInput );
             //    bitchKora.update();
 
             reset();
@@ -119,7 +119,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
         if ( textFromInput != "" )
         {
 //            bitches.doConversation( textFromInput, 0 );
-            bitchElisa.setTextToSend( textFromInput );
+//            bitchElisa.setTextToSend( textFromInput );
         }
         else
         {
@@ -210,7 +210,7 @@ void ofBitchSkeletonApp::drawText()
 
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
-    ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextToSend(), 100, 220 );
+    ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextAsked(), 100, 220 );
     ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getAnswer(), 100, 240 );
 //    ofDrawBitmapStringHighlight( "OSC: " + bitchKora.getAnswer(), 600, 220 );
 
