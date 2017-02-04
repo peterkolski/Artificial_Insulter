@@ -4,17 +4,17 @@ import insulterFromDatabase
 #osc INIT
 import OSC
 
-osc_to_of_address= ('127.0.0.1' , 22222) #OpenFrameworks
+osc_sender_HostPort= ('127.0.0.1' , 22222) #OpenFrameworks
 osc_send_address = "/python_here"       #Sending   - python to OF
 osc_transform_address = "/transform"    #Recieving - OF to python
-osc_from_of_address = ('127.0.0.1' , 33333) #python
+oscReciever_HostPort = ('127.0.0.1' , 33333) #python
 
 # Python to openframeworks:
 oscSender = OSC.OSCClient()
-oscSender.connect(osc_to_of_address)
+oscSender.connect(osc_sender_HostPort)
 
 # OpenFrameworks to python:
-oscReceiver = OSC.ThreadingOSCServer(osc_from_of_address)
+oscReceiver = OSC.ThreadingOSCServer(oscReciever_HostPort)
 
 #---
 # send ready message to openframeworks
