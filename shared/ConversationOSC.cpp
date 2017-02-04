@@ -2,14 +2,14 @@
 // Created by Peter A. Kolski on 05.02.17.
 //
 
-#include "ConversionOSC.h"
+#include "ConversationOSC.h"
 
-ConversionOSC::ConversionOSC() {
+ConversationOSC::ConversationOSC() {
     
 }
 
 
-string ConversionOSC::getName( int id )
+string ConversationOSC::getName( int id )
 {
     if ( id < talkerMaxAmount_)
     {
@@ -21,33 +21,33 @@ string ConversionOSC::getName( int id )
     }
 }
 
-int ConversionOSC::getTalkerCurrentID() const
+int ConversationOSC::getTalkerCurrentID() const
 {
     return idTalker_;
 }
 
-string ConversionOSC::getNameSpeaker()
+string ConversationOSC::getNameSpeaker()
 {
     return getName( idTalker_ );
 }
 
-string ConversionOSC::getNameListener()
+string ConversationOSC::getNameListener()
 {
     return getName( idOther_ );
 }
 
-const string &ConversionOSC::getAnswerCurrent()
+const string &ConversationOSC::getAnswerCurrent()
 {
     return answerCurrent_;
 }
 
 
-const string &ConversionOSC::getAnswerBefore()
+const string &ConversationOSC::getAnswerBefore()
 {
     return answerBefore_;
 }
 
-void ConversionOSC::next()
+void ConversationOSC::next()
 {
     if ( idTalker_ == 0 )
     {
@@ -60,19 +60,19 @@ void ConversionOSC::next()
     }
 }
 
-void ConversionOSC::doConversation()
+void ConversationOSC::doConversation()
 {
     answerBefore_ = answerCurrent_;
     doConversation( answerBefore_, idTalker_ );
 }
 
-void ConversionOSC::doConversation( string txt, int id )
+void ConversationOSC::doConversation( string txt, int id )
 {
     setTalkerActive( id );
     answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );
 }
 
-const string &ConversionOSC::getAnswerFromID( int id )
+const string &ConversationOSC::getAnswerFromID( int id )
 {
     if ( id < talkerMaxAmount_ )
     {
@@ -86,7 +86,7 @@ const string &ConversionOSC::getAnswerFromID( int id )
     }
 }
 
-void ConversionOSC::setTalkerActive( int id )
+void ConversationOSC::setTalkerActive( int id )
 {
     idTalker_ = id;
     if ( idTalker_ == 0 )

@@ -7,7 +7,7 @@
 
 
 #include "TalkerEliza.h"
-#include "ConversationEliza.h"
+#include "ConversationOSC.h"
 #include "bitcherOSC.h"
 
 
@@ -28,7 +28,7 @@ public:
     string defaultXMLError = "NIX";
 
     // --- CONVERSATION
-    arstu::ConversationEliza    bitches;
+    ConversationOSC    bitches;
     string textCurrent = "";
     string textLast = "";
     string textFromInput      = "";

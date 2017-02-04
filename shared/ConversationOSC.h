@@ -7,10 +7,10 @@
 
 #include "bitcherOSC.h"
 
-class ConversionOSC
+class ConversationOSC
 {
 public:
-    ConversionOSC();
+    ConversationOSC();
     void    next();
     void    doConversation();
     void    doConversation( string txt, int id );
