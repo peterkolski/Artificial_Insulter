@@ -67,8 +67,8 @@ def putKeywordsToDict( dataFrame ):
 
 # -----------------------------------
 
-def answerFromText(textIn_, dict_, dataFrame_):
-    entriesNumDF = len(dataFrame_.index)
+def answerFromText( textIn_, dict_, dataFrame_ ):
+    entriesNumDF = len( dataFrame_.index )
     keysIn_ = getKeywords(textIn_)
     idKey = 0   #
     textAnswer = "ERROR"
@@ -77,9 +77,9 @@ def answerFromText(textIn_, dict_, dataFrame_):
         list = dict_[keysIn_[idKey]]
         idList = randint(0, len(list) - 1)  # Random list entry
         rowNum = list[idList]
-        textAnswer dataFrame_.iloc[rowNum]['Text']
+        textAnswer = dataFrame_.iloc[rowNum ][ 'Text' ]
     else:
-        textAnswer dataFrame_.iloc[randint(0, entriesNumDF)]['Text']
+        textAnswer = dataFrame_.iloc[randint( 0, entriesNumDF ) ][ 'Text' ]
     textAnswer += " "
     return textAnswer
 
