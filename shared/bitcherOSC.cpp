@@ -26,7 +26,6 @@ void bitcherOSC::update()
 {
     textRecieved_ = recieveText();
     sendText( textToSend_ );
-//    checkPictureRecieved()
 }
 
 void bitcherOSC::sendText( string &text )
@@ -39,14 +38,13 @@ void bitcherOSC::sendText( string &text )
 
 string bitcherOSC::recieveText()
 {
+//    ofLogVerbose() << logInfo_ << "Recieving from adress: " << adressReciever_;
     string result = "";
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
         reciever_.getNextMessage( _message );
-
-        //Log received message for easier debugging of participants' messages:
-        ofLogVerbose( "Server recvd msg " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
+        ofLogVerbose( "Server recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
 
         // check the address of the incoming message
         if (    ( _message.getAddress() == adressReciever_ )
