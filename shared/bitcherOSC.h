@@ -15,10 +15,10 @@ class bitcherOSC
 {
 public:
     void setup( string &hostSendingTo, int portSender, int portReciever );
-    void            update();
-    const string    &getTextRecieved() { return textRecieved_; }
-    const string    &getTextToSend() { return textToSend_; }
+    string update();
     void            setTextToSend( const string &textToSend_ ) { bitcherOSC::textToSend_ = textToSend_; }
+    const string    &getAnswer() { return textRecieved_; }
+    const string    &getTextToSend() { return textToSend_; }
     void            sendPicturePath();
 
 private:

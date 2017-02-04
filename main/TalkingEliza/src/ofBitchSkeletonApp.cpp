@@ -176,7 +176,7 @@ void ofBitchSkeletonApp::setupOSC()
 
 void ofBitchSkeletonApp::reset()
 {
-    textCurrent = bitchElisa.getTextRecieved();
+    textCurrent = bitchElisa.getAnswer();
 //    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out
     textLast    = bitches.getAnswerBefore();
     setVoice();
@@ -211,8 +211,8 @@ void ofBitchSkeletonApp::drawText()
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
     ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextToSend(), 100, 220 );
-    ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getTextRecieved(), 100, 240 );
-//    ofDrawBitmapStringHighlight( "OSC: " + bitchKora.getTextRecieved(), 600, 220 );
+    ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getAnswer(), 100, 240 );
+//    ofDrawBitmapStringHighlight( "OSC: " + bitchKora.getAnswer(), 600, 220 );
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
