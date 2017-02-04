@@ -16,14 +16,9 @@ class bitcherOSC
 public:
     void setup( string &hostSendingTo, int portSender, int portReciever );
     void            update();
-    bool            isRecievable() ;
-    bool            isSendable() ;
-    const string    &getTextRecieved() ;
-    void            setTextRecieved( const string &textRecieved_ );
-    const string    &getTextToSend() ;
-    void            setTextToSend( const string &textToSend_ );
-    void            setAdressReciever( const string &adress );
-    void            setAdressSender( const string &adress );
+    const string    &getTextRecieved() { return textRecieved_; }
+    const string    &getTextToSend() { return textToSend_; }
+    void            setTextToSend( const string &textToSend_ ) { bitcherOSC::textToSend_ = textToSend_; }
     void            sendPicturePath();
 
 private:
@@ -41,8 +36,6 @@ private:
     std::string     adressSenderSending_;
     std::string     adressSenderArrived_;
 
-    bool    recievable_   = false;
-    bool    sendable_     = false;
     string  textRecieved_   = "";
     string  textToSend_     = "";
     string  recieveText();

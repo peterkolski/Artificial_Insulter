@@ -30,12 +30,15 @@ void bitcherOSC::setup( string &hostSendingTo, int portSender, int portReciever 
     reciever_.setup( portReciever_ );
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void bitcherOSC::update()
 {
     textRecieved_ = recieveText();
     sendText( textToSend_ );
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void bitcherOSC::sendText( string &text )
 {
     ofxOscMessage m;
@@ -43,6 +46,8 @@ void bitcherOSC::sendText( string &text )
     m.addStringArg( text );
     sender_.sendMessage( m, false );
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 string bitcherOSC::recieveText()
 {
@@ -74,37 +79,8 @@ string bitcherOSC::recieveText()
     return result;
 }
 
-const string &bitcherOSC::getTextRecieved()
-{
-    return textRecieved_;
-}
 
-void bitcherOSC::setTextRecieved( const string &textRecieved_ )
-{
-    bitcherOSC::textRecieved_ = textRecieved_;
-}
-
-const string &bitcherOSC::getTextToSend()
-{
-    return textToSend_;
-}
-
-void bitcherOSC::setTextToSend( const string &textToSend_ )
-{
-    bitcherOSC::textToSend_ = textToSend_;
-}
-
-bool bitcherOSC::isRecievable()
-{
-    return recievable_;
-}
-
-bool bitcherOSC::isSendable()
-{
-    return sendable_;
-}
-
-//--------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
 {
@@ -137,15 +113,7 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
     return msg_string;
 }
 
-void bitcherOSC::setAdressReciever( const string &adress )
-{
-    bitcherOSC::adressRecieverText_ = adress;
-}
-
-void bitcherOSC::setAdressSender( const string &adress )
-{
-    bitcherOSC::adressSenderText_ = adress;
-}
+//----------------------------------------------------------------------------------------------------------------------
 
 void bitcherOSC::sendPicturePath()
 {
