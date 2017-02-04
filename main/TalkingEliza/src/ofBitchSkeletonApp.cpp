@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setup(){
     setVoice( );
+    ofSetLogLevel( OF_LOG_VERBOSE );
 
 //    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
     string settingsPath = "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt";
@@ -81,6 +82,8 @@ void ofBitchSkeletonApp::keyPressed(int key){
     if ( key == 'S' )
     {
         saveImage( imageNamePath );
+        bitchElisa.sendPicturePath();
+        ofLogNotice() << "Sent picture";
     }
 
 

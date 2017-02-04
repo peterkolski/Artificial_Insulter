@@ -25,6 +25,7 @@ public:
     void            setTextToSend( const string &textToSend_ );
     void            setAdressReciever( const string &adress );
     void            setAdressSender( const string &adress );
+    void            sendPicturePath();
 
 private:
     string getOscMsgAsString( ofxOscMessage m );
@@ -34,14 +35,15 @@ private:
     int             portReciever_;
     std::string     hostSenderToOther_;
     std::string     adressReciever_;
-    std::string     adressSender_;
+    std::string     logInfo_ = "BitcherOSC || ";
 
+    std::string     adressSender_;
     bool    recievable_   = false;
     bool    sendable_     = false;
     string  textRecieved_   = "";
     string  textToSend_     = "";
     string  recieveText();
-    void sendText( string &text );
+    void    sendText( string &text );
 };
 
 

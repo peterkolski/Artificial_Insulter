@@ -12,6 +12,12 @@ void bitcherOSC::setup( string &hostSender, int portSender, string adrSender, in
     adressReciever_     = adrRecieve;
     adressSender_       = adrSender;
 
+    ofLogVerbose() << logInfo_ << "Host: " << hostSenderToOther_;
+    ofLogVerbose() << logInfo_ << "Port Sending to: " << portSender_;
+    ofLogVerbose() << logInfo_ << "Port Recieving from: " << portReciever_;
+    ofLogVerbose() << logInfo_ << "Adress Sender: " << adressSender_;
+    ofLogVerbose() << logInfo_ << "Adress Reciever: " << adressReciever_;
+
     sender_.setup( hostSenderToOther_, portSender_ );
     reciever_.setup( portReciever_ );
 }
@@ -20,6 +26,7 @@ void bitcherOSC::update()
 {
     textRecieved_ = recieveText();
     sendText( textToSend_ );
+//    checkPictureRecieved()
 }
 
 void bitcherOSC::sendText( string &text )
@@ -36,7 +43,7 @@ string bitcherOSC::recieveText()
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
-        reciever_.getNextMessage( _message ); //TODO alternative code
+        reciever_.getNextMessage( _message );
 
         //Log received message for easier debugging of participants' messages:
         ofLogVerbose( "Server recvd msg " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
@@ -47,6 +54,7 @@ string bitcherOSC::recieveText()
             &&  ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING ) )
          {
              result = _message.getArgAsString( 0 ); // TODO check all entries
+             ofLogVerbose() << logInfo_ << "message recieved from " << adressReciever_;
          }
         else
         {
@@ -127,4 +135,18 @@ void bitcherOSC::setAdressReciever( const string &adress )
 void bitcherOSC::setAdressSender( const string &adress )
 {
     bitcherOSC::adressSender_ = adress;
+}
+
+void bitcherOSC::sendPicturePath()
+{
+    ofxOscMessage m;
+    string  adressPicSent = "/recognize";
+    string filePathPicSent = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg";
+
+    m.setAddress( adressPicSent );
+    m.addStringArg( filePathPicSent );
+    sender_.sendMessage( m, false );
+
+    ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent;
+    ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
 }
