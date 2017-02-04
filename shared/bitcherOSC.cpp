@@ -4,21 +4,29 @@
 
 #include "bitcherOSC.h"
 
-void bitcherOSC::setup( string &hostSender, int portSender, string adrSender, int portReciever, string adrRecieve )
+void bitcherOSC::setup( string &hostSendingTo, int portSender, int portReciever )
 {
-    hostSenderToOther_  = hostSender;
+    hostSendSendingTo_  = hostSendingTo;
     portSender_         = portSender;
     portReciever_       = portReciever;
-    adressReciever_     = adrRecieve;
-    adressSender_       = adrSender;
 
-    ofLogVerbose() << logInfo_ << "Host: " << hostSenderToOther_;
+    string adressRecieverTMP = "/answer";
+    adressRecieverText_     = adressRecieverTMP + "_text";
+    adressRecieverSending_  = adressRecieverTMP + "_sending";
+    adressRecieverArrived_  = adressRecieverTMP + "_arrived";
+
+    string adressSenderTMP  = "/original";
+    adressSenderText_       = adressSenderTMP + "_text";
+    adressSenderSending_    = adressSenderTMP + "_sending";
+    adressSenderArrived_    = adressSenderTMP + "_arrived";
+
+    ofLogVerbose() << logInfo_ << "Host: " << hostSendSendingTo_;
     ofLogVerbose() << logInfo_ << "Port Sending to: " << portSender_;
     ofLogVerbose() << logInfo_ << "Port Recieving from: " << portReciever_;
-    ofLogVerbose() << logInfo_ << "Adress Sender: " << adressSender_;
-    ofLogVerbose() << logInfo_ << "Adress Reciever: " << adressReciever_;
+    ofLogVerbose() << logInfo_ << "Adress Sender: " << adressSenderText_;
+    ofLogVerbose() << logInfo_ << "Adress Reciever: " << adressRecieverText_;
 
-    sender_.setup( hostSenderToOther_, portSender_ );
+    sender_.setup( hostSendSendingTo_, portSender_ );
     reciever_.setup( portReciever_ );
 }
 
@@ -31,7 +39,7 @@ void bitcherOSC::update()
 void bitcherOSC::sendText( string &text )
 {
     ofxOscMessage m;
-    m.setAddress( adressSender_ );
+    m.setAddress( adressSenderText_ );
     m.addStringArg( text );
     sender_.sendMessage( m, false );
 }
@@ -46,7 +54,7 @@ string bitcherOSC::recieveText()
         ofLogVerbose( "Server recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp() );
 
         // check the address of the incoming message
-        if (    ( _message.getAddress() == adressReciever_ )
+        if (    ( _message.getAddress() == adressRecieverText_ )
             &&  ( _message.getNumArgs() > 0 ) )
          {
              for ( int i = 0; i < _message.getNumArgs() ; ++i )
@@ -54,7 +62,7 @@ string bitcherOSC::recieveText()
                  if ( _message.getArgType( i ) == OFXOSC_TYPE_STRING )
                  {
                      result = _message.getArgAsString( i );
-                     ofLogVerbose() << logInfo_ << "message recieved from " << adressReciever_ << " => " << result;
+                     ofLogVerbose() << logInfo_ << "message recieved from " << adressRecieverText_ << " => " << result;
                  }
              }
          }
@@ -131,12 +139,12 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
 
 void bitcherOSC::setAdressReciever( const string &adress )
 {
-    bitcherOSC::adressReciever_ = adress;
+    bitcherOSC::adressRecieverText_ = adress;
 }
 
 void bitcherOSC::setAdressSender( const string &adress )
 {
-    bitcherOSC::adressSender_ = adress;
+    bitcherOSC::adressSenderText_ = adress;
 }
 
 void bitcherOSC::sendPicturePath()

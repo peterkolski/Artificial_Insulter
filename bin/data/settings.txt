@@ -3,25 +3,9 @@
 </PATH>
 
 <OSC>
-    <ADRESS>
-        <SEND>
-            <TEXT> /recognize </TEXT>
-            <PICSAVED> /picture_saved </PICSAVED>
-        </SEND>
-
-        <RECIEVE>
-            <TEXT> /result </TEXT>
-            <PICSAVED> /picture_saved </PICSAVED>
-        </RECIEVE>
-    </ADRESS>
-
-    <HOST>
-            192.168.2.45
-    </HOST>
-
+    <HOST> 192.168.2.45 </HOST>
     <PORT>
         <SEND>      33333 </SEND>
         <RECIEVE>   22222 </RECIEVE>
     </PORT>
-
 </OSC>

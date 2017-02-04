@@ -169,13 +169,9 @@ void ofBitchSkeletonApp::setupOSC()
     string host             = xml.getValue( "OSC:HOST", defaultXMLError );
     int    portToPython     = xml.getValue( "OSC:PORT:SEND", 9000 );
     int    portFromPython   = xml.getValue( "OSC:PORT:RECIEVE", 9000 );
-    string adrSendText      = xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
-    string adrRecieveText   = xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
-    string adrSendPicDone   = xml.getValue( "OSC:ADRESS:SEND:PICSAVED", defaultXMLError );
-    string adrRecievePicDone = xml.getValue( "OSC:ADRESS:RECIEVE:PICSAVED", defaultXMLError );
 
-    bitchElisa.setup( host, portToPython, adrSendText, portFromPython, adrRecieveText );
-//    bitchKora.setup( host, portFromPython, portToPython, adressFromPython, adressToPython );
+    bitchElisa.setup( host, portToPython, portFromPython );
+//    bitchKora.setup( host, portFromPython, portToPython );
 }
 
 void ofBitchSkeletonApp::reset()

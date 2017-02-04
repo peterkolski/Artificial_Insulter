@@ -14,7 +14,7 @@ using namespace std;
 class bitcherOSC
 {
 public:
-    void            setup( string &hostSender, int portSender, string adrSender, int portReciever, string adrRecieve );
+    void setup( string &hostSendingTo, int portSender, int portReciever );
     void            update();
     bool            isRecievable() ;
     bool            isSendable() ;
@@ -27,16 +27,20 @@ public:
     void            sendPicturePath();
 
 private:
+    std::string     logInfo_ = "BitcherOSC || ";
     string getOscMsgAsString( ofxOscMessage m );
     ofxOscSender    sender_;
     ofxOscReceiver  reciever_;
     int             portSender_;
     int             portReciever_;
-    std::string     hostSenderToOther_;
-    std::string     adressReciever_;
-    std::string     logInfo_ = "BitcherOSC || ";
+    std::string     hostSendSendingTo_;
+    std::string     adressRecieverText_;
+    std::string     adressRecieverSending_;
+    std::string     adressRecieverArrived_;
+    std::string     adressSenderText_;
+    std::string     adressSenderSending_;
+    std::string     adressSenderArrived_;
 
-    std::string     adressSender_;
     bool    recievable_   = false;
     bool    sendable_     = false;
     string  textRecieved_   = "";
