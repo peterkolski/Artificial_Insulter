@@ -38,7 +38,6 @@ void bitcherOSC::sendText( string &text )
 
 string bitcherOSC::recieveText()
 {
-//    ofLogVerbose() << logInfo_ << "Recieving from adress: " << adressReciever_;
     string result = "";
     while ( reciever_.hasWaitingMessages() )
     {
@@ -48,15 +47,20 @@ string bitcherOSC::recieveText()
 
         // check the address of the incoming message
         if (    ( _message.getAddress() == adressReciever_ )
-            &&  ( _message.getNumArgs() > 0 )
-            &&  ( _message.getArgType( 0 ) == OFXOSC_TYPE_STRING ) )
+            &&  ( _message.getNumArgs() > 0 ) )
          {
-             result = _message.getArgAsString( 0 ); // TODO check all entries
-             ofLogVerbose() << logInfo_ << "message recieved from " << adressReciever_;
+             for ( int i = 0; i < _message.getNumArgs() ; ++i )
+             {
+                 if ( _message.getArgType( i ) == OFXOSC_TYPE_STRING )
+                 {
+                     result = _message.getArgAsString( i );
+                     ofLogVerbose() << logInfo_ << "message recieved from " << adressReciever_ << " => " << result;
+                 }
+             }
          }
         else
         {
-            ofLogWarning( "Server got weird message: " + _message.getAddress() );
+            ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
         }
     }
     return result;
