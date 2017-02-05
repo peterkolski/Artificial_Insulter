@@ -103,7 +103,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
             bitches.next();
             bitches.doConversation();
 
-            bitchElisa.ask( textFromInput );
+//            bitchElisa.ask( textFromInput );
             //    bitchKora.update();
 
             reset();
@@ -134,7 +134,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 void ofBitchSkeletonApp::processImage()
 {
     saveImage( imageNamePath );
-    bitchElisa.sendPicturePath();
+//    bitchElisa.sendPicturePath();
 //    bitchElisa.update(); // TODO too fast, processing taes some time
 
     ofLogNotice() << "Sent picture";
@@ -171,13 +171,13 @@ void ofBitchSkeletonApp::setupOSC()
     int    portFromPython   = xml.getValue( "OSC:PORT:RECIEVE", 9000 );
 
     bitches.setup( 0, host, portToPython, portFromPython );
-    bitches.setup( 1, host, portToPython, portFromPython );
-    bitchElisa.setup( host, portToPython, portFromPython );
+    bitches.setup( 1, host, portToPython + 1, portFromPython + 1 );
+//    bitchElisa.setup( host, portToPython, portFromPython );
 }
 
 void ofBitchSkeletonApp::reset()
 {
-    textCurrent = bitchElisa.getAnswer();
+//    textCurrent = bitchElisa.getAnswer();
 //    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out
     textLast    = bitches.getAnswerBefore();
     setVoice();
@@ -211,8 +211,8 @@ void ofBitchSkeletonApp::drawText()
 
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
-    ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextAsked(), 100, 220 );
-    ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getAnswer(), 100, 240 );
+//    ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextAsked(), 100, 220 );
+//    ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getAnswer(), 100, 240 );
 //    ofDrawBitmapStringHighlight( "OSC: " + bitchKora.getAnswer(), 600, 220 );
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );

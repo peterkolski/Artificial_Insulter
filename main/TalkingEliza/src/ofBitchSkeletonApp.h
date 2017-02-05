@@ -29,7 +29,7 @@ public:
 
     // --- CONVERSATION
     ConversationOSC    bitches;
-    bitcherOSC  bitchElisa;
+//    bitcherOSC  bitchElisa;
     string textCurrent = "";
     string textLast = "";
     string textFromInput      = "";
