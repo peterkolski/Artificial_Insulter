@@ -20,7 +20,7 @@ void ConversationOSC::setup( int id, string host, int portSender, int portReciev
 {
     if ( id < talkerMaxAmount_)
     {
-        talkerVec_[ id ]->setup( host, portReciever, portReciever );
+        talkerVec_[ id ]->setup( host, portSender, portReciever );
     }
     else {
         ofLogError() << logNameClass_ << "Setup: ID invalid";
