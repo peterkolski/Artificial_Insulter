@@ -37,7 +37,7 @@ string bitcherOSC::ask( string &text )
     textSent_ = text;
     sendText( textSent_ );
     // TODO This could take some time
-    sleep( 1 );
+    usleep( 3000 );
     textRecieved_ = recieveText();
     return textRecieved_;
 }

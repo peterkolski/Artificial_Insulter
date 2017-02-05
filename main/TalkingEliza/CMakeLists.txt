@@ -8,7 +8,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/ofBitchSkeletonApp.cpp
         ../../shared/TalkerEliza.cpp
         ../../shared/ConversationEliza.cpp
-        ../../shared/ConversionOSC.cpp
+        ../../shared/ConversationOSC.cpp
         ../../shared/bitcherOSC.cpp
         )
 
