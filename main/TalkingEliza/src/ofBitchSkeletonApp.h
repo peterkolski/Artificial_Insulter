@@ -29,11 +29,10 @@ public:
 
     // --- CONVERSATION
     ConversationOSC    bitches;
+    bitcherOSC  bitchElisa;
     string textCurrent = "";
     string textLast = "";
     string textFromInput      = "";
-    bitcherOSC  bitchElisa;
-//    bitcherOSC  bitchKora;
 
     // --- SEEING
     ofVideoGrabber      vidGrabber;

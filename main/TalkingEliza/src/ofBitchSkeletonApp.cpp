@@ -170,8 +170,9 @@ void ofBitchSkeletonApp::setupOSC()
     int    portToPython     = xml.getValue( "OSC:PORT:SEND", 9000 );
     int    portFromPython   = xml.getValue( "OSC:PORT:RECIEVE", 9000 );
 
+    bitches.setup( 0, host, portToPython, portFromPython );
+    bitches.setup( 1, host, portToPython, portFromPython );
     bitchElisa.setup( host, portToPython, portFromPython );
-//    bitchKora.setup( host, portFromPython, portToPython );
 }
 
 void ofBitchSkeletonApp::reset()
