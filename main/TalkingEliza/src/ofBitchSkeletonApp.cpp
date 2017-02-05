@@ -174,8 +174,7 @@ void ofBitchSkeletonApp::setupOSC()
 
 void ofBitchSkeletonApp::reset()
 {
-//    textCurrent = bitchElisa.getAnswer();
-//    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out
+    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out
     textLast    = bitches.getAnswerBefore();
     setVoice();
     shouldSpeak = true;
