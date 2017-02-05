@@ -11,6 +11,7 @@ class ConversationOSC
 {
 public:
     ConversationOSC();
+    void    setup( int id, string host, int portSender, int portReciever );
     void    next();
     void    doConversation();
     void    doConversation( string txt, int id );
@@ -25,7 +26,7 @@ public:
 
 
 private:
-    string  logNameClass_       = "arstu::ConversationEliza => ";
+    string  logNameClass_       = "arstu::ConversationOSC => ";
     vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
 
     vector< string >            talkerNames_;

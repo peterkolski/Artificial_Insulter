@@ -5,9 +5,27 @@
 #include "ConversationOSC.h"
 
 ConversationOSC::ConversationOSC() {
-    
+    talkerVec_.resize( talkerMaxAmount_ );
+    talkerVec_[ 0 ] = make_unique< bitcherOSC >();
+    talkerVec_[ 1 ] = make_unique< bitcherOSC >();
+
+    talkerNames_.resize( talkerMaxAmount_ );
+    talkerNames_[ 0 ] = "Elisa";
+    talkerNames_[ 1 ] = "Kora";
+
+    answerCurrent_ = talkerVec_[ 0 ]->getAnswer();
 }
 
+void ConversationOSC::setup( int id, string host, int portSender, int portReciever )
+{
+    if ( id < talkerMaxAmount_)
+    {
+        talkerVec_[ id ]->setup( host, portReciever, portReciever );
+    }
+    else {
+        ofLogError() << logNameClass_ << "Setup: ID invalid";
+    }
+}
 
 string ConversationOSC::getName( int id )
 {
@@ -36,11 +54,11 @@ string ConversationOSC::getNameListener()
     return getName( idOther_ );
 }
 
+
 const string &ConversationOSC::getAnswerCurrent()
 {
     return answerCurrent_;
 }
-
 
 const string &ConversationOSC::getAnswerBefore()
 {
