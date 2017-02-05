@@ -23,6 +23,8 @@ _changerMale ={"yours"   : "his",
                 "Your "    : "His ",
                 "you "     : "he ",
                 "You "     : "He ",
+                "You' "     : "He' ",
+                "you' "     : "he' ",
                }
 _changerFemale ={"yours"   : "hers",
                 "Yours"   : "Hers",
@@ -32,7 +34,9 @@ _changerFemale ={"yours"   : "hers",
                 "you've"     : "she's",
                 "You "     : "she ",
                 "You've"     : "she's",
-               }
+                 "You' ": "She' ",
+                 "you' ": "she' ",
+                 }
 
 
 def changeToMale( text_ ):
