@@ -19,7 +19,7 @@ set( ${APP_NAME}_SOURCE_FILES
 set( OFX_ADDONS_ACTIVE
         ofxQuadWarp
         ofxOpenCv
-        ofxSoundProcessor
+#        ofxSoundProcessor
         ofxUI
         ofxXmlSettings
         ofxOsc

@@ -19,7 +19,7 @@ void ofBitchSkeletonApp::setup(){
 
     textCurrent = bitches.getAnswerCurrent();
 
-    setupSoundAnalysis();
+//    setupSoundAnalysis();
     setupGUI();
     setupOSC();
 
@@ -27,7 +27,7 @@ void ofBitchSkeletonApp::setup(){
     vidPlayerRight.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov" );
     vidPlayerLeft.play();
     vidPlayerRight.play();
-    
+
     auto camWidth = 1280;  // try to grab at this size.
     auto camHeight = 720;
     vidGrabber.setDeviceID( 0 );
@@ -78,8 +78,8 @@ void ofBitchSkeletonApp::draw(){
         ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
     ofPopStyle( );
 
-    auto scale = 1.0;
-    drawVoice( scale );
+//    auto scale = 1.0;
+//    drawVoice( scale );
 
     //======================== QUAD WARP
 
@@ -144,13 +144,13 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
     warperRight.load(); // reload last saved changes.
 }
 
-void ofBitchSkeletonApp::drawVoice( double scale )
-{
-    ofPushStyle( );
-    ofSetColor( ofColor::red );
-    ofDrawRectangle( 0, ofGetHeight() / 2, ofGetWidth( ), ofGetHeight( ) * analyser.getAmplitude() * scale );
-    ofPopStyle( );
-}
+//void ofBitchSkeletonApp::drawVoice( double scale )
+//{
+//    ofPushStyle( );
+//    ofSetColor( ofColor::red );
+//    ofDrawRectangle( 0, ofGetHeight() / 2, ofGetWidth( ), ofGetHeight( ) * analyser.getAmplitude() * scale );
+//    ofPopStyle( );
+//}
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::keyPressed(int key){
@@ -212,14 +212,14 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
     img.save( fileNamePath );
 }
 
-void ofBitchSkeletonApp::setupSoundAnalysis()
-{
-    auto bufferSize = 512;
-    auto sampleRate = 44100;
-
-    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
-    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
-}
+//void ofBitchSkeletonApp::setupSoundAnalysis()
+//{
+//    auto bufferSize = 512;
+//    auto sampleRate = 44100;
+//
+//    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
+//    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
+//}
 
 void ofBitchSkeletonApp::setupGUI()
 {
@@ -290,7 +290,7 @@ void ofBitchSkeletonApp::drawText()
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }
 
-void ofBitchSkeletonApp::audioIn( float*input, int bufferSize, int nChannels )
-{
-    analyser.grabAudioBuffer( input );
-}
+//void ofBitchSkeletonApp::audioIn( float*input, int bufferSize, int nChannels )
+//{
+//    analyser.grabAudioBuffer( input );
+//}
