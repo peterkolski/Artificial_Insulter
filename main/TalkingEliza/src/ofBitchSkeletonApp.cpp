@@ -4,6 +4,7 @@
 void ofBitchSkeletonApp::setup(){
     setVoice( );
     ofSetLogLevel( OF_LOG_VERBOSE );
+    ofEnableAlphaBlending();
 
 //    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
     string settingsPath = "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt";
@@ -63,6 +64,7 @@ void ofBitchSkeletonApp::update(){
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::draw(){
+    ofBackground( 0 );
     auto gap = 10;
     auto shift = 0;
     if ( bitches.getTalkerCurrentID() == 0 )
@@ -73,16 +75,25 @@ void ofBitchSkeletonApp::draw(){
         shift = ofGetWidth() / 2;
     }
 
-    ofPushStyle( );
-        ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
-    ofPopStyle( );
-
 //    auto scale = 1.0;
 //    drawVoice( scale );
 
+    ofPushStyle( );
+    {
+        ofSetColor( ofColor::lightGray, 100 );
+        ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
+    }
+    ofPopStyle( );
 
-    //======================== QUAD WARP
+    drawVideosWarped();
 
+    vidGrabber.draw( ofGetWidth() / 2 - 200 / 2 , 30, 200, 80 );
+
+    drawText( );
+}
+
+void ofBitchSkeletonApp::drawVideosWarped()
+{
     ofPushStyle();
     ofSetColor( ofColor::white );
     fboLeft.begin();
@@ -104,33 +115,28 @@ void ofBitchSkeletonApp::draw(){
     ofPushMatrix();
     {
         ofMultMatrix( matrixWarpLeft );
-        fboLeft.draw(0, 0);
+        fboLeft.draw( 0, 0);
     }
     ofPopMatrix();
     ofPushMatrix();
     {
         ofMultMatrix( matrixWarpRight );
-        fboRight.draw(0, 0);
+        fboRight.draw( 0, 0);
     }
     ofPopMatrix();
     //======================== draw quad warp ui.
-    ofSetColor(ofColor::yellow);
+    ofSetColor( ofColor::yellow);
     warperLeft.drawCorners();
     warperRight.drawCorners();
 
-    ofSetColor(ofColor::magenta);
+    ofSetColor( ofColor::magenta);
     warperLeft.drawHighlightedCorner();
     warperRight.drawHighlightedCorner();
 
-    ofSetColor(ofColor::red);
+    ofSetColor( ofColor::red);
     warperLeft.drawSelectedCorner();
     warperRight.drawSelectedCorner();
     ofPopStyle();
-
-
-    vidGrabber.draw( ofGetWidth() / 2 - 400 / 2 , 10, 400, 200 );
-
-    drawText( );
 }
 
 void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight )
