@@ -48,8 +48,9 @@ public:
 
     // --- VISUALIZER
     ofxSoundAnalyser    analyser;
-    ofFbo               fbo;
-    ofxQuadWarp         warper;
+    ofFbo               fboLeft, fboRight;
+    ofxQuadWarp         warperLeft, warperRight;
+    ofVideoPlayer       vidPlayerLeft, vidPlayerRight;
 
 
     void drawText();
@@ -60,4 +61,5 @@ public:
     void setupSoundAnalysis();
     void saveImage( string &fileNamePath );
     void processImage();
+    void setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight );
 };

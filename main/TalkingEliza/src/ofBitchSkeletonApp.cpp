@@ -29,21 +29,7 @@ void ofBitchSkeletonApp::setup(){
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
 
-    auto warpWidth = camWidth / 3 ;
-    auto warpHeight = camHeight / 3;
-
-    fbo.allocate( warpWidth, warpHeight );
-
-    auto xInitPos = 0;
-    auto yInitPos = 0;
-
-    warper.setSourceRect(ofRectangle(0, 0, warpWidth, warpHeight));              // this is the source rectangle which is the size of the image and located at ( 0, 0 )
-    warper.setTopLeftCornerPosition(ofPoint(xInitPos, yInitPos));             // this is position of the quad warp corners, centering the image on the screen.
-    warper.setTopRightCornerPosition(ofPoint(xInitPos + warpWidth, yInitPos));        // this is position of the quad warp corners, centering the image on the screen.
-    warper.setBottomLeftCornerPosition(ofPoint(xInitPos, yInitPos + warpHeight));      // this is position of the quad warp corners, centering the image on the screen.
-    warper.setBottomRightCornerPosition(ofPoint(xInitPos + warpWidth, yInitPos + warpHeight)); // this is position of the quad warp corners, centering the image on the screen.
-    warper.setup();
-    warper.load(); // reload last saved changes.
+    setupWarping( camWidth / 3, camHeight / 3, 0, 0, 0, 0 );
 
     bitches.doConversation( "I hate you all", 0 );
 }
@@ -92,41 +78,62 @@ void ofBitchSkeletonApp::draw(){
 
     ofPushStyle();
     ofSetColor( ofColor::white );
-    fbo.begin();
+    fboLeft.begin();
     {
-        vidGrabber.draw( 0, 0, fbo.getWidth(), fbo.getHeight() );
+        vidGrabber.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
     }
-    fbo.end();
+    fboLeft.end();
 
-    auto matrixWarp = warper.getMatrix();
+    auto matrixWarp = warperLeft.getMatrix();
 
     //======================== use the matrix to transform our fbo.
 
     ofPushMatrix();
     {
         ofMultMatrix( matrixWarp );
-        fbo.draw(0, 0);
+        fboLeft.draw(0, 0);
     }
     ofPopMatrix();
     //======================== draw quad warp ui.
 
     ofSetColor(ofColor::magenta);
-    warper.drawQuadOutline();
+    warperLeft.drawQuadOutline();
 
     ofSetColor(ofColor::yellow);
-    warper.drawCorners();
+    warperLeft.drawCorners();
 
     ofSetColor(ofColor::magenta);
-    warper.drawHighlightedCorner();
+    warperLeft.drawHighlightedCorner();
 
     ofSetColor(ofColor::red);
-    warper.drawSelectedCorner();
+    warperLeft.drawSelectedCorner();
     ofPopStyle();
 
 
     drawText( );
 
     gui2->draw( );
+}
+
+void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight )
+{
+    fboLeft.allocate( width, height );
+    warperLeft.setSourceRect( ofRectangle( 0, 0, width, height ));              // this is the source rectangle which is the size of the image and located at ( 0, 0 )
+    warperLeft.setTopLeftCornerPosition( ofPoint( xPosLeft, yPosLeft ));             // this is position of the quad warp corners, centering the image on the screen.
+    warperLeft.setTopRightCornerPosition( ofPoint( xPosLeft + width, yPosLeft ));        // this is position of the quad warp corners, centering the image on the screen.
+    warperLeft.setBottomLeftCornerPosition( ofPoint( xPosLeft, yPosLeft + height ));      // this is position of the quad warp corners, centering the image on the screen.
+    warperLeft.setBottomRightCornerPosition( ofPoint( xPosLeft + width, yPosLeft + height )); // this is position of the quad warp corners, centering the image on the screen.
+    warperLeft.setup();
+    warperLeft.load(); // reload last saved changes.
+
+    fboRight.allocate( width, height );
+    warperRight.setSourceRect( ofRectangle( 0, 0, width, height ));              // this is the source rectangle which is the size of the image and located at ( 0, 0 )
+    warperRight.setTopLeftCornerPosition( ofPoint( xPosRight, yPosRight ));             // this is position of the quad warp corners, centering the image on the screen.
+    warperRight.setTopRightCornerPosition( ofPoint( xPosRight + width, yPosRight ));        // this is position of the quad warp corners, centering the image on the screen.
+    warperRight.setBottomLeftCornerPosition( ofPoint( xPosRight, yPosRight + height ));      // this is position of the quad warp corners, centering the image on the screen.
+    warperRight.setBottomRightCornerPosition( ofPoint( xPosRight + width, yPosRight + height )); // this is position of the quad warp corners, centering the image on the screen.
+    warperRight.setup();
+    warperRight.load(); // reload last saved changes.
 }
 
 void ofBitchSkeletonApp::drawVoice( double scale )
@@ -147,7 +154,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     // --- Verbose
     if(key == 'v' || key == 'V') {
-        warper.toggleShow();
+        warperLeft.toggleShow();
     }
 
     if  ( key == ' ' ){}
