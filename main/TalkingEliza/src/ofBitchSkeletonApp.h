@@ -48,6 +48,9 @@ public:
 
     // --- VISUALIZER
     ofxSoundAnalyser    analyser;
+    ofFbo               fbo;
+    ofxQuadWarp         warper;
+
 
     void drawText();
     void reset();

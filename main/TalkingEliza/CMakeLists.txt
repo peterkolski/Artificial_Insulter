@@ -6,8 +6,6 @@ set( APP_NAME   TalkingEliza )
 set( ${APP_NAME}_SOURCE_FILES
         src/main.cpp
         src/ofBitchSkeletonApp.cpp
-        ../../shared/TalkerEliza.cpp
-        ../../shared/ConversationEliza.cpp
         ../../shared/ConversationOSC.cpp
         ../../shared/bitcherOSC.cpp
         )
@@ -20,6 +18,7 @@ set( ${APP_NAME}_SOURCE_FILES
 # ------------------------ AddOns ------------
 set( OFX_ADDONS_ACTIVE
         ofxQuadWarp
+        ofxOpenCv
         ofxSoundProcessor
         ofxUI
         ofxXmlSettings

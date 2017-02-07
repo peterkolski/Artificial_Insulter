@@ -29,6 +29,22 @@ void ofBitchSkeletonApp::setup(){
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
 
+    auto warpWidth = camWidth / 3 ;
+    auto warpHeight = camHeight / 3;
+
+    fbo.allocate( warpWidth, warpHeight );
+
+    auto xInitPos = 0;
+    auto yInitPos = 0;
+
+    warper.setSourceRect(ofRectangle(0, 0, warpWidth, warpHeight));              // this is the source rectangle which is the size of the image and located at ( 0, 0 )
+    warper.setTopLeftCornerPosition(ofPoint(xInitPos, yInitPos));             // this is position of the quad warp corners, centering the image on the screen.
+    warper.setTopRightCornerPosition(ofPoint(xInitPos + warpWidth, yInitPos));        // this is position of the quad warp corners, centering the image on the screen.
+    warper.setBottomLeftCornerPosition(ofPoint(xInitPos, yInitPos + warpHeight));      // this is position of the quad warp corners, centering the image on the screen.
+    warper.setBottomRightCornerPosition(ofPoint(xInitPos + warpWidth, yInitPos + warpHeight)); // this is position of the quad warp corners, centering the image on the screen.
+    warper.setup();
+    warper.load(); // reload last saved changes.
+
     bitches.doConversation( "I hate you all", 0 );
 }
 
@@ -37,6 +53,10 @@ void ofBitchSkeletonApp::update(){
     vidGrabber.update();
     speak( );
     //TODO HACK
+//    if(ofGetFrameNum() % 5 != 0) {
+//        // only update every 5 frames.
+//        return;
+//    }
 //    if ( ( ofGetFrameNum() % ( 60*10) ) == 0 )
 //    {
 //        processImage();
@@ -68,7 +88,42 @@ void ofBitchSkeletonApp::draw(){
     auto scale = 1.0;
     drawVoice( scale );
 
-    vidGrabber.draw( ofGetWidth() / 2 - ( widthView / 2 ), 20, widthView, heightView );
+    //======================== QUAD WARP
+
+    ofPushStyle();
+    ofSetColor( ofColor::white );
+    fbo.begin();
+    {
+        vidGrabber.draw( 0, 0, fbo.getWidth(), fbo.getHeight() );
+    }
+    fbo.end();
+
+    auto matrixWarp = warper.getMatrix();
+
+    //======================== use the matrix to transform our fbo.
+
+    ofPushMatrix();
+    {
+        ofMultMatrix( matrixWarp );
+        fbo.draw(0, 0);
+    }
+    ofPopMatrix();
+    //======================== draw quad warp ui.
+
+    ofSetColor(ofColor::magenta);
+    warper.drawQuadOutline();
+
+    ofSetColor(ofColor::yellow);
+    warper.drawCorners();
+
+    ofSetColor(ofColor::magenta);
+    warper.drawHighlightedCorner();
+
+    ofSetColor(ofColor::red);
+    warper.drawSelectedCorner();
+    ofPopStyle();
+
+
     drawText( );
 
     gui2->draw( );
@@ -90,6 +145,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
         processImage();
     }
 
+    // --- Verbose
+    if(key == 'v' || key == 'V') {
+        warper.toggleShow();
+    }
 
     if  ( key == ' ' ){}
     {
