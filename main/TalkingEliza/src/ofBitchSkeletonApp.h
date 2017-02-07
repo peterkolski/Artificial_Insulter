@@ -4,9 +4,8 @@
 #include "ofxUI.h"
 #include "ofxXmlSettings.h"
 #include "ofxSoundProcessor.h"
+#include "ofxQuadWarp.h"
 
-
-#include "TalkerEliza.h"
 #include "ConversationOSC.h"
 #include "bitcherOSC.h"
 

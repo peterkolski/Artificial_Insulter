@@ -19,8 +19,8 @@ set( ${APP_NAME}_SOURCE_FILES
 
 # ------------------------ AddOns ------------
 set( OFX_ADDONS_ACTIVE
+        ofxQuadWarp
         ofxSoundProcessor
-        ofxEliza
         ofxUI
         ofxXmlSettings
         ofxOsc
