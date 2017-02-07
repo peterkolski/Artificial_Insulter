@@ -23,6 +23,11 @@ void ofBitchSkeletonApp::setup(){
     setupGUI();
     setupOSC();
 
+    vidPlayerLeft.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov" );
+    vidPlayerRight.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov" );
+    vidPlayerLeft.play();
+    vidPlayerRight.play();
+    
     auto camWidth = 1280;  // try to grab at this size.
     auto camHeight = 720;
     vidGrabber.setDeviceID( 0 );
@@ -36,6 +41,8 @@ void ofBitchSkeletonApp::setup(){
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::update(){
+    vidPlayerLeft.update();
+    vidPlayerRight.update();
     vidGrabber.update();
     speak( );
     //TODO HACK
@@ -80,7 +87,8 @@ void ofBitchSkeletonApp::draw(){
     ofSetColor( ofColor::white );
     fboLeft.begin();
     {
-        vidGrabber.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
+//        vidGrabber.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
+        vidPlayerLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
     }
     fboLeft.end();
 
