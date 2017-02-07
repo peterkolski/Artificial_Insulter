@@ -33,7 +33,7 @@ void ofBitchSkeletonApp::setup(){
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
 
-    setupWarping( camWidth / 3, camHeight / 3, 0, 0, 0, 0 );
+    setupWarping( camWidth / 3, camHeight / 3, 10, 10, ofGetWidth() / 2, 10 );
 
     bitches.doConversation( "I hate you all", 0 );
 }
@@ -80,41 +80,55 @@ void ofBitchSkeletonApp::draw(){
 //    auto scale = 1.0;
 //    drawVoice( scale );
 
+
     //======================== QUAD WARP
 
     ofPushStyle();
     ofSetColor( ofColor::white );
     fboLeft.begin();
     {
-//        vidGrabber.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
         vidPlayerLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
     }
     fboLeft.end();
+    fboRight.begin();
+    {
+        vidPlayerRight.draw( 0, 0, fboRight.getWidth(), fboRight.getHeight() );
+    }
+    fboRight.end();
 
-    auto matrixWarp = warperLeft.getMatrix();
+    auto matrixWarpLeft = warperLeft.getMatrix();
+    auto matrixWarpRight = warperRight.getMatrix();
 
     //======================== use the matrix to transform our fbo.
 
     ofPushMatrix();
     {
-        ofMultMatrix( matrixWarp );
+        ofMultMatrix( matrixWarpLeft );
         fboLeft.draw(0, 0);
     }
     ofPopMatrix();
+    ofPushMatrix();
+    {
+        ofMultMatrix( matrixWarpRight );
+        fboRight.draw(0, 0);
+    }
+    ofPopMatrix();
     //======================== draw quad warp ui.
-
-    ofSetColor(ofColor::magenta);
-    warperLeft.drawQuadOutline();
-
     ofSetColor(ofColor::yellow);
     warperLeft.drawCorners();
+    warperRight.drawCorners();
 
     ofSetColor(ofColor::magenta);
     warperLeft.drawHighlightedCorner();
+    warperRight.drawHighlightedCorner();
 
     ofSetColor(ofColor::red);
     warperLeft.drawSelectedCorner();
+    warperRight.drawSelectedCorner();
     ofPopStyle();
+
+
+    vidGrabber.draw( ofGetWidth() / 2 - 400 / 2 , 10, 400, 200 );
 
     drawText( );
 }
@@ -159,6 +173,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
     // --- Verbose
     if(key == 'v' || key == 'V') {
         warperLeft.toggleShow();
+        warperRight.toggleShow();
     }
 
     if  ( key == ' ' ){}
