@@ -17,12 +17,6 @@ void ofBitchSkeletonApp::setup(){
     ofLogNotice() << "Path to write file" << imageNamePath;
 
 
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:RECIEVE:TEXT", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:ADRESS:SEND:TEXT", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:HOST", defaultXMLError );
-
     textCurrent = bitches.getAnswerCurrent();
 
     setupSoundAnalysis();
@@ -163,13 +157,21 @@ void ofBitchSkeletonApp::setupGUI()
 
 void ofBitchSkeletonApp::setupOSC()
 {
-    string host             = xml.getValue( "OSC:HOST", defaultXMLError );
-    int    portToPython     = xml.getValue( "OSC:PORT:SEND", 9000 );
-    int    portFromPython   = xml.getValue( "OSC:PORT:RECIEVE", 9000 );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND2", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE1", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE2", defaultXMLError );
+    ofLogNotice() << "INFO: " << xml.getValue( "OSC:HOST", defaultXMLError );
 
-    bitches.setup( 0, host, portToPython, portFromPython );
-    bitches.setup( 1, host, portToPython + 1, portFromPython + 1 );
-//    bitchElisa.setup( host, portToPython, portFromPython );
+    string host             = xml.getValue( "OSC:HOST", defaultXMLError );
+    int    portToPython1     = xml.getValue( "OSC:PORT:SEND1", 9000 );
+    int    portToPython2     = xml.getValue( "OSC:PORT:SEND2", 9000 );
+    int    portFromPython1   = xml.getValue( "OSC:PORT:RECIEVE1", 9000 );
+    int    portFromPython2   = xml.getValue( "OSC:PORT:RECIEVE2", 9000 );
+
+    bitches.setup( 0, host, portToPython1, portFromPython1 );
+    bitches.setup( 1, host, portToPython2, portFromPython2 );
+//    bitchElisa.setup( host, portToPython2, portFromPython );
 }
 
 void ofBitchSkeletonApp::reset()

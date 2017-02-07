@@ -3,9 +3,11 @@
 </PATH>
 
 <OSC>
-    <HOST> 192.168.2.45 </HOST>
+    <HOST> 127.0.0.1 </HOST>
     <PORT>
-        <SEND>      33333 </SEND>
-        <RECIEVE>   22222 </RECIEVE>
+        <SEND1>      33333 </SEND1>
+        <SEND2>      33334 </SEND2>
+        <RECIEVE1>   22222 </RECIEVE1>
+        <RECIEVE2>   22223 </RECIEVE2>
     </PORT>
 </OSC>
