@@ -20,7 +20,6 @@ set( OFX_ADDONS_ACTIVE
         ofxQuadWarp
         ofxOpenCv
 #        ofxSoundProcessor
-        ofxUI
         ofxXmlSettings
         ofxOsc
         )

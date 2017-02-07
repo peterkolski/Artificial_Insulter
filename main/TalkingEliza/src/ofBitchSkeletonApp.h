@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxUI.h"
+//#include "ofxUI.h"
 #include "ofxXmlSettings.h"
 //#include "ofxSoundProcessor.h"
 #include "ofxQuadWarp.h"
@@ -38,8 +38,7 @@ public:
     string              imageNamePath   = "imageFromTalkingElisa.jpg";
     int                 widthView       = 160;
     int                 heightView      = 120;
-    ofxUITextInput      *textInput;
-    ofxUISuperCanvas    *gui2;
+    string              textInput;
 
     // --- SOUND
     void speak();
@@ -56,7 +55,6 @@ public:
     void reset();
 //    void drawVoice( double scale );
     void setupOSC();
-    void setupGUI();
 //    void setupSoundAnalysis();
     void saveImage( string &fileNamePath );
     void processImage();

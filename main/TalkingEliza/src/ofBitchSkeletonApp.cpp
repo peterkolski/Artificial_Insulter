@@ -20,7 +20,6 @@ void ofBitchSkeletonApp::setup(){
     textCurrent = bitches.getAnswerCurrent();
 
 //    setupSoundAnalysis();
-    setupGUI();
     setupOSC();
 
     vidPlayerLeft.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov" );
@@ -117,10 +116,7 @@ void ofBitchSkeletonApp::draw(){
     warperLeft.drawSelectedCorner();
     ofPopStyle();
 
-
     drawText( );
-
-    gui2->draw( );
 }
 
 void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight )
@@ -167,20 +163,15 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if  ( key == ' ' ){}
     {
-        if ( !textInput->isFocused() )
-        {
-            bitches.next();
-            bitches.doConversation();
-//            bitchElisa.ask( textFromInput );
-            reset();
-        }
+        bitches.next();
+        bitches.doConversation();
+        reset();
     }
 
-    if (    ( key == OF_KEY_RETURN )
-         && ( textInput->isClicked() ) )
+    if ( key == OF_KEY_RETURN )
     {
-        textFromInput = textInput->getTextString();
-        textInput->setTextString( "" );
+        textFromInput = textInput;
+        textInput = "";
 
         if ( textFromInput != "" )
         {
@@ -193,7 +184,6 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
         reset();
     }
-
 }
 
 void ofBitchSkeletonApp::processImage()
@@ -221,13 +211,6 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
 //    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
 //}
 
-void ofBitchSkeletonApp::setupGUI()
-{
-    gui2 = new ofxUISuperCanvas( "Talk to Elisa", 400, 300, 200, 100 );
-    textInput = gui2->addTextInput( "TEXT: ", "Hello Elisa");
-    textInput->setAutoUnfocus( false);
-    textInput->setAutoClear( false );
-}
 
 void ofBitchSkeletonApp::setupOSC()
 {
