@@ -17,7 +17,7 @@ public:
     void keyPressed  (int key);
 
     void setVoice();
-    void drawText();
+    void drawVerboseText();
     void reset();
     void setupOSC();
     void saveImage( string &fileNamePath );
@@ -46,7 +46,9 @@ public:
     bool    shouldSpeak = false;
 
     // --- VISUALIZER
-    ofFbo               fboLeft, fboRight;
-    ofxQuadWarp         warperLeft, warperRight;
-    ofVideoPlayer       vidPlayerLeft, vidPlayerRight;
+    ofFbo           fboLeft, fboRight;
+    ofxQuadWarp     warperLeft, warperRight;
+    ofVideoPlayer   vidPlayerLeft, vidPlayerRight;
+    bool            isVerbose = true;
+    void drawActiveSpeakerRect() const;
 };

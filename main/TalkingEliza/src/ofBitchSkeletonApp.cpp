@@ -56,6 +56,17 @@ void ofBitchSkeletonApp::update(){
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::draw(){
     ofBackground( 0 );
+    
+    drawActiveSpeakerRect();
+    drawVideosWarped();
+
+    vidGrabber.draw( ofGetWidth() / 2 - 200 / 2 , 30, 200, 80 );
+
+    if ( isVerbose ) { drawVerboseText(); }
+}
+
+void ofBitchSkeletonApp::drawActiveSpeakerRect() const
+{
     auto gap = 10;
     auto shift = 0;
     if ( bitches.getTalkerCurrentID() == 0 )
@@ -66,18 +77,15 @@ void ofBitchSkeletonApp::draw(){
         shift = ofGetWidth() / 2;
     }
 
-    ofPushStyle( );
+    if ( isVerbose )
     {
-        ofSetColor( ofColor::lightGray, 100 );
-        ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
+        ofPushStyle( );
+        {
+            ofSetColor( ofColor_::lightGray, 100 );
+            ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
+        }
+        ofPopStyle( );
     }
-    ofPopStyle( );
-
-    drawVideosWarped();
-
-    vidGrabber.draw( ofGetWidth() / 2 - 200 / 2 , 30, 200, 80 );
-
-    drawText( );
 }
 
 //--------------------------------------------------------------
@@ -155,10 +163,16 @@ void ofBitchSkeletonApp::keyPressed(int key){
         processImage();
     }
 
+    if ( key == 'F' )
+    {
+        ofToggleFullscreen();
+    }
+
     // --- Verbose
     if(key == 'v' || key == 'V') {
         warperLeft.toggleShow();
         warperRight.toggleShow();
+        isVerbose = warperLeft.isShowing();
     }
 
 
@@ -249,7 +263,7 @@ void ofBitchSkeletonApp::speak()
 }
 
 //--------------------------------------------------------------
-void ofBitchSkeletonApp::drawText()
+void ofBitchSkeletonApp::drawVerboseText()
 {
     ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
     ofDrawBitmapStringHighlight( bitches.getName( 1 ) , ofGetWidth() * 3 / 4, 100);
