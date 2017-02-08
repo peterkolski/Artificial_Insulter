@@ -6,10 +6,10 @@ dataTable = pd.read_csv('../../data/ShitTalkTable.csv')
 resultDict = ai.putKeywordsToDict( dataTable )
 
 host = '127.0.0.1'
-portSender = 22223
-portReciever = 33334
+portSender = 22222
+portReciever = 33333
 
-class myChatter:
+class Chatter:
     oscSender = OSC.OSCClient( )
     oscSenderAddress_Txt = "/answer_text"       # Python to OF
     oscRecieverAddress_Txt = "/original_text"   # OF to python
@@ -31,7 +31,7 @@ class myChatter:
         messageOSC.append( text )
         self.oscSender.send( messageOSC )
 
-    def replyToFirst(self, addr, tags, stuff, source ):
+    def replyOscHandler( self, addr, tags, stuff, source ):
         input_sentence = stuff[ 0 ]
         print "Original:", input_sentence
         answer = ai.answerFromText( input_sentence, resultDict, dataTable )
@@ -43,7 +43,7 @@ class myChatter:
 # =================================
 # =================================
 
-chatterElisa = myChatter( host, portSender, portReciever )
+chatterElisa = Chatter( host, portSender, portReciever )
 
 # --- send ready message to openframeworks
 textInit = "READY"
@@ -52,5 +52,5 @@ chatterElisa.send( textInit )
 # --------
 print "listening to:", chatterElisa.oscRecieverAddress_Txt
 # start osc listener:
-chatterElisa.oscReceiver.addMsgHandler( chatterElisa.oscRecieverAddress_Txt, chatterElisa.replyToFirst )
+chatterElisa.oscReceiver.addMsgHandler( chatterElisa.oscRecieverAddress_Txt, chatterElisa.replyOscHandler )
 chatterElisa.oscReceiver.serve_forever( )  # nothing after that works
