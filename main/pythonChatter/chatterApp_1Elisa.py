@@ -25,6 +25,7 @@ class Chatter:
         self.portReciever_ = portReciever
         self.oscSender_HostPort = (self.host_, self.portSender_)  # to OpenFrameworks
         self.oscReciever_HostPort = (self.host_, self.portReciever_)  # python
+        self.counter = 0
         print self.oscSender_HostPort
         print self.oscReciever_HostPort
         self.oscSender.connect( self.oscSender_HostPort )
@@ -39,9 +40,13 @@ class Chatter:
     def replyOscHandler( self, addr, tags, stuff, source ):
         input_sentence = stuff[ 0 ]
         print "Original:", input_sentence
-        answer = chatbot.get_response( input_sentence )
-        # answer = ai.answerFromText( input_sentence, resultDict, dataTable )
-        # answer = ai.changeToMale( answer )
+        if self.counter++ % 2 == 0 :        # TODO switching between the chatters
+            answer = "ChatterBot | "
+            answer += chatbot.get_response( input_sentence )
+        else:
+            answer = "DataInsulter | "
+            answer += ai.answerFromText( input_sentence, resultDict, dataTable )
+            answer += ai.changeToMale( answer )
         print "Answer: ", answer
         self.send( answer )
         return
