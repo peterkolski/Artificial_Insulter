@@ -2,43 +2,55 @@ import insulterFromDatabase as ai
 import pandas as pd
 import OSC
 
-dataTable = pd.read_csv('../data/ShitTalkTable.csv')
+dataTable = pd.read_csv('../../data/ShitTalkTable.csv')
 resultDict = ai.putKeywordsToDict( dataTable )
 
-oscSender_HostPort = ('127.0.0.1', 22223)  # to OpenFrameworks
-oscSenderAddress_Txt = "/answer_text"  # Sending   - python to OF
-print oscSender_HostPort
+host = '127.0.0.1'
+portSender = 22223
+portReciever = 33334
 
-oscReciever_HostPort = ('127.0.0.1', 33334)  # python
-oscRecieverAddress_Txt = "/original_text"  # Recieving - OF to python
-print oscReciever_HostPort
+class myChatter:
+    oscSender = OSC.OSCClient( )
+    oscSenderAddress_Txt = "/answer_text"       # Python to OF
+    oscRecieverAddress_Txt = "/original_text"   # OF to python
 
-# --- Python to openframeworks:
-oscSender = OSC.OSCClient( )
-oscSender.connect( oscSender_HostPort )
+    def __init__(self, host, portSender, portReciever):
+        self.host_ = host
+        self.portSender_ = portSender
+        self.portReciever_ = portReciever
+        self.oscSender_HostPort = (self.host_, self.portSender_)  # to OpenFrameworks
+        self.oscReciever_HostPort = (self.host_, self.portReciever_)  # python
+        print self.oscSender_HostPort
+        print self.oscReciever_HostPort
+        self.oscSender.connect( self.oscSender_HostPort )
+        self.oscReceiver = OSC.ThreadingOSCServer( self.oscReciever_HostPort )
 
-# --- OpenFrameworks to python:
-oscReceiver = OSC.ThreadingOSCServer( oscReciever_HostPort )
+    def send(self, text ):
+        messageOSC = OSC.OSCMessage( )
+        messageOSC.setAddress( self.oscSenderAddress_Txt )
+        messageOSC.append( text )
+        self.oscSender.send( messageOSC )
+
+    def replyToFirst(self, addr, tags, stuff, source ):
+        input_sentence = stuff[ 0 ]
+        print "Original:", input_sentence
+        answer = ai.answerFromText( input_sentence, resultDict, dataTable )
+        answer = ai.changeToMale( answer )
+        print "Answer: ", answer
+        self.send( answer )
+        return
+
+# =================================
+# =================================
+
+chatterElisa = myChatter( host, portSender, portReciever )
 
 # --- send ready message to openframeworks
-message = OSC.OSCMessage( )
-message.setAddress( oscSenderAddress_Txt )
-message.append( "READY" )
-oscSender.send( message )
-
-def replyToFirst( addr, tags, stuff, source ):
-    input_sentence = stuff[ 0 ]
-    print "Original:", input_sentence
-    answer = ai.answerFromText( input_sentence, resultDict, dataTable )
-    answer = ai.changeToMale( answer  )
-    messageAnswer = OSC.OSCMessage()
-    messageAnswer.setAddress( oscSenderAddress_Txt )
-    messageAnswer.append( answer )
-    oscSender.send( messageAnswer )
-    return
+textInit = "READY"
+chatterElisa.send( textInit )
 
 # --------
-print "listening to:", oscRecieverAddress_Txt
+print "listening to:", chatterElisa.oscRecieverAddress_Txt
 # start osc listener:
-oscReceiver.addMsgHandler( oscRecieverAddress_Txt, replyToFirst )
-oscReceiver.serve_forever( )  # nothing after that works
+chatterElisa.oscReceiver.addMsgHandler( chatterElisa.oscRecieverAddress_Txt, chatterElisa.replyToFirst )
+chatterElisa.oscReceiver.serve_forever( )  # nothing after that works
