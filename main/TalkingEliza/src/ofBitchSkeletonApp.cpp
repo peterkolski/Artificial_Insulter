@@ -19,6 +19,8 @@ void ofBitchSkeletonApp::setup(){
 
     textCurrent = bitches.getAnswerCurrent();
 
+    pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
+
     setupOSC();
 
     int camWidth;
@@ -81,7 +83,7 @@ void ofBitchSkeletonApp::drawActiveSpeakerRect() const
     {
         ofPushStyle( );
         {
-            ofSetColor( ofColor_::lightGray, 100 );
+            ofSetColor( ofColor::lightGray, 100 );
             ofDrawRectangle( gap + shift, gap, ofGetWidth( ) / 2 - 2 * gap, ofGetHeight( ) - 2 * gap );
         }
         ofPopStyle( );
@@ -160,7 +162,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == 'S' )
     {
-        processImage();
+        processImage( pathTargetImage );
     }
 
     if ( key == 'F' )
@@ -197,10 +199,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofBitchSkeletonApp::processImage()
+void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
-    bitches.sendPicturePath( "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg" );
+    bitches.sendPicturePath( targetPath );
     // TODO too fast, processing takes some time
 
     ofLogNotice() << "Sent picture";

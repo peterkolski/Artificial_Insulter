@@ -21,7 +21,7 @@ public:
     void reset();
     void setupOSC();
     void saveImage( string &fileNamePath );
-    void processImage();
+    void processImage( string targetPath );
     void setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight );
     void drawVideosWarped();
     void setupVideo( int &camWidth, int &camHeight );
@@ -39,6 +39,7 @@ public:
     ofVideoGrabber      vidGrabber;
     string              imageNamePath   = "imageFromTalkingElisa.jpg";
     string              textInput;
+    string              pathTargetImage;
 
     // --- SOUND
     void speak();
