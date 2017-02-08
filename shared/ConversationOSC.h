@@ -12,7 +12,7 @@ class ConversationOSC
 {
 public:
     ConversationOSC();
-    void    setupPicturePath( string host, int portSender, int portReciever );
+    void setupPicturePath( string host, int portSender, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
     void    doConversation();
@@ -32,7 +32,7 @@ private:
     void            setTalkerActive( int id );
     string          logInfo_       = "ConversationOSC | ";
     ofxOscSender    senderPictureAnalysis_;
-    string          adressPicSent_   = "/recognize";
+    string          adressPicSent_;
     int     talkerMaxAmount_    = 2;
     int     idTalker_           = 0;
     int     idOther_         = 1;

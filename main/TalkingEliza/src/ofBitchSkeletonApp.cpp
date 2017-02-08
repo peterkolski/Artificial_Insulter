@@ -219,18 +219,21 @@ void ofBitchSkeletonApp::setupOSC()
 {
     ofLogNotice() << "send1: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
     ofLogNotice() << "send2: " << xml.getValue( "OSC:PORT:SEND2", defaultXMLError );
+    ofLogNotice() << "sendPic: " << xml.getValue( "OSC:PORT:SENDPIC", defaultXMLError );
     ofLogNotice() << "recieve1: " << xml.getValue( "OSC:PORT:RECIEVE1", defaultXMLError );
     ofLogNotice() << "recieve2: " << xml.getValue( "OSC:PORT:RECIEVE2", defaultXMLError );
     ofLogNotice() << "Host: " << xml.getValue( "OSC:HOST", defaultXMLError );
 
-    string host             = xml.getValue( "OSC:HOST", defaultXMLError );
+    string host              = xml.getValue( "OSC:HOST", defaultXMLError );
     int    portToPython1     = xml.getValue( "OSC:PORT:SEND1", 9000 );
     int    portToPython2     = xml.getValue( "OSC:PORT:SEND2", 9000 );
+    int    portToPythonPic   = xml.getValue( "OSC:PORT:SENDPIC", 9000 );
     int    portFromPython1   = xml.getValue( "OSC:PORT:RECIEVE1", 9000 );
     int    portFromPython2   = xml.getValue( "OSC:PORT:RECIEVE2", 9000 );
 
     bitches.setup( 0, host, portToPython1, portFromPython1 );
     bitches.setup( 1, host, portToPython2, portFromPython2 );
+    bitches.setupPicturePath( host, portToPythonPic, "/recognize" );
 }
 
 //--------------------------------------------------------------

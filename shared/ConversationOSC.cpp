@@ -124,9 +124,10 @@ void ConversationOSC::recieveText()
     answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
 }
 
-void ConversationOSC::setupPicturePath( string host, int portSender, int portReciever )
+void ConversationOSC::setupPicturePath( string host, int portSender, string adressPath )
 {
     senderPictureAnalysis_.setup( host, portSender );
+    adressPicSent_ = adressPath;
 }
 
 void ConversationOSC::sendPicturePath( string &filePathPicSent )
