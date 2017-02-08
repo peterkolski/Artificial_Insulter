@@ -1,6 +1,7 @@
 import insulterFromDatabase as ai
 import pandas as pd
 import OSC
+from chatterbot import ChatBot
 
 dataTable = pd.read_csv('../../data/ShitTalkTable.csv')
 resultDict = ai.putKeywordsToDict( dataTable )
@@ -8,6 +9,10 @@ resultDict = ai.putKeywordsToDict( dataTable )
 host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
+
+chatbot = ChatBot( 'Elisa Test', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
+# chatbot.train("chatterbot.corpus.english") # Train based on the english corpus
+# chatbot.get_response("Hello, how are you today?")
 
 class Chatter:
     oscSender = OSC.OSCClient( )
@@ -34,8 +39,9 @@ class Chatter:
     def replyOscHandler( self, addr, tags, stuff, source ):
         input_sentence = stuff[ 0 ]
         print "Original:", input_sentence
-        answer = ai.answerFromText( input_sentence, resultDict, dataTable )
-        answer = ai.changeToMale( answer )
+        answer = chatbot.get_response( input_sentence )
+        # answer = ai.answerFromText( input_sentence, resultDict, dataTable )
+        # answer = ai.changeToMale( answer )
         print "Answer: ", answer
         self.send( answer )
         return
