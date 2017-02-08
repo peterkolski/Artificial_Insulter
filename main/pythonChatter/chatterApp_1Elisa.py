@@ -45,7 +45,7 @@ class Chatter:
         if ( self.counter % 2 == 0 ):        # TODO switching between the chatters
             answer += "ChatterBot | "
             if (input_sentence != ""):
-                answer += chatbot.get_response( input_sentence )
+                answer += str( chatbot.get_response( input_sentence ) )
         else:
             answer += "DataInsulter | "
             answer += ai.answerFromText( input_sentence, resultDict, dataTable )
