@@ -200,8 +200,8 @@ void ofBitchSkeletonApp::keyPressed(int key){
 void ofBitchSkeletonApp::processImage()
 {
     saveImage( imageNamePath );
-//    bitchElisa.sendPicturePath();
-//    bitchElisa.update(); // TODO too fast, processing takes some time
+    bitches.sendPicturePath( "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg" );
+    // TODO too fast, processing takes some time
 
     ofLogNotice() << "Sent picture";
 }

@@ -18,7 +18,7 @@ public:
     void    doConversation();
     void    doConversation( string txt, int id );
     void    recieveText();
-    void    sendPicturePath();
+    void sendPicturePath( string &filePathPicSent );
 
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();
@@ -32,6 +32,7 @@ private:
     void            setTalkerActive( int id );
     string          logInfo_       = "ConversationOSC | ";
     ofxOscSender    senderPictureAnalysis_;
+    string          adressPicSent_   = "/recognize";
     int     talkerMaxAmount_    = 2;
     int     idTalker_           = 0;
     int     idOther_         = 1;

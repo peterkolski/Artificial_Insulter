@@ -129,16 +129,14 @@ void ConversationOSC::setupPicturePath( string host, int portSender, int portRec
     senderPictureAnalysis_.setup( host, portSender );
 }
 
-void ConversationOSC::sendPicturePath()
+void ConversationOSC::sendPicturePath( string &filePathPicSent )
 {
     ofxOscMessage m;
-    string  adressPicSent   = "/recognize";
-    string  filePathPicSent = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg";
 
-    m.setAddress( adressPicSent );
+    m.setAddress( adressPicSent_ );
     m.addStringArg( filePathPicSent );
     senderPictureAnalysis_.sendMessage( m, false );
 
-    ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent;
+    ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent_;
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
 }
