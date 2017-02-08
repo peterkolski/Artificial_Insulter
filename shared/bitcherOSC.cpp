@@ -36,9 +36,9 @@ string bitcherOSC::ask( string &text )
 {
     textSent_ = text;
     sendText( textSent_ );
-    // TODO This could take some time
-    usleep( 6000 );
-    textRecieved_ = recieveText();
+    
+    recieveText();
+    textRecieved_ = getAnswer();
     return textRecieved_;
 }
 
@@ -55,9 +55,8 @@ void bitcherOSC::sendText( string &text )
 
 //----------------------------------------------------------------------------------------------------------------------
 
-string bitcherOSC::recieveText()
+void bitcherOSC::recieveText()
 {
-    string result = "";
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
@@ -72,8 +71,8 @@ string bitcherOSC::recieveText()
              {
                  if ( _message.getArgType( i ) == OFXOSC_TYPE_STRING )
                  {
-                     result = _message.getArgAsString( i );
-                     ofLogVerbose() << logInfo_ << "message recieved from " << adressRecieverText_ << " => " << result;
+                     textRecieved_ = _message.getArgAsString( i );
+                     ofLogVerbose() << logInfo_ << "message recieved from " << adressRecieverText_ << " => " << textRecieved_;
                  }
              }
          }
@@ -82,7 +81,6 @@ string bitcherOSC::recieveText()
             ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
         }
     }
-    return result;
 }
 
 

@@ -20,8 +20,10 @@ public:
     const string    &getAnswer() { return textRecieved_; }
     const string    &getTextAsked() { return textSent_; }
     void            sendPicturePath();
+    void recieveText();
 
 private:
+    void            sendText( string &text );
     std::string     logInfo_ = "BitcherOSC || ";
     string getOscMsgAsString( ofxOscMessage m );
     ofxOscSender    sender_;
@@ -38,8 +40,6 @@ private:
 
     string  textRecieved_   = "";
     string  textSent_     = "";
-    string  recieveText();
-    void    sendText( string &text );
 };
 
 

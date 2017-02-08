@@ -15,6 +15,7 @@ public:
     void    next();
     void    doConversation();
     void    doConversation( string txt, int id );
+    void    recieveText();
 
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();

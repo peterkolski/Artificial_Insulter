@@ -34,7 +34,7 @@ void ofBitchSkeletonApp::setup(){
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber(camWidth, camHeight);
 
-    setupWarping( camWidth / 3, camHeight / 3, 10, 10, ofGetWidth() / 2, 10 );
+    setupWarping( camWidth / 2, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
     bitches.doConversation( "I hate you all", 0 );
 }
@@ -45,6 +45,7 @@ void ofBitchSkeletonApp::update(){
     vidPlayerRight.update();
     vidGrabber.update();
     speak( );
+    bitches.recieveText();
     //TODO HACK
 //    if(ofGetFrameNum() % 5 != 0) {
 //        // only update every 5 frames.
@@ -193,6 +194,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
     {
         textFromInput = textInput;
         textInput = "";
+        textFromInput = "TEST TEXT";//TODO HACK
 
         if ( textFromInput != "" )
         {
@@ -206,10 +208,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
         reset();
     }
-    else
-    {
-        textInput += key;
-    }
+//    else
+//    {
+//        textInput += key;
+//    }
 }
 
 void ofBitchSkeletonApp::processImage()
@@ -240,11 +242,11 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
 
 void ofBitchSkeletonApp::setupOSC()
 {
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:SEND2", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE1", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:PORT:RECIEVE2", defaultXMLError );
-    ofLogNotice() << "INFO: " << xml.getValue( "OSC:HOST", defaultXMLError );
+    ofLogNotice() << "send1: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
+    ofLogNotice() << "send2: " << xml.getValue( "OSC:PORT:SEND2", defaultXMLError );
+    ofLogNotice() << "recieve1: " << xml.getValue( "OSC:PORT:RECIEVE1", defaultXMLError );
+    ofLogNotice() << "recieve2: " << xml.getValue( "OSC:PORT:RECIEVE2", defaultXMLError );
+    ofLogNotice() << "Host: " << xml.getValue( "OSC:HOST", defaultXMLError );
 
     string host             = xml.getValue( "OSC:HOST", defaultXMLError );
     int    portToPython1     = xml.getValue( "OSC:PORT:SEND1", 9000 );

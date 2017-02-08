@@ -117,3 +117,9 @@ void ConversationOSC::setTalkerActive( int id )
     }
 }
 
+void ConversationOSC::recieveText()
+{
+    talkerVec_[ idTalker_ ]->recieveText();
+    answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
+}
+
