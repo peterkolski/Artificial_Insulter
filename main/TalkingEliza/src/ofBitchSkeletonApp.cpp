@@ -182,12 +182,12 @@ void ofBitchSkeletonApp::keyPressed(int key){
         warperRight.toggleShow();
     }
 
-    if  ( key == ' ' ){}
-    {
-        bitches.next();
-        bitches.doConversation();
-        reset();
-    }
+//    if  ( key == ' ' ){}
+//    {
+//        bitches.next();
+//        bitches.doConversation();
+//        reset();
+//    }
 
     if ( key == OF_KEY_RETURN )
     {
@@ -196,6 +196,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
         if ( textFromInput != "" )
         {
+//            bitches.next();
             bitches.doConversation( textFromInput, 0 );
         }
         else
@@ -204,6 +205,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
         }
 
         reset();
+    }
+    else
+    {
+        textInput += key;
     }
 }
 
