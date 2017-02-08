@@ -33,14 +33,11 @@ public:
     // --- CONVERSATION
     ConversationOSC    bitches;
     string textCurrent = "";
-    string textLast = "";
     string textFromInput      = "";
 
     // --- SEEING
     ofVideoGrabber      vidGrabber;
     string              imageNamePath   = "imageFromTalkingElisa.jpg";
-    int                 widthView       = 160;
-    int                 heightView      = 120;
     string              textInput;
 
     // --- SOUND

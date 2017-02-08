@@ -80,6 +80,7 @@ void ofBitchSkeletonApp::draw(){
     drawText( );
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::drawVideosWarped()
 {
     ofPushStyle();
@@ -98,8 +99,7 @@ void ofBitchSkeletonApp::drawVideosWarped()
     auto matrixWarpLeft = warperLeft.getMatrix();
     auto matrixWarpRight = warperRight.getMatrix();
 
-    //======================== use the matrix to transform our fbo.
-
+    // --- use the matrix to transform our fbo.
     ofPushMatrix();
     {
         ofMultMatrix( matrixWarpLeft );
@@ -112,7 +112,7 @@ void ofBitchSkeletonApp::drawVideosWarped()
         fboRight.draw( 0, 0);
     }
     ofPopMatrix();
-    //======================== draw quad warp ui.
+    // --- draw quad warp UI
     ofSetColor( ofColor::yellow);
     warperLeft.drawCorners();
     warperRight.drawCorners();
@@ -127,6 +127,7 @@ void ofBitchSkeletonApp::drawVideosWarped()
     ofPopStyle();
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight )
 {
     fboLeft.allocate( width, height );
@@ -136,7 +137,6 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
     warperLeft.setBottomLeftCornerPosition( ofPoint( xPosLeft, yPosLeft + height ));      // this is position of the quad warp corners, centering the image on the screen.
     warperLeft.setBottomRightCornerPosition( ofPoint( xPosLeft + width, yPosLeft + height )); // this is position of the quad warp corners, centering the image on the screen.
     warperLeft.setup();
-    warperLeft.load(); // reload last saved changes.
 
     fboRight.allocate( width, height );
     warperRight.setSourceRect( ofRectangle( 0, 0, width, height ));              // this is the source rectangle which is the size of the image and located at ( 0, 0 )
@@ -145,7 +145,6 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
     warperRight.setBottomLeftCornerPosition( ofPoint( xPosRight, yPosRight + height ));      // this is position of the quad warp corners, centering the image on the screen.
     warperRight.setBottomRightCornerPosition( ofPoint( xPosRight + width, yPosRight + height )); // this is position of the quad warp corners, centering the image on the screen.
     warperRight.setup();
-    warperRight.load(); // reload last saved changes.
 }
 
 //--------------------------------------------------------------
@@ -183,6 +182,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 //    }
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::processImage()
 {
     saveImage( imageNamePath );
@@ -192,6 +192,7 @@ void ofBitchSkeletonApp::processImage()
     ofLogNotice() << "Sent picture";
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::saveImage( string &fileNamePath )
 {
     ofImage img;
@@ -199,6 +200,7 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
     img.save( fileNamePath );
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::setupOSC()
 {
     ofLogNotice() << "send1: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
@@ -217,11 +219,10 @@ void ofBitchSkeletonApp::setupOSC()
     bitches.setup( 1, host, portToPython2, portFromPython2 );
 }
 
-
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::reset()
 {
-    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out
-    textLast    = bitches.getAnswerBefore();
+    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out;
     setVoice();
     shouldSpeak = true;
 }
@@ -236,15 +237,18 @@ void ofBitchSkeletonApp::setVoice()
     }
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
     {
-        string cmd = "say -v " + voice + " " + textCurrent + " &";   // create the command
+        string cmd = "say -v " + voice + " " + bitches.getAnswerCurrent() + " &";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
     }
 }
+
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::drawText()
 {
     ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
@@ -257,6 +261,7 @@ void ofBitchSkeletonApp::drawText()
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }
 
+//--------------------------------------------------------------
 void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
 {
     camWidth= 1280;
