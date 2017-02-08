@@ -5,17 +5,7 @@ void ofBitchSkeletonApp::setup(){
     setVoice( );
     ofSetLogLevel( OF_LOG_VERBOSE );
     ofEnableAlphaBlending();
-
-//    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
-    string settingsPath = "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt";
-    ofLogNotice() << settingsPath;
-    if (!xml.loadFile( settingsPath ) )
-    {
-        ofLogError() << "No XML file loaded";
-    }
-
-    imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
-    ofLogNotice() << "Path to write file" << imageNamePath;
+    setupXML( "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt" );
 
     textCurrent = bitches.getAnswerCurrent();
 
@@ -291,4 +281,16 @@ void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
     vidPlayerRight.play();// try to grab at this size.vidGrabber.setDeviceID( 0 );
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber( camWidth, camHeight);
+}
+
+void ofBitchSkeletonApp::setupXML( string settingsPath )
+{//    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
+    ofLogNotice() << settingsPath;
+    if (!xml.loadFile( settingsPath ) )
+    {
+        ofLogError() << "No XML file loaded";
+    }
+
+    imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
+    ofLogNotice() << "Path to write file" << imageNamePath;
 }

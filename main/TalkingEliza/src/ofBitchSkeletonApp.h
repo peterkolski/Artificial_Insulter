@@ -52,4 +52,5 @@ public:
     ofVideoPlayer   vidPlayerLeft, vidPlayerRight;
     bool            isVerbose = true;
     void drawActiveSpeakerRect() const;
+    void setupXML( string settingsPath );
 };
