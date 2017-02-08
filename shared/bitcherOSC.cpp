@@ -36,7 +36,7 @@ string bitcherOSC::ask( string &text )
 {
     textSent_ = text;
     sendText( textSent_ );
-    
+
     recieveText();
     textRecieved_ = getAnswer();
     return textRecieved_;

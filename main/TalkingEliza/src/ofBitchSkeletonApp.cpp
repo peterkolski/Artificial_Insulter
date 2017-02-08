@@ -183,25 +183,15 @@ void ofBitchSkeletonApp::keyPressed(int key){
         warperRight.toggleShow();
     }
 
-//    if  ( key == ' ' ){}
-//    {
-//        bitches.next();
-//        bitches.doConversation();
-//        reset();
-//    }
 
     if ( key == OF_KEY_RETURN )
     {
         textFromInput = textInput;
         textInput = "";
-        textFromInput = "TEST TEXT";//TODO HACK
+        bitches.next();
 
-        if ( textFromInput != "" )
-        {
-//            bitches.next();
-            bitches.doConversation( textFromInput, 0 );
-        }
-        else
+        bitches.doConversation();
+        if ( textFromInput == "" )
         {
             ofLogError() << "No Text input";
         }
