@@ -3,17 +3,25 @@ import pandas as pd
 import OSC
 from chatterbot import ChatBot
 
-dataTable = pd.read_csv('../../data/ShitTalkTable.csv')
-resultDict = ai.putKeywordsToDict( dataTable )
 
 host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
 
+
+# =================================
+# =================================
+dataTable = pd.read_csv('../../data/ShitTalkTable.csv')
+resultDict = ai.putKeywordsToDict( dataTable )
+
 # chatbot = ChatBot( 'Elisa Test', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
 chatbot = ChatBot( 'Kora', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
 # chatbot.train("chatterbot.corpus.english") # Train based on the english corpus
 # chatbot.get_response("Hello, how are you today?")
+
+# =================================
+# === CHATTER CLASS
+# =================================
 
 class Chatter:
     oscSender               = OSC.OSCClient( )
@@ -57,6 +65,7 @@ class Chatter:
         return
 
 # =================================
+# === Run program
 # =================================
 
 chatterElisa = Chatter( host, portSender, portReciever )
