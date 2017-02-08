@@ -2,6 +2,7 @@
 // Created by Peter A. Kolski on 05.02.17.
 //
 
+#include "bitcherOSC.h"
 #include "ConversationOSC.h"
 
 ConversationOSC::ConversationOSC() {
@@ -23,7 +24,7 @@ void ConversationOSC::setup( int id, string host, int portSender, int portReciev
         talkerVec_[ id ]->setup( host, portSender, portReciever );
     }
     else {
-        ofLogError() << logNameClass_ << "Setup: ID invalid";
+        ofLogError() << logInfo_ << "Setup: ID invalid";
     }
 }
 
@@ -35,7 +36,7 @@ string ConversationOSC::getName( int id )
     }
     else
     {
-        ofLogError() << logNameClass_ << "Wrong name id";
+        ofLogError() << logInfo_ << "Wrong name id";
     }
 }
 
@@ -98,7 +99,7 @@ const string &ConversationOSC::getAnswerFromID( int id )
     }
     else
     {
-        ofLogError( ) << logNameClass_ << "Wrong ID";
+        ofLogError( ) << logInfo_ << "Wrong ID";
         return "";
 
     }
@@ -123,3 +124,21 @@ void ConversationOSC::recieveText()
     answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
 }
 
+void ConversationOSC::setupPicturePath( string host, int portSender, int portReciever )
+{
+
+}
+
+void ConversationOSC::sendPicturePath()
+{
+    ofxOscMessage m;
+    string  adressPicSent   = "/recognize";
+    string  filePathPicSent = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg";
+
+    m.setAddress( adressPicSent );
+    m.addStringArg( filePathPicSent );
+    sender_.sendMessage( m, false );
+
+    ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent;
+    ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
+}

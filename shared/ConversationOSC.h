@@ -6,16 +6,19 @@
 #define ELISAKORA_CONVERSIONOSC_H
 
 #include "bitcherOSC.h"
+#include "ofxOsc.h"
 
 class ConversationOSC
 {
 public:
     ConversationOSC();
+    void    setupPicturePath( string host, int portSender, int portReciever );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
     void    doConversation();
     void    doConversation( string txt, int id );
     void    recieveText();
+    void    sendPicturePath();
 
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();
@@ -27,7 +30,7 @@ public:
 
 
 private:
-    string  logNameClass_       = "arstu::ConversationOSC => ";
+    string  logInfo_       = "ConversationOSC | ";
     vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
 
     vector< string >            talkerNames_;

@@ -119,16 +119,3 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void bitcherOSC::sendPicturePath()
-{
-    ofxOscMessage m;
-    string  adressPicSent = "/recognize";
-    string filePathPicSent = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg";
-
-    m.setAddress( adressPicSent );
-    m.addStringArg( filePathPicSent );
-    sender_.sendMessage( m, false );
-
-    ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent;
-    ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
-}
