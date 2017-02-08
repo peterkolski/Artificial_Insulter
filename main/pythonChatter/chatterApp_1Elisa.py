@@ -10,7 +10,8 @@ host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
 
-chatbot = ChatBot( 'Elisa Test', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
+# chatbot = ChatBot( 'Elisa Test', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
+chatbot = ChatBot( 'Kora', trainer='chatterbot.trainers.ChatterBotCorpusTrainer' )
 # chatbot.train("chatterbot.corpus.english") # Train based on the english corpus
 # chatbot.get_response("Hello, how are you today?")
 
@@ -41,15 +42,16 @@ class Chatter:
         input_sentence = str( stuff[ 0 ] )
         print "Original:", input_sentence
         self.counter += 1
-        answer = str( self.counter ) + " "
+        # answer = str( self.counter ) + " "
+        answer = ""
         if ( self.counter % 2 == 0 ):        # TODO switching between the chatters
-            answer += "ChatterBot | "
+            # answer += "ChatterBot | "
             if (input_sentence != ""):
                 answer += str( chatbot.get_response( input_sentence ) )
         else:
-            answer += "DataInsulter | "
-            answer += ai.answerFromText( input_sentence, resultDict, dataTable )
-            answer += ai.changeToMale( answer )
+            # answer += "DataInsulter | "
+            answerTMP = ai.answerFromText( input_sentence, resultDict, dataTable )
+            answer += ai.changeToMale( answerTMP )
         print "Answer: ", answer
         self.send( answer )
         return
@@ -60,8 +62,8 @@ class Chatter:
 chatterElisa = Chatter( host, portSender, portReciever )
 
 # --- send ready message to openframeworks
-textInit = "READY"
-chatterElisa.send( textInit )
+chatterElisa.send( "READY" )
+chatterElisa.send( "Second start message")
 
 # --------
 print "listening to:", chatterElisa.oscRecieverAddress_Txt
