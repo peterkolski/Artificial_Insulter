@@ -15,9 +15,9 @@ chatbot = ChatBot( 'Elisa Test', trainer='chatterbot.trainers.ChatterBotCorpusTr
 # chatbot.get_response("Hello, how are you today?")
 
 class Chatter:
-    oscSender = OSC.OSCClient( )
-    oscSenderAddress_Txt = "/answer_text"       # Python to OF
-    oscRecieverAddress_Txt = "/original_text"   # OF to python
+    oscSender               = OSC.OSCClient( )
+    oscSenderAddress_Txt    = "/answer_text"     # Python to OF
+    oscRecieverAddress_Txt  = "/original_text"   # OF to python
 
     def __init__(self, host, portSender, portReciever):
         self.host_ = host
@@ -38,13 +38,16 @@ class Chatter:
         self.oscSender.send( messageOSC )
 
     def replyOscHandler( self, addr, tags, stuff, source ):
-        input_sentence = stuff[ 0 ]
+        input_sentence = str( stuff[ 0 ] )
         print "Original:", input_sentence
-        if self.counter++ % 2 == 0 :        # TODO switching between the chatters
-            answer = "ChatterBot | "
-            answer += chatbot.get_response( input_sentence )
+        self.counter += 1
+        answer = str( self.counter ) + " "
+        if ( self.counter % 2 == 0 ):        # TODO switching between the chatters
+            answer += "ChatterBot | "
+            if (input_sentence != ""):
+                answer += chatbot.get_response( input_sentence )
         else:
-            answer = "DataInsulter | "
+            answer += "DataInsulter | "
             answer += ai.answerFromText( input_sentence, resultDict, dataTable )
             answer += ai.changeToMale( answer )
         print "Answer: ", answer
