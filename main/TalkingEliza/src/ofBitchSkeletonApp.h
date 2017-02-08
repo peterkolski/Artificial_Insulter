@@ -1,14 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofxUI.h"
 #include "ofxXmlSettings.h"
-//#include "ofxSoundProcessor.h"
 #include "ofxQuadWarp.h"
 
 #include "ConversationOSC.h"
 #include "bitcherOSC.h"
-
 
 class ofBitchSkeletonApp : public ofBaseApp
 {
@@ -18,9 +15,16 @@ public:
     void update();
     void draw();
     void keyPressed  (int key);
-//    void audioIn( float*input, int bufferSize, int nChannels );
 
     void setVoice();
+    void drawText();
+    void reset();
+    void setupOSC();
+    void saveImage( string &fileNamePath );
+    void processImage();
+    void setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight );
+    void drawVideosWarped();
+    void setupVideo( int &camWidth, int &camHeight );
 
     // --- XML
     ofxXmlSettings  xml;
@@ -28,7 +32,6 @@ public:
 
     // --- CONVERSATION
     ConversationOSC    bitches;
-//    bitcherOSC  bitchElisa;
     string textCurrent = "";
     string textLast = "";
     string textFromInput      = "";
@@ -46,18 +49,7 @@ public:
     bool    shouldSpeak = false;
 
     // --- VISUALIZER
-//    ofxSoundAnalyser    analyser;
     ofFbo               fboLeft, fboRight;
     ofxQuadWarp         warperLeft, warperRight;
     ofVideoPlayer       vidPlayerLeft, vidPlayerRight;
-
-    void drawText();
-    void reset();
-//    void drawVoice( double scale );
-    void setupOSC();
-//    void setupSoundAnalysis();
-    void saveImage( string &fileNamePath );
-    void processImage();
-    void setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight );
-    void drawVideosWarped();
 };

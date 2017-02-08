@@ -17,23 +17,13 @@ void ofBitchSkeletonApp::setup(){
     imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
     ofLogNotice() << "Path to write file" << imageNamePath;
 
-
     textCurrent = bitches.getAnswerCurrent();
 
-//    setupSoundAnalysis();
     setupOSC();
 
-    vidPlayerLeft.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov" );
-    vidPlayerRight.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov" );
-    vidPlayerLeft.play();
-    vidPlayerRight.play();
-
-    auto camWidth = 1280;  // try to grab at this size.
-    auto camHeight = 720;
-    vidGrabber.setDeviceID( 0 );
-    vidGrabber.setDesiredFrameRate( 15 );
-    vidGrabber.initGrabber(camWidth, camHeight);
-
+    int camWidth;
+    int camHeight;
+    setupVideo( camWidth, camHeight );
     setupWarping( camWidth / 2, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
     bitches.doConversation( "I hate you all", 0 );
@@ -75,9 +65,6 @@ void ofBitchSkeletonApp::draw(){
     else {
         shift = ofGetWidth() / 2;
     }
-
-//    auto scale = 1.0;
-//    drawVoice( scale );
 
     ofPushStyle( );
     {
@@ -161,14 +148,6 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
     warperRight.load(); // reload last saved changes.
 }
 
-//void ofBitchSkeletonApp::drawVoice( double scale )
-//{
-//    ofPushStyle( );
-//    ofSetColor( ofColor::red );
-//    ofDrawRectangle( 0, ofGetHeight() / 2, ofGetWidth( ), ofGetHeight( ) * analyser.getAmplitude() * scale );
-//    ofPopStyle( );
-//}
-
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::keyPressed(int key){
 
@@ -208,7 +187,7 @@ void ofBitchSkeletonApp::processImage()
 {
     saveImage( imageNamePath );
 //    bitchElisa.sendPicturePath();
-//    bitchElisa.update(); // TODO too fast, processing taes some time
+//    bitchElisa.update(); // TODO too fast, processing takes some time
 
     ofLogNotice() << "Sent picture";
 }
@@ -219,16 +198,6 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
     img.setFromPixels( vidGrabber.getPixels() );
     img.save( fileNamePath );
 }
-
-//void ofBitchSkeletonApp::setupSoundAnalysis()
-//{
-//    auto bufferSize = 512;
-//    auto sampleRate = 44100;
-//
-//    analyser.setup( sampleRate, bufferSize * 2, bufferSize, bufferSize / 2, 100 ); // call before ofSoundStreamSetup()
-//    ofSoundStreamSetup( 1, 1, this, sampleRate, bufferSize, 1 );
-//}
-
 
 void ofBitchSkeletonApp::setupOSC()
 {
@@ -246,8 +215,8 @@ void ofBitchSkeletonApp::setupOSC()
 
     bitches.setup( 0, host, portToPython1, portFromPython1 );
     bitches.setup( 1, host, portToPython2, portFromPython2 );
-//    bitchElisa.setup( host, portToPython2, portFromPython );
 }
+
 
 void ofBitchSkeletonApp::reset()
 {
@@ -265,8 +234,8 @@ void ofBitchSkeletonApp::setVoice()
     else {
         voice = "Tom";
     }
-
 }
+
 void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
@@ -276,7 +245,6 @@ void ofBitchSkeletonApp::speak()
         shouldSpeak = false;
     }
 }
-
 void ofBitchSkeletonApp::drawText()
 {
     ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
@@ -284,14 +252,19 @@ void ofBitchSkeletonApp::drawText()
 
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
     ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
-//    ofDrawBitmapStringHighlight( "OSC to Python: " + bitchElisa.getTextAsked(), 100, 220 );
-//    ofDrawBitmapStringHighlight( "OSC from Python: " + bitchElisa.getAnswer(), 100, 240 );
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }
 
-//void ofBitchSkeletonApp::audioIn( float*input, int bufferSize, int nChannels )
-//{
-//    analyser.grabAudioBuffer( input );
-//}
+void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
+{
+    camWidth= 1280;
+    camHeight= 720;
+    vidPlayerLeft.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov" );
+    vidPlayerRight.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov" );
+    vidPlayerLeft.play();
+    vidPlayerRight.play();// try to grab at this size.vidGrabber.setDeviceID( 0 );
+    vidGrabber.setDesiredFrameRate( 15 );
+    vidGrabber.initGrabber( camWidth, camHeight);
+}
