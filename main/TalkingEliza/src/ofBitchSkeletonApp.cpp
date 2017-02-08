@@ -56,7 +56,7 @@ void ofBitchSkeletonApp::update(){
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::draw(){
     ofBackground( 0 );
-    
+
     drawActiveSpeakerRect();
     drawVideosWarped();
 

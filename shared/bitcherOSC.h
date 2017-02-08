@@ -19,7 +19,6 @@ public:
 
     const string    &getAnswer() { return textRecieved_; }
     const string    &getTextAsked() { return textSent_; }
-    void            sendPicturePath();
     void            recieveText();
 
 private:

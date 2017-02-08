@@ -126,7 +126,7 @@ void ConversationOSC::recieveText()
 
 void ConversationOSC::setupPicturePath( string host, int portSender, int portReciever )
 {
-
+    senderPictureAnalysis_.setup( host, portSender );
 }
 
 void ConversationOSC::sendPicturePath()
@@ -137,7 +137,7 @@ void ConversationOSC::sendPicturePath()
 
     m.setAddress( adressPicSent );
     m.addStringArg( filePathPicSent );
-    sender_.sendMessage( m, false );
+    senderPictureAnalysis_.sendMessage( m, false );
 
     ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent;
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );

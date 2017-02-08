@@ -28,18 +28,18 @@ public:
     const string &getAnswerCurrent();
     const string &getAnswerFromID( int id );
 
-
 private:
-    string  logInfo_       = "ConversationOSC | ";
-    vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
-
-    vector< string >            talkerNames_;
-    void    setTalkerActive( int id );
+    void            setTalkerActive( int id );
+    string          logInfo_       = "ConversationOSC | ";
+    ofxOscSender    senderPictureAnalysis_;
     int     talkerMaxAmount_    = 2;
     int     idTalker_           = 0;
     int     idOther_         = 1;
     string  answerCurrent_      = "";
     string  answerBefore_       = "";
+
+    vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
+    vector< string >            talkerNames_;
 };
 
 
