@@ -37,7 +37,7 @@ string bitcherOSC::ask( string &text )
     textSent_ = text;
     sendText( textSent_ );
     // TODO This could take some time
-    usleep( 3000 );
+    usleep( 6000 );
     textRecieved_ = recieveText();
     return textRecieved_;
 }
@@ -45,6 +45,8 @@ string bitcherOSC::ask( string &text )
 //----------------------------------------------------------------------------------------------------------------------
 void bitcherOSC::sendText( string &text )
 {
+    ofLogVerbose() << logInfo_ << "Sending port " << portSender_ << " | adr " << adressSenderText_;
+    ofLogVerbose() << logInfo_ << "Text " << text;
     ofxOscMessage m;
     m.setAddress( adressSenderText_ );
     m.addStringArg( text );
