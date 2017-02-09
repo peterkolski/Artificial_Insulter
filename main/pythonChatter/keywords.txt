@@ -8,9 +8,45 @@ chicken
 freak
 
 DELETE:
-match
-team
-hobbies
-ping / high score
-keyboard
-games / single play / playing
+- aim
+- match
+- team
+- ping
+- score
+- keyboard
+- games /
+- play / playing
+
+pacifist
+aiming
+suicide
+scoreboard
+Iridium
+Kill
+killcam
+kill
+PC
+Play
+cancer
+ammo
+win
+stormtrooper
+server
+profile
+pacifist
+masturbation
+hostage
+gun
+flight
+cunt
+blood
+blindfold
+bitch
+barn
+Team
+
+CHECK
+certificate
+cancer
+buddy
+abortion

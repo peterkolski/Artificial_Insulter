@@ -8,13 +8,11 @@ from Chatter import ChatterSystem
 
 databaseNameShittalk = '../../data/ShitTalkTable.csv'
 databaseName         = "./databasePeter.json"
-
-dataTableShitTalk = pd.read_csv( databaseNameShittalk )
-
 host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
 
+dataTableShitTalk = pd.read_csv( databaseNameShittalk )
 chatterbotInstance = ChatBot('Kora',
                             storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
                             read_only=True,
