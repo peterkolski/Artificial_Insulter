@@ -1,0 +1,3 @@
+pip install --upgrade pip
+nltk corpa:
+taggers/averaged_perceptron_tagger/averaged_perceptron_tagger.pickle
