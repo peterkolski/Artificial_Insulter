@@ -13,11 +13,11 @@ portSender = 22222
 portReciever = 33333
 
 chatterbotInstance = ChatBot('Kora',
-                     trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-                     storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
-                     read_only=True,
-                    filters=["chatterbot.filters.RepetitiveResponseFilter"],    #Do not repeat yourself too often
-                     database = "./databasePeter.json")
+                            storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
+                            read_only=True,
+                            filters=["chatterbot.filters.RepetitiveResponseFilter"],    #Do not repeat yourself too often
+                            database = "./databasePeter.json"
+                             )
 # chatbot.train("chatterbot.corpus.english") # Train based on the english corpus
 
 chatterElisa = ChatterSystem( host, portSender, portReciever, dataTableShitTalk, chatterbotInstance )
