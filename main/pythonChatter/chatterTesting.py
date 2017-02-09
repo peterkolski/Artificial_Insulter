@@ -5,18 +5,21 @@ import logging
 # Uncomment the following line to enable verbose logging
 # logging.basicConfig(level=logging.INFO)
 
-# Create a new instance of a ChatBot
+databaseName = "./databaseTest.json"
+
 bot = ChatBot("Terminal",
     storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
     logic_adapters=[ "chatterbot.logic.BestMatch"],
     input_adapter="chatterbot.input.TerminalAdapter",
     output_adapter="chatterbot.output.TerminalAdapter",
     filters=["chatterbot.filters.RepetitiveResponseFilter"],
-    database="./databaseTest.json",
+    database=databaseName,
     read_only=True
 )
 
-print("Type something to begin...")
+print("====================================================")
+print("Test chat started on database " + databaseName)
+print("====================================================")
 
 # The following loop will execute each time the user enters input
 while True:
