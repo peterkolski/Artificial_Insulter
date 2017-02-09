@@ -275,8 +275,8 @@ void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
 {
     camWidth= 1280;
     camHeight= 720;
-    vidPlayerLeft.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov" );
-    vidPlayerRight.load( "/Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov" );
+    vidPlayerLeft.load( xml.getValue("PATH:VID1", "Lacuna - AI 1.mov") );
+    vidPlayerRight.load( xml.getValue("PATH:VID2", "Lacuna - AI 2.mov")  );
     vidPlayerLeft.play();
     vidPlayerRight.play();// try to grab at this size.vidGrabber.setDeviceID( 0 );
     vidGrabber.setDesiredFrameRate( 15 );
