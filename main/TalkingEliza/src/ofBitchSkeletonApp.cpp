@@ -4,7 +4,8 @@
 void ofBitchSkeletonApp::setup(){
     setVoice( );
     ofSetLogLevel( OF_LOG_VERBOSE );
-    ofEnableAlphaBlending();
+//    ofEnableAlphaBlending();
+    ofDisableAlphaBlending();
     setupXML( "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt" );
 
     textCurrent = bitches.getAnswerCurrent();
@@ -12,9 +13,17 @@ void ofBitchSkeletonApp::setup(){
     pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
 
     setupOSC();
+    int camWidth = 1280;
+    int camHeight = 720;
+    // --- Syphon
+    syphonLeft.setup();
+    syphonRight.setup();
+    string appName = "Max";
+    string serverName1 = "left";
+    string serverName2 = "right";
+    syphonLeft.set( serverName1, appName );
+    syphonRight.set( serverName2, appName );
 
-    int camWidth;
-    int camHeight;
     setupVideo( camWidth, camHeight );
     setupWarping( camWidth / 2, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
@@ -84,15 +93,19 @@ void ofBitchSkeletonApp::drawActiveSpeakerRect() const
 void ofBitchSkeletonApp::drawVideosWarped()
 {
     ofPushStyle();
-    ofSetColor( ofColor::white );
+    ofSetColor( ofColor::white, 255 );
     fboLeft.begin();
     {
-        vidPlayerLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
+//        ofDisableAlphaBlending();
+        syphonLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
+//        vidPlayerLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
+//        ofEnableAlphaBlending();
     }
     fboLeft.end();
     fboRight.begin();
     {
-        vidPlayerRight.draw( 0, 0, fboRight.getWidth(), fboRight.getHeight() );
+        syphonRight.draw( 0, 0, fboRight.getWidth(), fboRight.getHeight() );
+//        vidPlayerRight.draw( 0, 0, fboRight.getWidth(), fboRight.getHeight() );
     }
     fboRight.end();
 
@@ -273,8 +286,6 @@ void ofBitchSkeletonApp::drawVerboseText()
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
 {
-    camWidth= 1280;
-    camHeight= 720;
     vidPlayerLeft.load( xml.getValue("PATH:VID1", "Lacuna - AI 1.mov") );
     vidPlayerRight.load( xml.getValue("PATH:VID2", "Lacuna - AI 2.mov")  );
     vidPlayerLeft.play();

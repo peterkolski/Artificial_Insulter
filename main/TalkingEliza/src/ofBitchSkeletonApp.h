@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofxQuadWarp.h"
+#include "ofxSyphon.h"
 
 #include "ConversationOSC.h"
 #include "bitcherOSC.h"
@@ -53,4 +54,6 @@ public:
     bool            isVerbose = true;
     void drawActiveSpeakerRect() const;
     void setupXML( string settingsPath );
+    ofxSyphonClient syphonLeft, syphonRight;
+
 };
