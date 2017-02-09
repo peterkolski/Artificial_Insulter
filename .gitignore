@@ -47,3 +47,4 @@ research/peter/StoryTeller/data/vgg/vgg19.pkl
 out.jpg
 *.app
 log.txt
+*.pyc
