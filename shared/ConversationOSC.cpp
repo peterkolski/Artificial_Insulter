@@ -126,6 +126,8 @@ void ConversationOSC::recieveMessages()
 {
     talkerVec_[ idTalker_ ]->recieveText();
     answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
+
+    recieveSoundFinished();
 }
 
 void ConversationOSC::setupPicturePath( string host, int portSender, string adressPath )
@@ -150,6 +152,8 @@ void ConversationOSC::sendSoundStartLeft( int length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound LEFT | port " << portSoundSender_ << " | adr " << adressSoundLeft_;
     ofLogVerbose() << logInfo_ << "length: " << length;
+
+    isSoundPlayingLeft_ = true;
     ofxOscMessage m;
     m.setAddress( adressSoundLeft_ );
     m.addStringArg( "start" );
@@ -161,9 +165,39 @@ void ConversationOSC::sendSoundStartRight( int length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound RIGHT | port " << portSoundSender_ << " | adr " << adressSoundRight_;
     ofLogVerbose() << logInfo_ << "length: " << length;
+
+    isSoundPlayingRight_ = true;
     ofxOscMessage m;
     m.setAddress( adressSoundRight_ );
     m.addStringArg( "start" );
     m.addIntArg( length );
     senderSound_.sendMessage( m, false );
+}
+
+void ConversationOSC::recieveSoundFinished()
+{
+    while ( recieverSound_.hasWaitingMessages() )
+    {
+        ofxOscMessage _message;
+        recieverSound_.getNextMessage( _message );
+
+        // check the address of the incoming message
+        if ( _message.getNumArgs() > 0 )
+        {
+            if ( ( _message.getAddress() == adressSoundLeft_ ) && ( _message.getArgAsString( 0 ) == textSoundDone_ ) )
+            {
+                isSoundPlayingLeft_ = false;
+                ofLogVerbose() << logInfo_ << "message recieved from " << adressSoundLeft_ << " => " << textSoundDone_;
+            }
+            if ( ( _message.getAddress() == adressSoundRight_ ) && ( _message.getArgAsString( 0 ) == textSoundDone_ ) )
+            {
+                isSoundPlayingRight_ = false;
+                ofLogVerbose() << logInfo_ << "message recieved from " << adressSoundRight_ << " => " << textSoundDone_;
+            }
+        }
+        else
+        {
+            ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
+        }
+    }
 }

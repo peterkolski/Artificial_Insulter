@@ -37,8 +37,9 @@ private:
     string          adressPicSent_;
 
     // --- SOUND
-    bool            recieveSoundFinished();
-    bool            isSoundPlaying_;
+    void recieveSoundFinished();
+    bool            isSoundPlayingLeft_     = false;
+    bool            isSoundPlayingRight_  = false;
     ofxOscSender    senderSound_;
     ofxOscReceiver  recieverSound_;
     string          hostSound_ = "127.0.0.1";
@@ -46,6 +47,7 @@ private:
     int             portSoundReciever_ = 40001;
     string          adressSoundLeft_  = "/left";
     string          adressSoundRight_ = "/right";
+    string          textSoundDone_ = "done";
 
     int     talkerMaxAmount_    = 2;
     int     idTalker_           = 0;
