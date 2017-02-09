@@ -15,6 +15,10 @@ ConversationOSC::ConversationOSC() {
     talkerNames_[ 1 ] = "Kora";
 
     answerCurrent_ = talkerVec_[ 0 ]->getAnswer();
+
+    // --- SETUP Sound control
+    senderSound_.setup( hostSound_, portSoundSender_ );
+    recieverSound_.setup( portSoundReciever_ );
 }
 
 void ConversationOSC::setup( int id, string host, int portSender, int portReciever )
