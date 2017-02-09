@@ -17,8 +17,10 @@ public:
     void    next();
     void    doConversation();
     void    doConversation( string txt, int id );
-    void    recieveText();
-    void sendPicturePath( string &filePathPicSent );
+    void    recieveMessages();
+    void    sendPicturePath( string &filePathPicSent );
+    void    sendSoundStartLeft( int length );
+    void    sendSoundStartRight( int length );
 
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();
@@ -34,11 +36,14 @@ private:
     ofxOscSender    senderPictureAnalysis_;
     string          adressPicSent_;
 
+    // --- SOUND
+    bool            recieveSoundFinished();
+    bool            isSoundPlaying_;
     ofxOscSender    senderSound_;
     ofxOscReceiver  recieverSound_;
-    string          hostSound_ = "localhost";
-    int             portSoundSender_ = 40.000;
-    int             portSoundReciever_ = 40.001;
+    string          hostSound_ = "127.0.0.1";
+    int             portSoundSender_ = 40000;
+    int             portSoundReciever_ = 40001;
     string          adressSoundLeft_  = "/left";
     string          adressSoundRight_ = "/right";
 

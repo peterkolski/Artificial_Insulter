@@ -36,7 +36,7 @@ void ofBitchSkeletonApp::update(){
     vidPlayerRight.update();
     vidGrabber.update();
     speak( );
-    bitches.recieveText();
+    bitches.recieveMessages();
     //TODO HACK
 //    if(ofGetFrameNum() % 5 != 0) {
 //        // only update every 5 frames.
@@ -191,6 +191,15 @@ void ofBitchSkeletonApp::keyPressed(int key){
         if ( textFromInput == "" )
         {
             ofLogError() << "No Text input";
+        }
+
+        if ( bitches.getTalkerCurrentID() == 0 )
+        {
+            bitches.sendSoundStartLeft( 5 );
+        }
+        else
+        {
+            bitches.sendSoundStartRight( 2 );
         }
 
         reset();

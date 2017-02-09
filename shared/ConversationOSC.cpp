@@ -122,7 +122,7 @@ void ConversationOSC::setTalkerActive( int id )
     }
 }
 
-void ConversationOSC::recieveText()
+void ConversationOSC::recieveMessages()
 {
     talkerVec_[ idTalker_ ]->recieveText();
     answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
@@ -144,4 +144,26 @@ void ConversationOSC::sendPicturePath( string &filePathPicSent )
 
     ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent_;
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
+}
+
+void ConversationOSC::sendSoundStartLeft( int length )
+{
+    ofLogVerbose() << logInfo_ << "Sending Sound LEFT | port " << portSoundSender_ << " | adr " << adressSoundLeft_;
+    ofLogVerbose() << logInfo_ << "length: " << length;
+    ofxOscMessage m;
+    m.setAddress( adressSoundLeft_ );
+    m.addStringArg( "start" );
+    m.addIntArg( length );
+    senderSound_.sendMessage( m, false );
+}
+
+void ConversationOSC::sendSoundStartRight( int length )
+{
+    ofLogVerbose() << logInfo_ << "Sending Sound RIGHT | port " << portSoundSender_ << " | adr " << adressSoundRight_;
+    ofLogVerbose() << logInfo_ << "length: " << length;
+    ofxOscMessage m;
+    m.setAddress( adressSoundRight_ );
+    m.addStringArg( "start" );
+    m.addIntArg( length );
+    senderSound_.sendMessage( m, false );
 }
