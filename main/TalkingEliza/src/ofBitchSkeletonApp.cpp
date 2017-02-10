@@ -223,7 +223,13 @@ void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
     bitches.sendPicturePath( targetPath );
+
     // TODO too fast, processing takes some time
+    // TODO HACK
+
+    //switch to mutant
+    bitches.sendStartMutant( "I am a window", "A widdow is my wife" );
+    bitches.setIsMutantChatbot( true );
 
     ofLogNotice() << "Sent picture";
 }

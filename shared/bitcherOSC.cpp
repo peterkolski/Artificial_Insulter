@@ -107,5 +107,14 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
     return msg_string;
 }
 
+void bitcherOSC::startMutant( string txt1, string txt2 )
+{
+    ofxOscMessage m;
+    m.setAddress( "/generate" );
+    m.addStringArg( txt1 );
+    m.addStringArg( txt2 );
+    sender_.sendMessage( m, false );
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 

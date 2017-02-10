@@ -16,6 +16,7 @@ class bitcherOSC
 public:
     void setup( string &hostSendingTo, int portSender, int portReciever );
     string          ask( string &text );
+    void            startMutant( string txt1, string txt2 );
 
     const string    &getAnswer() { return textRecieved_; }
     const string    &getTextAsked() { return textSent_; }

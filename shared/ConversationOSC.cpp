@@ -236,3 +236,13 @@ bool ConversationOSC::isSoundPlayingRight()
     return isSoundPlayingRight_;
 }
 
+void ConversationOSC::sendStartMutant( string txt1, string txt2 )
+{
+    talkerVec_.at( idTalker_ )->startMutant( txt1, txt2 );
+}
+
+void ConversationOSC::setIsMutantChatbot( bool isMutantChatbot )
+{
+    ConversationOSC::isMutantChatbot_ = isMutantChatbot;
+}
+

@@ -15,12 +15,14 @@ public:
     void    setupPicturePath( string host, int portSender, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
+    void setIsMutantChatbot( bool isMutantChatbot );
     void    doConversation();
     void    doConversation( string txt, int id );
     void    recieveMessages();
     void    sendPicturePath( string &filePathPicSent );
     void    sendSoundStartLeft( int length );
     void    sendSoundStartRight( int length );
+    void    sendStartMutant( string txt1, string txt2 );
 
     bool    isSoundPlayingLeft();
     bool    isSoundPlayingRight();
@@ -39,7 +41,7 @@ private:
     string          adressPicSent_;
 
     // --- SOUND
-    void recieveSoundFinished();
+    void            recieveSoundFinished();
     bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
     ofxOscSender    senderSound_;
