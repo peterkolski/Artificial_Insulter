@@ -9,10 +9,14 @@ ConversationOSC::ConversationOSC() {
     talkerVec_.resize( talkerMaxAmount_ );
     talkerVec_[ 0 ] = make_unique< bitcherOSC >();
     talkerVec_[ 1 ] = make_unique< bitcherOSC >();
+    talkerVec_[ 2 ] = make_unique< bitcherOSC >();
+    talkerVec_[ 3 ] = make_unique< bitcherOSC >();
 
     talkerNames_.resize( talkerMaxAmount_ );
-    talkerNames_[ 0 ] = "Elisa";
-    talkerNames_[ 1 ] = "Kora";
+    talkerNames_[ 0 ] = "Left";
+    talkerNames_[ 1 ] = "Right";
+    talkerNames_[ 2 ] = "Left";
+    talkerNames_[ 3 ] = "Right";
 
     answerCurrent_ = talkerVec_[ 0 ]->getAnswer();
 
@@ -72,19 +76,9 @@ const string &ConversationOSC::getAnswerBefore()
 
 void ConversationOSC::next()
 {
-    if ( !isMutantChatbot_ )
-    {
-        if ( idTalker_ == 0 )
-        {
-            idTalker_   = 1;
-            idOther_ = 0;
-        }
-        else {
-            idTalker_   = 0;
-            idOther_ = 1;
-        }
-    }
-    else
+    bool isMutantChatbot = talkerVec_[ idTalker_ ]->switchChatbot();
+
+    if ( isMutantChatbot )
     {
         if ( idTalker_ == 2 )
         {
@@ -94,6 +88,18 @@ void ConversationOSC::next()
         else {
             idTalker_   = 2;
             idOther_ = 3;
+        }
+    }
+    else
+    {
+        if ( idTalker_ == 0 )
+        {
+            idTalker_   = 1;
+            idOther_ = 0;
+        }
+        else {
+            idTalker_   = 0;
+            idOther_ = 1;
         }
     }
 }
