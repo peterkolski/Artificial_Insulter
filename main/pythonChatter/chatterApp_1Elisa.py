@@ -6,15 +6,20 @@ from Chatter import ChatterSystem
 # ====== SETUP
 # =================================
 
-databaseNameShittalk = '../../data/ShitTalkTable.csv'
-# databaseNameShittalk = '../../data/ShitTalkTable_Filtered.csv'
+# databaseNameShittalk = '../../data/ShitTalkTable.csv'
+databaseNameShittalk = '../../data/ShitTalkTable_Filtered.csv'
 # databaseName         = "./databasePeter.json"
 databaseName         = "./databaseTest.json"
 host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
 
+# =================================
+# =================================
+
 dataTableShitTalk = pd.read_csv( databaseNameShittalk )
+dataTableShitTalk = dataTableShitTalk[ dataTableShitTalk.Rating != 'shit' ]
+
 chatterbotInstance = ChatBot('Kora',
                             storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
                             read_only=True,
