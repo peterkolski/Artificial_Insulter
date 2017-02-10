@@ -59,18 +59,12 @@ void bitcherOSC::recieveText()
         reciever_.getNextMessage( _message );
         ofLogVerbose() << logInfo_ << " Recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp();
 
-        // check the address of the incoming message
         if (    ( _message.getAddress() == adressRecieverText_ )
             &&  ( _message.getNumArgs() > 0 ) )
          {
-             for ( int i = 0; i < _message.getNumArgs() ; ++i )
-             {
-                 if ( _message.getArgType( i ) == OFXOSC_TYPE_STRING )
-                 {
-                     textRecieved_ = _message.getArgAsString( i );
-                     ofLogVerbose() << logInfo_ << "message recieved from " << adressRecieverText_ << " => " << textRecieved_;
-                 }
-             }
+             textRecieved_ = _message.getArgAsString( 0 );
+             isMutantChatbot_ = _message.getArgAsBool( 1 );
+             ofLogVerbose() << logInfo_ << "Message from " << adressRecieverText_ << " | " << textRecieved_;
          }
         else
         {
