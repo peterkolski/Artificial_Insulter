@@ -76,9 +76,12 @@ const string &ConversationOSC::getAnswerBefore()
 
 void ConversationOSC::next()
 {
-    bool isMutantChatbot = talkerVec_[ idTalker_ ]->switchChatbot();
+    if ( talkerVec_[ idTalker_ ]->switchChatbot() )
+    {
+        isMutantChatbot_ = !isMutantChatbot_;
+    }
 
-    if ( isMutantChatbot )
+    if ( isMutantChatbot_ )
     {
         if ( idTalker_ == 2 )
         {
@@ -232,3 +235,4 @@ bool ConversationOSC::isSoundPlayingRight()
 {
     return isSoundPlayingRight_;
 }
+
