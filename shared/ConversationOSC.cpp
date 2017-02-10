@@ -153,10 +153,12 @@ void ConversationOSC::recieveMessages()
     answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
 
     recieveSoundFinished();
+    recievePictureFinished();
 }
 
 void ConversationOSC::setupPicturePath( string host, int portSender, int portReceiver, string adressPath )
 {
+    ofLogVerbose() << "Pic Receive port " << portReceiver << " | adress: " << adressPicRecieved_;
     senderPictureAnalysis_.setup( host, portSender );
     receiverPictureAnalysis_.setup( portReceiver );
     adressPicSent_ = adressPath;

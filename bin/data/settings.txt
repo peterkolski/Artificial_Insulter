@@ -1,5 +1,5 @@
 <PATH>
-    <SAVEPIC> /Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
+    <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
     <VID1> /Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov </VID1>
     <VID2> /Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov </VID2>
 </PATH>
@@ -7,10 +7,10 @@
 <OSC>
     <HOST> 127.0.0.1 </HOST>
     <PORT>
-        <SEND1>      33333 </SEND1>
-        <SEND2>      33334 </SEND2>
-        <RECIEVE1>   22222 </RECIEVE1>
-        <RECIEVE2>   22223 </RECIEVE2>
+        <SEND1>      60000 </SEND1>
+        <SEND2>      60001 </SEND2>
+        <RECIEVE1>   50000 </RECIEVE1>
+        <RECIEVE2>   50001 </RECIEVE2>
 
         <SENDPIC>    33333 </SENDPIC>
         <RECIEVEPIC>   22222 </RECIEVEPIC>

@@ -275,10 +275,10 @@ void ofBitchSkeletonApp::setupOSC()
     string host              = xml.getValue( "OSC:HOST", defaultXMLError );
     int    portToPython1     = xml.getValue( "OSC:PORT:SEND1", 9000 );
     int    portToPython2     = xml.getValue( "OSC:PORT:SEND2", 9000 );
-    int    portToPythonPic   = xml.getValue( "OSC:PORT:SENDPIC", 9000 );
-    int    portFromPythonPic = xml.getValue( "OSC:PORT:RECIEVEPIC", 9000 );
     int    portFromPython1   = xml.getValue( "OSC:PORT:RECIEVE1", 9000 );
     int    portFromPython2   = xml.getValue( "OSC:PORT:RECIEVE2", 9000 );
+    int    portToPythonPic   = xml.getValue( "OSC:PORT:SENDPIC", 9000 );
+    int    portFromPythonPic = xml.getValue( "OSC:PORT:RECIEVEPIC", 9000 );
 
     bitchConversation.setup( 0, host, portToPython1, portFromPython1 );
     bitchConversation.setup( 1, host, portToPython2, portFromPython2 );
