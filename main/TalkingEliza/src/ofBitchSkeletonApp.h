@@ -57,4 +57,5 @@ public:
     void setupXML( string settingsPath );
     ofxSyphonClient syphonLeft, syphonRight;
 
+    void sendSoundNotification( int durationDivision );
 };

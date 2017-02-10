@@ -40,6 +40,8 @@ void ofBitchSkeletonApp::update(){
     vidGrabber.update();
     bitches.recieveMessages();
 
+    sendSoundNotification( 10 );
+
 //    speak();
 
     //TODO HACK
@@ -193,20 +195,34 @@ void ofBitchSkeletonApp::keyPressed(int key){
         textFromInput = textInput;
         textInput = "";
 
-        bitches.next(); 
+
+        bitches.next();
+        textCurrent = bitches.getAnswerCurrent(); // For checking when new text come in
         bitches.doConversation();
 
         if ( textFromInput == "" )
         {
             ofLogError() << "No Text input";
         }
+    }
+//    else
+//    {
+//        textInput += key;
+//    }
+}
 
-        // TODO Wait a bit
-        // - save string
-        // - set flag to ask for new tring
-        // --- send sound notification
-        int duration = bitches.getAnswerCurrent().length() / 10;
-        ofLogVerbose() << "Sound Duration: " << duration;
+void ofBitchSkeletonApp::sendSoundNotification( int durationDivision )
+{
+    if ( textCurrent != bitches.getAnswerCurrent() ) // TODO das wird immer untscheidlich sein, da die speaker wechseln
+    {
+        ofLogVerbose() << "Sound Text before: " << textCurrent;
+        textCurrent = bitches.getAnswerCurrent();
+        ofLogVerbose() << "Sound Text after: " << textCurrent;
+
+        setVoice();
+        shouldSpeak = true;
+        
+        int duration = textCurrent.length() / durationDivision;
         if ( bitches.getNameSpeaker() == "Left" )
         {
             bitches.sendSoundStartLeft( duration );
@@ -216,12 +232,8 @@ void ofBitchSkeletonApp::keyPressed(int key){
             bitches.sendSoundStartRight( duration );
         }
 
-        reset();
+        ofLogVerbose() << "Sound Duration: " << duration;
     }
-//    else
-//    {
-//        textInput += key;
-//    }
 }
 
 //--------------------------------------------------------------
