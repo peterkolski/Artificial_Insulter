@@ -63,7 +63,7 @@ void bitcherOSC::recieveText()
             &&  ( _message.getNumArgs() > 0 ) )
          {
              textRecieved_ = _message.getArgAsString( 0 );
-             isMutantChatbot_ = _message.getArgAsBool( 1 );
+             switchChatbot_ = _message.getArgAsBool( 1 );
              ofLogVerbose() << logInfo_ << "Message from " << adressRecieverText_ << " | " << textRecieved_;
          }
         else
