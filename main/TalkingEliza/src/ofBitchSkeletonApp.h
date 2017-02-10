@@ -73,4 +73,9 @@ public:
     void sendSoundNotification( float durationDivision );
     void updateCoversation();
     void copyInputText();
+
+    int secondsElapsedCurrent = 0;
+    int secondsMarker = 0;
+    int roundCounter = 0;
+    bool isTalking = false;
 };

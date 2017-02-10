@@ -55,23 +55,10 @@ void ofBitchSkeletonApp::update(){
 
     sendSoundNotification( 10 );
 
-//    speak();
+    updateCoversation();
 
-    //TODO HACK
-//    if(ofGetFrameNum() % 5 != 0) {
-//        // only update every 5 frames.
-//        return;
-//    }
-//    if ( ( ofGetFrameNum() % ( 60*10) ) == 0 )
-//    {
-//        processImage();
-////        bitchElisa.update();
-//    }
-//    if ( ( ofGetFrameNum() % ( 60*5) ) == 0 )
-//    {
-////        processImage();
-//        bitchElisa.update();
-//    }
+
+//    speak();
 }
 
 //--------------------------------------------------------------
@@ -208,17 +195,36 @@ void ofBitchSkeletonApp::keyPressed(int key){
     if ( key == OF_KEY_RETURN )
     {
         updateCoversation();
-
     }
 }
 
 void ofBitchSkeletonApp::updateCoversation()
 {
-    copyInputText();
+    secondsElapsedCurrent = (int)ofGetElapsedTimef() - secondsMarker;
 
-    bitchConversation.next();
-    textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
-    bitchConversation.doConversation();
+    if ( ( secondsElapsedCurrent > 3 ) && ( !isTalking ) )
+    {
+        isTalking = true;
+
+        copyInputText();
+        bitchConversation.next();
+        textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
+        bitchConversation.doConversation();
+
+        roundCounter++;
+        ofLogVerbose() << "ROUND: " << roundCounter;
+    }
+
+    if ( ( isTalking )
+         && ( secondsElapsedCurrent > 6 )
+        && ( !bitchConversation.isSoundPlayingRight() )
+        && ( !bitchConversation.isSoundPlayingLeft() ) )
+    {
+        secondsMarker = (int)ofGetElapsedTimef();
+        isTalking = false;
+
+        ofLogVerbose() << "Ready for talking again";
+    }
 }
 
 void ofBitchSkeletonApp::copyInputText()
@@ -339,7 +345,7 @@ void ofBitchSkeletonApp::drawVerboseText()
 
 void ofBitchSkeletonApp::drawText()
 {
-    int maxNumCharacters = 50;
+    int maxNumCharacters = 40;
 
     ofSetColor(225);
     if ( bitchConversation.isSoundPlayingLeft() )
