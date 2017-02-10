@@ -1,9 +1,9 @@
+<CAMEXTERNAL> 0 </CAMEXTERNAL>
 <PATH>
     <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
     <VID1> /Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov </VID1>
     <VID2> /Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov </VID2>
 </PATH>
-
 <OSC>
     <HOST> 127.0.0.1 </HOST>
     <PORT>
