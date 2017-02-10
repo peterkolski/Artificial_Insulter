@@ -73,11 +73,11 @@ void ofBitchSkeletonApp::draw(){
     if ( isVerbose ) { drawVerboseText(); }
 }
 
-void ofBitchSkeletonApp::drawActiveSpeakerRect() const
+void ofBitchSkeletonApp::drawActiveSpeakerRect()
 {
     auto gap = 10;
     auto shift = 0;
-    if ( bitches.getTalkerCurrentID() == 0 )
+    if ( bitches.getNameSpeaker() == "Left" )
     {
         shift = 0;
     }
@@ -228,7 +228,7 @@ void ofBitchSkeletonApp::processImage( string targetPath )
     // TODO HACK
 
     //switch to mutant
-    bitches.sendStartMutant( "I am a window", "A widdow is my wife" );
+    bitches.sendStartMutant( "a flock of birds sitting on top of a power line", "a group of birds sitting on top of a sign" );
     bitches.setIsMutantChatbot( true );
 
     ofLogNotice() << "Sent picture";

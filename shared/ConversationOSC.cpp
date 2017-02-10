@@ -79,6 +79,7 @@ void ConversationOSC::next()
     if ( talkerVec_[ idTalker_ ]->switchChatbot() )
     {
         isMutantChatbot_ = !isMutantChatbot_;
+        ofLogVerbose() << logInfo_ << "Chatbots switched " << isMutantChatbot_;
     }
 
     if ( isMutantChatbot_ )
@@ -105,6 +106,7 @@ void ConversationOSC::next()
             idOther_ = 1;
         }
     }
+    ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << " Mutant: " << isMutantChatbot_;
 }
 
 void ConversationOSC::doConversation()
@@ -238,6 +240,7 @@ bool ConversationOSC::isSoundPlayingRight()
 
 void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 {
+    idTalker_ = 2;
     talkerVec_.at( idTalker_ )->startMutant( txt1, txt2 );
 }
 

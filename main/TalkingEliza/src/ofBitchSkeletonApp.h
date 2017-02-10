@@ -53,7 +53,7 @@ public:
     ofxQuadWarp     warperLeft, warperRight;
     ofVideoPlayer   vidPlayerLeft, vidPlayerRight;
     bool            isVerbose = true;
-    void drawActiveSpeakerRect() const;
+    void drawActiveSpeakerRect();
     void setupXML( string settingsPath );
     ofxSyphonClient syphonLeft, syphonRight;
 
