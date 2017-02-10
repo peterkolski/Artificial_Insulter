@@ -22,6 +22,7 @@ set( OFX_ADDONS_ACTIVE
         ofxSyphon
         ofxXmlSettings
         ofxOsc
+        ofxGui
         )
 
 # =========================================================================

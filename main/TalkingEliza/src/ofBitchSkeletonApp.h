@@ -63,9 +63,9 @@ public:
 
     bool         drawGui = true;
     ofxIntSlider xPosTextLeft;
-    ofxIntSlider xPosText2;
+    ofxIntSlider xPosTextRight;
     ofxIntSlider yPosTextLeft;
-    ofxIntSlider yPosText2;
+    ofxIntSlider yPosTextRight;
     ofxIntSlider xPosCam;
     ofxIntSlider yPosCam;
     ofxPanel     gui;

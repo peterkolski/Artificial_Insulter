@@ -25,6 +25,7 @@ void ofBitchSkeletonApp::setup(){
     syphonRight.set( serverName2, appName );
 
     setupVideo( camWidth, camHeight );
+//    setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
     setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
     bitchConversation.doConversation( "I hate you all 0 Left", 0 );
@@ -37,12 +38,12 @@ void ofBitchSkeletonApp::setup(){
     verdana14.setLetterSpacing(1.037);
 
     gui.setup();
-    gui.add( xPosTextLeft.setup( "Text Left X", 100, 0, 2000 ) );
-    gui.add( yPosTextLeft.setup( "Text Left Y", 100, 0, 2000 ) );
-    gui.add( xPosText2.setup( "Text Right X", 100, 0, 2000 ) );
-    gui.add( yPosText2.setup( "Text Right Y", 100, 0, 2000 ) );
-    gui.add( xPosCam.setup( "Cam X", 100, 0, 2000 ) );
-    gui.add( yPosCam.setup( "Cam Y", 100, 0, 2000 ) );
+    gui.add( xPosTextLeft.setup( "Text Left X", 220, 0, 2000 ) );
+    gui.add( yPosTextLeft.setup( "Text Left Y", 600, 0, 2000 ) );
+    gui.add( xPosTextRight.setup( "Text Right X", 1000, 0, 2000 ) );
+    gui.add( yPosTextRight.setup( "Text Right Y", 600, 0, 2000 ) );
+    gui.add( xPosCam.setup( "Cam X", 1200, 0, 2000 ) );
+    gui.add( yPosCam.setup( "Cam Y", 700, 0, 2000 ) );
 }
 
 //--------------------------------------------------------------
@@ -80,7 +81,7 @@ void ofBitchSkeletonApp::draw() {
     drawActiveSpeakerRect();
     drawVideosWarped();
 
-    vidGrabber.draw( ofGetWidth() / 2 - 200 / 2 , 30, 200, 80 );
+    vidGrabber.draw( xPosCam , yPosCam, 200, 80 );
 
     drawText();
 
@@ -338,16 +339,16 @@ void ofBitchSkeletonApp::drawText()
     ofSetColor(225);
     if ( bitchConversation.isSoundPlayingLeft() )
     {
-        ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 300 );
+//        ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 300 );
 //        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
-        verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), maxNumCharacters ), 100, 250);
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), maxNumCharacters ), xPosTextLeft, yPosTextLeft);
 //        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitchConversation.isSoundPlayingRight() )
     {
-        ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
-        verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), maxNumCharacters ), 600, 270);
+//        ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), maxNumCharacters ), xPosTextRight, yPosTextRight);
 //        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }
