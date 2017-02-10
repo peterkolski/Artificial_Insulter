@@ -256,7 +256,8 @@ def getRightMessageCallback(addr, tags, stuff, source):
 def startServer2():
     print "2 listening to:",osc_from_of_addressRight
     # start osc listener:
-    oscReceiverRight.addMsgHandler(osc_original_address, getLeftMessageCallback)
+    oscReceiverRight.addMsgHandler( osc_original_address, getLeftMessageCallback)
+    oscReceiverRight.addMsgHandler( osc_generate_address, generateMessageCallback )
     oscReceiverRight.serve_forever()
 
 generateMessageCallback(0, 0, ["a flock of birds sitting on top of a power line" ,"a group of birds sitting on top of a sign"], 0)
