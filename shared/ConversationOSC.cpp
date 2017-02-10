@@ -92,7 +92,7 @@ void ConversationOSC::doConversation()
 void ConversationOSC::doConversation( string txt, int id )
 {
     setTalkerActive( id );
-    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );
+    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
 const string &ConversationOSC::getAnswerFromID( int id )

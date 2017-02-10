@@ -35,8 +35,10 @@ void ofBitchSkeletonApp::update(){
     vidPlayerLeft.update();
     vidPlayerRight.update();
     vidGrabber.update();
-    speak( );
     bitches.recieveMessages();
+
+//    speak();
+
     //TODO HACK
 //    if(ofGetFrameNum() % 5 != 0) {
 //        // only update every 5 frames.
@@ -187,9 +189,10 @@ void ofBitchSkeletonApp::keyPressed(int key){
     {
         textFromInput = textInput;
         textInput = "";
-        bitches.next();
 
+        bitches.next(); 
         bitches.doConversation();
+
         if ( textFromInput == "" )
         {
             ofLogError() << "No Text input";
@@ -298,14 +301,14 @@ void ofBitchSkeletonApp::drawText()
 {
     if ( bitches.isSoundPlayingLeft() )
     {
-//        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
-        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
+        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
+//        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitches.isSoundPlayingRight() )
     {
-//        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
-        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
+        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+//        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }
 
