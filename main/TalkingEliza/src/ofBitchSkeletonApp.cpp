@@ -8,7 +8,7 @@ void ofBitchSkeletonApp::setup(){
     ofDisableAlphaBlending();
     setupXML( "/Users/sonneundasche/programming/of/apps/ElisaKora/bin/data/settings.txt" );
 
-    textCurrent = bitches.getAnswerCurrent();
+    textCurrent = bitchConversation.getAnswerCurrent();
 
     pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
 
@@ -27,10 +27,10 @@ void ofBitchSkeletonApp::setup(){
     setupVideo( camWidth, camHeight );
     setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
-    bitches.doConversation( "I hate you all 0 Left", 0 );
-    bitches.doConversation( "I hate you all 1 Right", 1 );
-    bitches.doConversation( "I hate you all 2 Left", 2 );
-    bitches.doConversation( "I hate you all 3 Right", 3 );
+    bitchConversation.doConversation( "I hate you all 0 Left", 0 );
+    bitchConversation.doConversation( "I hate you all 1 Right", 1 );
+    bitchConversation.doConversation( "I hate you all 2 Left", 2 );
+    bitchConversation.doConversation( "I hate you all 3 Right", 3 );
 
     verdana14.load("verdana.ttf", 14, true, true);
     verdana14.setLineHeight(18.0f);
@@ -42,7 +42,7 @@ void ofBitchSkeletonApp::update(){
     vidPlayerLeft.update();
     vidPlayerRight.update();
     vidGrabber.update();
-    bitches.recieveMessages();
+    bitchConversation.recieveMessages();
 
     sendSoundNotification( 10 );
 
@@ -83,7 +83,7 @@ void ofBitchSkeletonApp::drawActiveSpeakerRect()
 {
     auto gap = 10;
     auto shift = 0;
-    if ( bitches.getNameSpeaker() == "Left" )
+    if ( bitchConversation.getNameSpeaker() == "Left" )
     {
         shift = 0;
     }
@@ -200,9 +200,9 @@ void ofBitchSkeletonApp::keyPressed(int key){
         textInput = "";
 
 
-        bitches.next();
-        textCurrent = bitches.getAnswerCurrent(); // For checking when new text come in
-        bitches.doConversation();
+        bitchConversation.next();
+        textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
+        bitchConversation.doConversation();
 
         if ( textFromInput == "" )
         {
@@ -217,23 +217,23 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
 void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
 {
-    if ( textCurrent != bitches.getAnswerCurrent() ) // TODO das wird immer untscheidlich sein, da die speaker wechseln
+    if ( textCurrent != bitchConversation.getAnswerCurrent() ) // TODO das wird immer untscheidlich sein, da die speaker wechseln
     {
         ofLogVerbose() << "Sound Text before: " << textCurrent;
-        textCurrent = bitches.getAnswerCurrent();
+        textCurrent = bitchConversation.getAnswerCurrent();
         ofLogVerbose() << "Sound Text after: " << textCurrent;
 
         setVoice();
         shouldSpeak = true;
         
         float duration = (float)textCurrent.length() / durationDivision;
-        if ( bitches.getNameSpeaker() == "Left" )
+        if ( bitchConversation.getNameSpeaker() == "Left" )
         {
-            bitches.sendSoundStartLeft( duration );
+            bitchConversation.sendSoundStartLeft( duration );
         }
         else
         {
-            bitches.sendSoundStartRight( duration );
+            bitchConversation.sendSoundStartRight( duration );
         }
     }
 }
@@ -242,14 +242,14 @@ void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
 void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
-    bitches.sendPicturePath( targetPath );
+    bitchConversation.sendPicturePath( targetPath );
 
     // TODO too fast, processing takes some time
     // TODO HACK
 
     //switch to mutant
-    bitches.sendStartMutant( "a flock of birds sitting on top of a power line", "a group of birds sitting on top of a sign" );
-    bitches.setIsMutantChatbot( true );
+    bitchConversation.sendStartMutant( "a flock of birds sitting on top of a power line", "a group of birds sitting on top of a sign" );
+    bitchConversation.setIsMutantChatbot( true );
 
     ofLogNotice() << "Sent picture";
 }
@@ -279,17 +279,17 @@ void ofBitchSkeletonApp::setupOSC()
     int    portFromPython1   = xml.getValue( "OSC:PORT:RECIEVE1", 9000 );
     int    portFromPython2   = xml.getValue( "OSC:PORT:RECIEVE2", 9000 );
 
-    bitches.setup( 0, host, portToPython1, portFromPython1 );
-    bitches.setup( 1, host, portToPython2, portFromPython2 );
-    bitches.setup( 2, host, 20002, 20001 );
-    bitches.setup( 3, host, 20004, 20003 );
-    bitches.setupPicturePath( host, portToPythonPic, "/recognize" );
+    bitchConversation.setup( 0, host, portToPython1, portFromPython1 );
+    bitchConversation.setup( 1, host, portToPython2, portFromPython2 );
+    bitchConversation.setup( 2, host, 20002, 20001 );
+    bitchConversation.setup( 3, host, 20004, 20003 );
+    bitchConversation.setupPicturePath( "192.168.1.33", portToPythonPic, "/recognize" );
 }
 
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::reset()
 {
-    textCurrent = bitches.getAnswerCurrent();     //TODO sort this logic out;
+    textCurrent = bitchConversation.getAnswerCurrent();     //TODO sort this logic out;
     setVoice();
     shouldSpeak = true;
 }
@@ -298,7 +298,7 @@ void ofBitchSkeletonApp::reset()
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::setVoice()
 {
-    if ( bitches.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
+    if ( bitchConversation.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
     else {
         voice = "Tom";
     }
@@ -309,7 +309,7 @@ void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
     {
-        string cmd = "say -v " + voice + " " + bitches.getAnswerCurrent() + " &";   // create the command
+        string cmd = "say -v " + voice + " " + bitchConversation.getAnswerCurrent() + " &";   // create the command
         system(cmd.c_str());
         shouldSpeak = false;
     }
@@ -318,11 +318,11 @@ void ofBitchSkeletonApp::speak()
 //--------------------------------------------------------------
 void ofBitchSkeletonApp::drawVerboseText()
 {
-    ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
-    ofDrawBitmapStringHighlight( bitches.getName( 1 ) , ofGetWidth() * 3 / 4, 100);
+    ofDrawBitmapStringHighlight( bitchConversation.getName( 0 ) , ofGetWidth() / 4 , 100);
+    ofDrawBitmapStringHighlight( bitchConversation.getName( 1 ) , ofGetWidth() * 3 / 4, 100);
 
-    ofDrawBitmapStringHighlight( bitches.getAnswerLeft(), 100, 200 );
-    ofDrawBitmapStringHighlight( bitches.getAnswerRight(), 600, 200 );
+    ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 200 );
+    ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 200 );
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
@@ -331,17 +331,17 @@ void ofBitchSkeletonApp::drawVerboseText()
 void ofBitchSkeletonApp::drawText()
 {
     ofSetColor(225);
-    if ( bitches.isSoundPlayingLeft() )
+    if ( bitchConversation.isSoundPlayingLeft() )
     {
-        ofDrawBitmapStringHighlight( bitches.getAnswerLeft(), 100, 300 );
-        verdana14.drawString( bitches.getAnswerLeft() , 100, 250);
+        ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 300 );
+        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
 //        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
-    if ( bitches.isSoundPlayingRight() )
+    if ( bitchConversation.isSoundPlayingRight() )
     {
-        ofDrawBitmapStringHighlight( bitches.getAnswerRight(), 600, 350 );
-        verdana14.drawString( bitches.getAnswerRight(), 600, 270);
+        ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
+        verdana14.drawString( bitchConversation.getAnswerRight(), 600, 270);
 //        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }

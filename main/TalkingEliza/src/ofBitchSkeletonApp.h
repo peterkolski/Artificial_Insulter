@@ -33,7 +33,7 @@ public:
     string defaultXMLError = "NIX";
 
     // --- CONVERSATION
-    ConversationOSC    bitches;
+    ConversationOSC    bitchConversation;
     string textCurrent = "";
     string textFromInput      = "";
 
