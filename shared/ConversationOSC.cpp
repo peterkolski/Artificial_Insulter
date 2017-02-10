@@ -246,6 +246,9 @@ void ConversationOSC::recievePictureFinished()
                 ofLogVerbose() << logInfo_ << "Picture message from " << adressPicRecieved_;
                 ofLogVerbose() << logInfo_ << "Picture Text1: " << pictureRecievedText1_;
                 ofLogVerbose() << logInfo_ << "Picture Text2: " << pictureRecievedText2_;
+
+                sendStartMutant( pictureRecievedText1_, pictureRecievedText2_ );
+                setIsMutantChatbot( true );
             }
         }
         else

@@ -243,14 +243,6 @@ void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
     bitchConversation.sendPicturePath( targetPath );
-
-    // TODO too fast, processing takes some time
-    // TODO HACK
-
-    //switch to mutant
-    bitchConversation.sendStartMutant( "a flock of birds sitting on top of a power line", "a group of birds sitting on top of a sign" );
-    bitchConversation.setIsMutantChatbot( true );
-
     ofLogNotice() << "Sent picture";
 }
 
@@ -331,18 +323,21 @@ void ofBitchSkeletonApp::drawVerboseText()
 
 void ofBitchSkeletonApp::drawText()
 {
+    int maxNumCharacters = 50;
+
     ofSetColor(225);
     if ( bitchConversation.isSoundPlayingLeft() )
     {
         ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 300 );
-        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
+//        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), maxNumCharacters ), 100, 250);
 //        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitchConversation.isSoundPlayingRight() )
     {
         ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
-        verdana14.drawString( bitchConversation.getAnswerRight(), 600, 270);
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), maxNumCharacters ), 600, 270);
 //        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }
@@ -369,4 +364,26 @@ void ofBitchSkeletonApp::setupXML( string settingsPath )
 
     imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
     ofLogNotice() << "Path to write file" << imageNamePath;
+}
+
+string ofBitchSkeletonApp::tokenizer( string input, int maxChar )
+{
+    if (!input.size()) {
+        return "";
+    }
+    std::stringstream sStream;
+    sStream << input[0];
+    for (int i = 1; i < input.size(); i++)
+    {
+//        if ( ( i > maxChar ) && ( input[i] == ' ' ) )
+        if ( i % maxChar == 0 )
+        {
+            sStream << "\n" << input[i];
+        }
+        else
+        {
+            sStream << input[i];
+        }
+    }
+    return ofToString( sStream.str() );
 }

@@ -28,6 +28,8 @@ public:
     void drawVideosWarped();
     void setupVideo( int &camWidth, int &camHeight );
 
+    string tokenizer( string input, int maxChar );
+
     // --- XML
     ofxXmlSettings  xml;
     string defaultXMLError = "NIX";
