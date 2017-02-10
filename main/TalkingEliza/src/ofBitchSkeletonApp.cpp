@@ -200,14 +200,20 @@ void ofBitchSkeletonApp::keyPressed(int key){
         {
             ofLogError() << "No Text input";
         }
-        
-        if ( bitches.getTalkerCurrentID() == 0 )
+
+        // TODO Wait a bit
+        // - save string
+        // - set flag to ask for new tring
+        // --- send sound notification
+        int duration = bitches.getAnswerCurrent().length() / 10;
+        ofLogVerbose() << "Sound Duration: " << duration;
+        if ( bitches.getNameSpeaker() == "Left" )
         {
-            bitches.sendSoundStartLeft( 1 );
+            bitches.sendSoundStartLeft( duration );
         }
         else
         {
-            bitches.sendSoundStartRight( 1 );
+            bitches.sendSoundStartRight( duration );
         }
 
         reset();
