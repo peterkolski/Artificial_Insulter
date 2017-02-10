@@ -200,14 +200,14 @@ void ofBitchSkeletonApp::keyPressed(int key){
         {
             ofLogError() << "No Text input";
         }
-
+        
         if ( bitches.getTalkerCurrentID() == 0 )
         {
-            bitches.sendSoundStartLeft( 5 );
+            bitches.sendSoundStartLeft( 1 );
         }
         else
         {
-            bitches.sendSoundStartRight( 2 );
+            bitches.sendSoundStartRight( 1 );
         }
 
         reset();
@@ -301,8 +301,8 @@ void ofBitchSkeletonApp::drawVerboseText()
     ofDrawBitmapStringHighlight( bitches.getName( 0 ) , ofGetWidth() / 4 , 100);
     ofDrawBitmapStringHighlight( bitches.getName( 1 ) , ofGetWidth() * 3 / 4, 100);
 
-    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
-    ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+    ofDrawBitmapStringHighlight( bitches.getAnswerLeft(), 100, 200 );
+    ofDrawBitmapStringHighlight( bitches.getAnswerRight(), 600, 200 );
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
@@ -312,13 +312,13 @@ void ofBitchSkeletonApp::drawText()
 {
     if ( bitches.isSoundPlayingLeft() )
     {
-        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
+        ofDrawBitmapStringHighlight( bitches.getAnswerLeft(), 100, 300 );
 //        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitches.isSoundPlayingRight() )
     {
-        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+        ofDrawBitmapStringHighlight( bitches.getAnswerRight(), 600, 350 );
 //        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }

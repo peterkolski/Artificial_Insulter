@@ -33,6 +33,8 @@ public:
     const string &getAnswerBefore();
     const string &getAnswerCurrent();
     const string &getAnswerFromID( int id );
+    string getAnswerLeft();
+    string getAnswerRight();
 
 private:
     void            setTalkerActive( int id );

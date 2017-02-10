@@ -131,7 +131,6 @@ const string &ConversationOSC::getAnswerFromID( int id )
     {
         ofLogError( ) << logInfo_ << "Wrong ID";
         return "";
-
     }
 }
 
@@ -213,12 +212,12 @@ void ConversationOSC::recieveSoundFinished()
             if ( ( _message.getAddress() == adressSoundLeft_ ) && ( _message.getArgAsString( 0 ) == textSoundDone_ ) )
             {
                 isSoundPlayingLeft_ = false;
-                ofLogVerbose() << logInfo_ << "message recieved from " << adressSoundLeft_ << " => " << textSoundDone_;
+                ofLogVerbose() << logInfo_ << "Sound message from " << adressSoundLeft_ << " Done? " << textSoundDone_;
             }
             if ( ( _message.getAddress() == adressSoundRight_ ) && ( _message.getArgAsString( 0 ) == textSoundDone_ ) )
             {
                 isSoundPlayingRight_ = false;
-                ofLogVerbose() << logInfo_ << "message recieved from " << adressSoundRight_ << " => " << textSoundDone_;
+                ofLogVerbose() << logInfo_ << "Sound message from " << adressSoundRight_ << " Done? " << textSoundDone_;
             }
         }
         else
@@ -247,5 +246,27 @@ void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 void ConversationOSC::setIsMutantChatbot( bool isMutantChatbot )
 {
     ConversationOSC::isMutantChatbot_ = isMutantChatbot;
+}
+
+string ConversationOSC::getAnswerLeft()
+{
+    if ( isMutantChatbot_ )
+    {
+        return talkerVec_[ 2 ]->getAnswer();
+    }
+    else {
+        return talkerVec_[ 0 ]->getAnswer();
+    }
+}
+
+string ConversationOSC::getAnswerRight()
+{
+    if ( isMutantChatbot_ )
+    {
+        return talkerVec_[ 3 ]->getAnswer();
+    }
+    else {
+        return talkerVec_[ 1 ]->getAnswer();
+    }
 }
 
