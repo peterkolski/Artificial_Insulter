@@ -12,7 +12,7 @@ class ConversationOSC
 {
 public:
     ConversationOSC();
-    void    setupPicturePath( string host, int portSender, string adressPath );
+    void setupPicturePath( string host, int portSender, int portReceiver, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
     void setIsMutantChatbot( bool isMutantChatbot );
@@ -39,11 +39,18 @@ public:
 private:
     void            setTalkerActive( int id );
     string          logInfo_       = "ConversationOSC | ";
+
+    // --- PICTURE
     ofxOscSender    senderPictureAnalysis_;
+    ofxOscReceiver  receiverPictureAnalysis_;
     string          adressPicSent_;
+    string          adressPicRecieved_ = "/result";
+    string          pictureRecievedText1_ = "empty";
+    string          pictureRecievedText2_ = "empty";
 
     // --- SOUND
     void            recieveSoundFinished();
+    void            recievePictureFinished();
     bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
     ofxOscSender    senderSound_;

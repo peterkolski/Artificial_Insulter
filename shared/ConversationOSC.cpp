@@ -155,9 +155,10 @@ void ConversationOSC::recieveMessages()
     recieveSoundFinished();
 }
 
-void ConversationOSC::setupPicturePath( string host, int portSender, string adressPath )
+void ConversationOSC::setupPicturePath( string host, int portSender, int portReceiver, string adressPath )
 {
     senderPictureAnalysis_.setup( host, portSender );
+    receiverPictureAnalysis_.setup( portReceiver );
     adressPicSent_ = adressPath;
 }
 
@@ -218,6 +219,31 @@ void ConversationOSC::recieveSoundFinished()
             {
                 isSoundPlayingRight_ = false;
                 ofLogVerbose() << logInfo_ << "Sound message from " << adressSoundRight_ << " Done? " << textSoundDone_;
+            }
+        }
+        else
+        {
+            ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
+        }
+    }
+}
+
+void ConversationOSC::recievePictureFinished()
+{
+    while ( receiverPictureAnalysis_.hasWaitingMessages() )
+    {
+        ofxOscMessage _message;
+        receiverPictureAnalysis_.getNextMessage( _message );
+
+        if ( _message.getNumArgs() > 0 )
+        {
+            if ( ( _message.getAddress() == adressPicRecieved_ ) )
+            {
+                pictureRecievedText1_ = _message.getArgAsString( 0 );
+                pictureRecievedText2_ = _message.getArgAsString( 1 );
+                ofLogVerbose() << logInfo_ << "Picture message from " << adressPicRecieved_;
+                ofLogVerbose() << logInfo_ << "Picture Text1: " << pictureRecievedText1_;
+                ofLogVerbose() << logInfo_ << "Picture Text2: " << pictureRecievedText2_;
             }
         }
         else

@@ -276,6 +276,7 @@ void ofBitchSkeletonApp::setupOSC()
     int    portToPython1     = xml.getValue( "OSC:PORT:SEND1", 9000 );
     int    portToPython2     = xml.getValue( "OSC:PORT:SEND2", 9000 );
     int    portToPythonPic   = xml.getValue( "OSC:PORT:SENDPIC", 9000 );
+    int    portFromPythonPic = xml.getValue( "OSC:PORT:RECIEVEPIC", 9000 );
     int    portFromPython1   = xml.getValue( "OSC:PORT:RECIEVE1", 9000 );
     int    portFromPython2   = xml.getValue( "OSC:PORT:RECIEVE2", 9000 );
 
@@ -283,7 +284,7 @@ void ofBitchSkeletonApp::setupOSC()
     bitchConversation.setup( 1, host, portToPython2, portFromPython2 );
     bitchConversation.setup( 2, host, 20002, 20001 );
     bitchConversation.setup( 3, host, 20004, 20003 );
-    bitchConversation.setupPicturePath( "192.168.1.33", portToPythonPic, "/recognize" );
+    bitchConversation.setupPicturePath( "192.168.1.33", portToPythonPic, portFromPythonPic, "/recognize" );
 }
 
 //--------------------------------------------------------------
