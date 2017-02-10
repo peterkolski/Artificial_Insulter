@@ -35,6 +35,14 @@ void ofBitchSkeletonApp::setup(){
     verdana14.load("verdana.ttf", 14, true, true);
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
+
+    gui.setup();
+    gui.add( xPosTextLeft.setup( "Text Left X", 100, 0, 2000 ) );
+    gui.add( yPosTextLeft.setup( "Text Left Y", 100, 0, 2000 ) );
+    gui.add( xPosText2.setup( "Text Right X", 100, 0, 2000 ) );
+    gui.add( yPosText2.setup( "Text Right Y", 100, 0, 2000 ) );
+    gui.add( xPosCam.setup( "Cam X", 100, 0, 2000 ) );
+    gui.add( yPosCam.setup( "Cam Y", 100, 0, 2000 ) );
 }
 
 //--------------------------------------------------------------
@@ -66,7 +74,7 @@ void ofBitchSkeletonApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofBitchSkeletonApp::draw(){
+void ofBitchSkeletonApp::draw() {
     ofBackground( 0 );
 
     drawActiveSpeakerRect();
@@ -77,6 +85,7 @@ void ofBitchSkeletonApp::draw(){
     drawText();
 
     if ( isVerbose ) { drawVerboseText(); }
+    if ( drawGui ) { gui.draw(); }
 }
 
 void ofBitchSkeletonApp::drawActiveSpeakerRect()
@@ -191,6 +200,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
         warperLeft.toggleShow();
         warperRight.toggleShow();
         isVerbose = warperLeft.isShowing();
+        drawGui = !drawGui;
     }
 
 

@@ -4,6 +4,7 @@
 #include "ofxXmlSettings.h"
 #include "ofxQuadWarp.h"
 #include "ofxSyphon.h"
+#include "ofxGui.h"
 
 #include "ConversationOSC.h"
 #include "bitcherOSC.h"
@@ -59,6 +60,15 @@ public:
     void setupXML( string settingsPath );
     ofxSyphonClient syphonLeft, syphonRight;
     ofTrueTypeFont	verdana14;
+
+    bool         drawGui = true;
+    ofxIntSlider xPosTextLeft;
+    ofxIntSlider xPosText2;
+    ofxIntSlider yPosTextLeft;
+    ofxIntSlider yPosText2;
+    ofxIntSlider xPosCam;
+    ofxIntSlider yPosCam;
+    ofxPanel     gui;
 
     void sendSoundNotification( float durationDivision );
 };
