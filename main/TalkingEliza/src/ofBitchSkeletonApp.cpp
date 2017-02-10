@@ -207,23 +207,28 @@ void ofBitchSkeletonApp::keyPressed(int key){
 
     if ( key == OF_KEY_RETURN )
     {
-        textFromInput = textInput;
-        textInput = "";
+        updateCoversation();
 
-
-        bitchConversation.next();
-        textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
-        bitchConversation.doConversation();
-
-        if ( textFromInput == "" )
-        {
-            ofLogError() << "No Text input";
-        }
     }
-//    else
-//    {
-//        textInput += key;
-//    }
+}
+
+void ofBitchSkeletonApp::updateCoversation()
+{
+    copyInputText();
+
+    bitchConversation.next();
+    textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
+    bitchConversation.doConversation();
+}
+
+void ofBitchSkeletonApp::copyInputText()
+{
+    textFromInput = textInput;
+    textInput = "";
+    if ( textFromInput == "" )
+    {
+        ofLogError() << "No Text input";
+    }
 }
 
 void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )

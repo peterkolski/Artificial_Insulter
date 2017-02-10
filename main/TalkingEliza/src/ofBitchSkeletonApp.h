@@ -71,4 +71,6 @@ public:
     ofxPanel     gui;
 
     void sendSoundNotification( float durationDivision );
+    void updateCoversation();
+    void copyInputText();
 };
