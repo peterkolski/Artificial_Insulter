@@ -25,7 +25,7 @@ void ofBitchSkeletonApp::setup(){
     syphonRight.set( serverName2, appName );
 
     setupVideo( camWidth, camHeight );
-    setupWarping( camWidth / 2, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
+    setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
     bitches.doConversation( "I hate you all", 0 );
 }
@@ -62,6 +62,8 @@ void ofBitchSkeletonApp::draw(){
     drawVideosWarped();
 
     vidGrabber.draw( ofGetWidth() / 2 - 200 / 2 , 30, 200, 80 );
+
+    drawText();
 
     if ( isVerbose ) { drawVerboseText(); }
 }
@@ -290,6 +292,21 @@ void ofBitchSkeletonApp::drawVerboseText()
 
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
+}
+
+void ofBitchSkeletonApp::drawText()
+{
+    if ( bitches.isSoundPlayingLeft() )
+    {
+//        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 0 ), 100, 200 );
+        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
+    }
+
+    if ( bitches.isSoundPlayingRight() )
+    {
+//        ofDrawBitmapStringHighlight( bitches.getAnswerFromID( 1 ), 600, 200 );
+        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
+    }
 }
 
 //--------------------------------------------------------------

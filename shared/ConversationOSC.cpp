@@ -201,3 +201,13 @@ void ConversationOSC::recieveSoundFinished()
         }
     }
 }
+
+bool ConversationOSC::isSoundPlayingLeft()
+{
+    return isSoundPlayingLeft_;
+}
+
+bool ConversationOSC::isSoundPlayingRight()
+{
+    return isSoundPlayingRight_;
+}

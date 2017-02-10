@@ -19,6 +19,7 @@ public:
 
     void setVoice();
     void drawVerboseText();
+    void drawText();
     void reset();
     void setupOSC();
     void saveImage( string &fileNamePath );

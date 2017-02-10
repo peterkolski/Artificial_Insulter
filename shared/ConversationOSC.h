@@ -22,6 +22,8 @@ public:
     void    sendSoundStartLeft( int length );
     void    sendSoundStartRight( int length );
 
+    bool    isSoundPlayingLeft();
+    bool    isSoundPlayingRight();
     int     getTalkerCurrentID() const;
     string  getNameSpeaker();
     string  getNameListener();
@@ -38,7 +40,7 @@ private:
 
     // --- SOUND
     void recieveSoundFinished();
-    bool            isSoundPlayingLeft_     = false;
+    bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
     ofxOscSender    senderSound_;
     ofxOscReceiver  recieverSound_;
