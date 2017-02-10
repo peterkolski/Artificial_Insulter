@@ -31,6 +31,7 @@ class ChatterSystem:
         messageOSC = OSC.OSCMessage( )
         messageOSC.setAddress( self.oscSenderAddress_Txt )
         messageOSC.append( text )
+        messageOSC.append( 0 )
         self.oscSender.send( messageOSC )
 
     def replyOscHandler( self, addr, tags, stuff, source ):
