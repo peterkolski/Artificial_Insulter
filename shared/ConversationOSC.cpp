@@ -173,7 +173,7 @@ void ConversationOSC::sendPicturePath( string &filePathPicSent )
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
 }
 
-void ConversationOSC::sendSoundStartLeft( int length )
+void ConversationOSC::sendSoundStartLeft( float length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound LEFT | port " << portSoundSender_ << " | adr " << adressSoundLeft_;
     ofLogVerbose() << logInfo_ << "length: " << length;
@@ -182,11 +182,11 @@ void ConversationOSC::sendSoundStartLeft( int length )
     ofxOscMessage m;
     m.setAddress( adressSoundLeft_ );
     m.addStringArg( "start" );
-    m.addIntArg( length );
+    m.addFloatArg( length );
     senderSound_.sendMessage( m, false );
 }
 
-void ConversationOSC::sendSoundStartRight( int length )
+void ConversationOSC::sendSoundStartRight( float length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound RIGHT | port " << portSoundSender_ << " | adr " << adressSoundRight_;
     ofLogVerbose() << logInfo_ << "length: " << length;
@@ -195,7 +195,7 @@ void ConversationOSC::sendSoundStartRight( int length )
     ofxOscMessage m;
     m.setAddress( adressSoundRight_ );
     m.addStringArg( "start" );
-    m.addIntArg( length );
+    m.addFloatArg( length );
     senderSound_.sendMessage( m, false );
 }
 

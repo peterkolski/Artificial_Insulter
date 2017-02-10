@@ -20,8 +20,8 @@ public:
     void    doConversation( string txt, int id );
     void    recieveMessages();
     void    sendPicturePath( string &filePathPicSent );
-    void    sendSoundStartLeft( int length );
-    void    sendSoundStartRight( int length );
+    void    sendSoundStartLeft( float length );
+    void    sendSoundStartRight( float length );
     void    sendStartMutant( string txt1, string txt2 );
 
     bool    isSoundPlayingLeft();

@@ -31,6 +31,10 @@ void ofBitchSkeletonApp::setup(){
     bitches.doConversation( "I hate you all 1 Right", 1 );
     bitches.doConversation( "I hate you all 2 Left", 2 );
     bitches.doConversation( "I hate you all 3 Right", 3 );
+
+    verdana14.load("verdana.ttf", 14, true, true);
+    verdana14.setLineHeight(18.0f);
+    verdana14.setLetterSpacing(1.037);
 }
 
 //--------------------------------------------------------------
@@ -211,7 +215,7 @@ void ofBitchSkeletonApp::keyPressed(int key){
 //    }
 }
 
-void ofBitchSkeletonApp::sendSoundNotification( int durationDivision )
+void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
 {
     if ( textCurrent != bitches.getAnswerCurrent() ) // TODO das wird immer untscheidlich sein, da die speaker wechseln
     {
@@ -222,7 +226,7 @@ void ofBitchSkeletonApp::sendSoundNotification( int durationDivision )
         setVoice();
         shouldSpeak = true;
         
-        int duration = textCurrent.length() / durationDivision;
+        float duration = (float)textCurrent.length() / durationDivision;
         if ( bitches.getNameSpeaker() == "Left" )
         {
             bitches.sendSoundStartLeft( duration );
@@ -231,8 +235,6 @@ void ofBitchSkeletonApp::sendSoundNotification( int durationDivision )
         {
             bitches.sendSoundStartRight( duration );
         }
-
-        ofLogVerbose() << "Sound Duration: " << duration;
     }
 }
 
@@ -328,15 +330,18 @@ void ofBitchSkeletonApp::drawVerboseText()
 
 void ofBitchSkeletonApp::drawText()
 {
+    ofSetColor(225);
     if ( bitches.isSoundPlayingLeft() )
     {
         ofDrawBitmapStringHighlight( bitches.getAnswerLeft(), 100, 300 );
+        verdana14.drawString( bitches.getAnswerLeft() , 100, 250);
 //        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitches.isSoundPlayingRight() )
     {
         ofDrawBitmapStringHighlight( bitches.getAnswerRight(), 600, 350 );
+        verdana14.drawString( bitches.getAnswerRight(), 600, 270);
 //        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
 }

@@ -56,6 +56,7 @@ public:
     void drawActiveSpeakerRect();
     void setupXML( string settingsPath );
     ofxSyphonClient syphonLeft, syphonRight;
+    ofTrueTypeFont	verdana14;
 
-    void sendSoundNotification( int durationDivision );
+    void sendSoundNotification( float durationDivision );
 };
