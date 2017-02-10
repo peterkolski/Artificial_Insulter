@@ -26,24 +26,24 @@ void ofBitchSkeletonApp::setup(){
 
     setupVideo( camWidth, camHeight );
 //    setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
-    setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
+    setupWarping( ofGetWidth() / 2 - 20, ofGetHeight() - 100, 10, 10, ofGetWidth() / 2, 10 );
 
     bitchConversation.doConversation( "I hate you all 0 Left", 0 );
     bitchConversation.doConversation( "I hate you all 1 Right", 1 );
     bitchConversation.doConversation( "I hate you all 2 Left", 2 );
     bitchConversation.doConversation( "I hate you all 3 Right", 3 );
 
-    verdana14.load("verdana.ttf", 14, true, true);
+    verdana14.load("verdana.ttf", 20, true, true);
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
     gui.setup();
-    gui.add( xPosTextLeft.setup( "Text Left X", 220, 0, 2000 ) );
-    gui.add( yPosTextLeft.setup( "Text Left Y", 600, 0, 2000 ) );
-    gui.add( xPosTextRight.setup( "Text Right X", 1000, 0, 2000 ) );
-    gui.add( yPosTextRight.setup( "Text Right Y", 600, 0, 2000 ) );
-    gui.add( xPosCam.setup( "Cam X", 1200, 0, 2000 ) );
-    gui.add( yPosCam.setup( "Cam Y", 700, 0, 2000 ) );
+    gui.add( xPosTextLeft.setup( "Text Left X", 240, 0, 2000 ) );
+    gui.add( yPosTextLeft.setup( "Text Left Y", 900, 0, 2000 ) );
+    gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
+    gui.add( yPosTextRight.setup( "Text Right Y", 900, 0, 2000 ) );
+    gui.add( xPosCam.setup( "Cam X", 1500, 0, 2000 ) );
+    gui.add( yPosCam.setup( "Cam Y", 1000, 0, 2000 ) );
 }
 
 //--------------------------------------------------------------
