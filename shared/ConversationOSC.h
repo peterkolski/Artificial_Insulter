@@ -51,7 +51,7 @@ private:
     string          adressSoundRight_ = "/right";
     string          textSoundDone_ = "done";
 
-    int     talkerMaxAmount_    = 2;
+    int     talkerMaxAmount_    = 4;
     int     idTalker_           = 0;
     int     idOther_         = 1;
     string  answerCurrent_      = "";

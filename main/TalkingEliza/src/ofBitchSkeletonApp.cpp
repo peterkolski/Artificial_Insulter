@@ -27,7 +27,10 @@ void ofBitchSkeletonApp::setup(){
     setupVideo( camWidth, camHeight );
     setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
 
-    bitches.doConversation( "I hate you all", 0 );
+    bitches.doConversation( "I hate you all 0 Left", 0 );
+    bitches.doConversation( "I hate you all 1 Right", 1 );
+    bitches.doConversation( "I hate you all 2 Left", 2 );
+    bitches.doConversation( "I hate you all 3 Right", 3 );
 }
 
 //--------------------------------------------------------------
@@ -252,6 +255,8 @@ void ofBitchSkeletonApp::setupOSC()
 
     bitches.setup( 0, host, portToPython1, portFromPython1 );
     bitches.setup( 1, host, portToPython2, portFromPython2 );
+    bitches.setup( 2, host, 20002, 20001 );
+    bitches.setup( 3, host, 20004, 20003 );
     bitches.setupPicturePath( host, portToPythonPic, "/recognize" );
 }
 
