@@ -20,6 +20,7 @@ public:
     const string    &getAnswer() { return textRecieved_; }
     const string    &getTextAsked() { return textSent_; }
     void            recieveText();
+    bool            isMutantChatbot() { return isMutantChatbot_; }
 
 private:
     void            sendText( string &text );
@@ -31,11 +32,8 @@ private:
     int             portReciever_;
     std::string     hostSendSendingTo_;
     std::string     adressRecieverText_;
-    std::string     adressRecieverSending_;
-    std::string     adressRecieverArrived_;
     std::string     adressSenderText_;
-    std::string     adressSenderSending_;
-    std::string     adressSenderArrived_;
+    bool            isMutantChatbot_ = false;
 
     string  textRecieved_   = "";
     string  textSent_     = "";

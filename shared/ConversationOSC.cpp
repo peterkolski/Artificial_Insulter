@@ -72,14 +72,29 @@ const string &ConversationOSC::getAnswerBefore()
 
 void ConversationOSC::next()
 {
-    if ( idTalker_ == 0 )
+    if ( !isMutantChatbot_ )
     {
-        idTalker_   = 1;
-        idOther_ = 0;
+        if ( idTalker_ == 0 )
+        {
+            idTalker_   = 1;
+            idOther_ = 0;
+        }
+        else {
+            idTalker_   = 0;
+            idOther_ = 1;
+        }
     }
-    else {
-        idTalker_   = 0;
-        idOther_ = 1;
+    else
+    {
+        if ( idTalker_ == 2 )
+        {
+            idTalker_   = 3;
+            idOther_ = 2;
+        }
+        else {
+            idTalker_   = 2;
+            idOther_ = 3;
+        }
     }
 }
 

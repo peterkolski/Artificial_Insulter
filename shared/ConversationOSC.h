@@ -56,6 +56,7 @@ private:
     int     idOther_         = 1;
     string  answerCurrent_      = "";
     string  answerBefore_       = "";
+    bool    isMutantChatbot_    = false;
 
     vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
     vector< string >            talkerNames_;

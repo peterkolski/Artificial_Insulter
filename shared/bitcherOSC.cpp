@@ -12,13 +12,9 @@ void bitcherOSC::setup( string &hostSendingTo, int portSender, int portReciever 
 
     string adressRecieverTMP = "/answer";
     adressRecieverText_     = adressRecieverTMP + "_text";
-    adressRecieverSending_  = adressRecieverTMP + "_sending";
-    adressRecieverArrived_  = adressRecieverTMP + "_arrived";
 
     string adressSenderTMP  = "/original";
     adressSenderText_       = adressSenderTMP + "_text";
-    adressSenderSending_    = adressSenderTMP + "_sending";
-    adressSenderArrived_    = adressSenderTMP + "_arrived";
 
     ofLogVerbose() << logInfo_ << "Host: " << hostSendSendingTo_;
     ofLogVerbose() << logInfo_ << "Port Sending to: " << portSender_;
