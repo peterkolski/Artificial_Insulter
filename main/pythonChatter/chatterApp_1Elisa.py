@@ -7,7 +7,9 @@ from Chatter import ChatterSystem
 # =================================
 
 databaseNameShittalk = '../../data/ShitTalkTable.csv'
-databaseName         = "./databasePeter.json"
+# databaseNameShittalk = '../../data/ShitTalkTable_Filtered.csv'
+# databaseName         = "./databasePeter.json"
+databaseName         = "./databaseTest.json"
 host = '127.0.0.1'
 portSender = 22222
 portReciever = 33333
