@@ -19,6 +19,7 @@ portReciever = 33333
 
 dataTableShitTalk = pd.read_csv( databaseNameShittalk )
 dataTableShitTalk = dataTableShitTalk[ dataTableShitTalk.Rating != 'shit' ]
+dataTableShitTalk.drop(dataTableShitTalk.columns[[0]], axis=1, inplace=True) # TODO HACK because an extra column got saved
 
 chatterbotInstance = ChatBot('Kora',
                             storage_adapter="chatterbot.storage.JsonFileStorageAdapter",
