@@ -12,10 +12,10 @@ class ConversationOSC
 {
 public:
     ConversationOSC();
-    void setupPicturePath( string host, int portSender, int portReceiver, string adressPath );
+    void    setupPicturePath( string host, int portSender, int portReceiver, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
-    void setIsMutantChatbot( bool isMutantChatbot );
+    void    setIsMutantChatbot( bool isMutantChatbot );
     void    doConversation();
     void    doConversation( string txt, int id );
     void    recieveMessages();
@@ -26,13 +26,9 @@ public:
 
     bool    isSoundPlayingLeft();
     bool    isSoundPlayingRight();
-    int     getTalkerCurrentID() const;
     string  getNameSpeaker();
-    string  getNameListener();
     string  getName( int id );
-    const string &getAnswerBefore();
     const string &getAnswerCurrent();
-    const string &getAnswerFromID( int id );
     string getAnswerLeft();
     string getAnswerRight();
 
@@ -64,7 +60,6 @@ private:
 
     int     talkerMaxAmount_    = 4;
     int     idTalker_           = 0;
-    int     idOther_         = 1;
     string  answerCurrent_      = "";
     string  answerBefore_       = "";
     bool    isMutantChatbot_    = false;

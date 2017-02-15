@@ -48,30 +48,15 @@ string ConversationOSC::getName( int id )
     }
 }
 
-int ConversationOSC::getTalkerCurrentID() const
-{
-    return idTalker_;
-}
-
 string ConversationOSC::getNameSpeaker()
 {
     return getName( idTalker_ );
-}
-
-string ConversationOSC::getNameListener()
-{
-    return getName( idOther_ );
 }
 
 
 const string &ConversationOSC::getAnswerCurrent()
 {
     return answerCurrent_;
-}
-
-const string &ConversationOSC::getAnswerBefore()
-{
-    return answerBefore_;
 }
 
 void ConversationOSC::next()
@@ -87,11 +72,9 @@ void ConversationOSC::next()
         if ( idTalker_ == 2 )
         {
             idTalker_   = 3;
-            idOther_ = 2;
         }
         else {
             idTalker_   = 2;
-            idOther_ = 3;
         }
     }
     else
@@ -99,11 +82,9 @@ void ConversationOSC::next()
         if ( idTalker_ == 0 )
         {
             idTalker_   = 1;
-            idOther_ = 0;
         }
         else {
             idTalker_   = 0;
-            idOther_ = 1;
         }
     }
     ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << " Mutant: " << isMutantChatbot_;
@@ -121,29 +102,11 @@ void ConversationOSC::doConversation( string txt, int id )
     answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
-const string &ConversationOSC::getAnswerFromID( int id )
-{
-    if ( id < talkerMaxAmount_ )
-    {
-        return talkerVec_[ id ]->getAnswer();
-    }
-    else
-    {
-        ofLogError( ) << logInfo_ << "Wrong ID";
-        return "";
-    }
-}
-
 void ConversationOSC::setTalkerActive( int id )
 {
     idTalker_ = id;
     if ( idTalker_ == 0 )
     {
-        idOther_ = 1;
-    }
-    else
-    {
-        idOther_ = 0;
     }
 }
 

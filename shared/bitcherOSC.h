@@ -19,7 +19,6 @@ public:
     void            startMutant( string txt1, string txt2 );
 
     const string    &getAnswer() { return textRecieved_; }
-    const string    &getTextAsked() { return textSent_; }
     void            recieveText();
     bool            switchChatbot() { return switchChatbot_; }
 
