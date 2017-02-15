@@ -15,7 +15,7 @@ public:
     void    setupPicturePath( string host, int portSender, int portReceiver, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
     void    next();
-    void    setIsMutantChatbot( bool isMutantChatbot );
+    void    setIsMutantChatbot( bool isMutantChatbot ) { ConversationOSC::isMutantChatbot_ = isMutantChatbot; }
     void    doConversation();
     void    doConversation( string txt, int id );
     void    recieveMessages();
@@ -24,11 +24,11 @@ public:
     void    sendSoundStartRight( float length );
     void    sendStartMutant( string txt1, string txt2 );
 
-    bool    isSoundPlayingLeft();
-    bool    isSoundPlayingRight();
-    string  getNameSpeaker();
+    bool    isSoundPlayingLeft()    { return isSoundPlayingLeft_; }
+    bool    isSoundPlayingRight()   { return isSoundPlayingRight_; }
+    string  getNameSpeaker()        { return getName( idTalker_ ); }
     string  getName( int id );
-    const string &getAnswerCurrent();
+    const string &getAnswerCurrent() { return answerCurrent_; }
     string getAnswerLeft();
     string getAnswerRight();
 

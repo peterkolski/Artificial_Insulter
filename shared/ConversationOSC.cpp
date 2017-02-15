@@ -25,6 +25,8 @@ ConversationOSC::ConversationOSC() {
     recieverSound_.setup( portSoundReciever_ );
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::setup( int id, string host, int portSender, int portReciever )
 {
     if ( id < talkerMaxAmount_)
@@ -35,6 +37,8 @@ void ConversationOSC::setup( int id, string host, int portSender, int portReciev
         ofLogError() << logInfo_ << "Setup: ID invalid";
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getName( int id )
 {
@@ -48,16 +52,7 @@ string ConversationOSC::getName( int id )
     }
 }
 
-string ConversationOSC::getNameSpeaker()
-{
-    return getName( idTalker_ );
-}
-
-
-const string &ConversationOSC::getAnswerCurrent()
-{
-    return answerCurrent_;
-}
+//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::next()
 {
@@ -90,11 +85,15 @@ void ConversationOSC::next()
     ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << " Mutant: " << isMutantChatbot_;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::doConversation()
 {
     answerBefore_ = answerCurrent_;
     doConversation( answerBefore_, idTalker_ );
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::doConversation( string txt, int id )
 {
@@ -102,13 +101,19 @@ void ConversationOSC::doConversation( string txt, int id )
     answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::setTalkerActive( int id )
 {
     idTalker_ = id;
     if ( idTalker_ == 0 )
     {
+        //TODO why empty?
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 void ConversationOSC::recieveMessages()
 {
@@ -119,6 +124,8 @@ void ConversationOSC::recieveMessages()
     recievePictureFinished();
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::setupPicturePath( string host, int portSender, int portReceiver, string adressPath )
 {
     ofLogVerbose() << "Pic Receive port " << portReceiver << " | adress: " << adressPicRecieved_;
@@ -126,6 +133,8 @@ void ConversationOSC::setupPicturePath( string host, int portSender, int portRec
     receiverPictureAnalysis_.setup( portReceiver );
     adressPicSent_ = adressPath;
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::sendPicturePath( string &filePathPicSent )
 {
@@ -138,6 +147,8 @@ void ConversationOSC::sendPicturePath( string &filePathPicSent )
     ofLogVerbose() << logInfo_ << "sent to adress: " << adressPicSent_;
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::sendSoundStartLeft( float length )
 {
@@ -152,6 +163,8 @@ void ConversationOSC::sendSoundStartLeft( float length )
     senderSound_.sendMessage( m, false );
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::sendSoundStartRight( float length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound RIGHT | port " << portSoundSender_ << " | adr " << adressSoundRight_;
@@ -164,6 +177,9 @@ void ConversationOSC::sendSoundStartRight( float length )
     m.addFloatArg( length );
     senderSound_.sendMessage( m, false );
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 void ConversationOSC::recieveSoundFinished()
 {
@@ -193,6 +209,8 @@ void ConversationOSC::recieveSoundFinished()
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void ConversationOSC::recievePictureFinished()
 {
     while ( receiverPictureAnalysis_.hasWaitingMessages() )
@@ -221,15 +239,7 @@ void ConversationOSC::recievePictureFinished()
     }
 }
 
-bool ConversationOSC::isSoundPlayingLeft()
-{
-    return isSoundPlayingLeft_;
-}
-
-bool ConversationOSC::isSoundPlayingRight()
-{
-    return isSoundPlayingRight_;
-}
+//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 {
@@ -237,10 +247,7 @@ void ConversationOSC::sendStartMutant( string txt1, string txt2 )
     talkerVec_.at( idTalker_ )->startMutant( txt1, txt2 );
 }
 
-void ConversationOSC::setIsMutantChatbot( bool isMutantChatbot )
-{
-    ConversationOSC::isMutantChatbot_ = isMutantChatbot;
-}
+//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getAnswerLeft()
 {
@@ -252,6 +259,8 @@ string ConversationOSC::getAnswerLeft()
         return talkerVec_[ 0 ]->getAnswer();
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getAnswerRight()
 {
