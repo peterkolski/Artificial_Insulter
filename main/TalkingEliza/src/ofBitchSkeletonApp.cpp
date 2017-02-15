@@ -349,6 +349,9 @@ void ofBitchSkeletonApp::drawVerboseText()
     ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 200 );
     ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 200 );
 
+    ofDrawBitmapStringHighlight( bitchConversation.getPictureRecievedText1(), 600, 250, ofColor::red );
+    ofDrawBitmapStringHighlight( bitchConversation.getPictureRecievedText2(), 100, 250, ofColor::red );
+
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }
@@ -360,18 +363,24 @@ void ofBitchSkeletonApp::drawText()
     ofSetColor(225);
     if ( bitchConversation.isSoundPlayingLeft() )
     {
-//        ofDrawBitmapStringHighlight( bitchConversation.getAnswerLeft(), 100, 300 );
 //        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
         verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), maxNumCharacters ), xPosTextLeft, yPosTextLeft);
-//        ofDrawBitmapStringHighlight( "LEFT", 100, 200 );
     }
 
     if ( bitchConversation.isSoundPlayingRight() )
     {
 //        ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
         verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), maxNumCharacters ), xPosTextRight, yPosTextRight);
-//        ofDrawBitmapStringHighlight( "RIGHT", 600, 200 );
     }
+
+    // --- Drawing the Picture texts
+    ofPushStyle();
+    {
+        ofSetColor( ofColor::red );
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText1(), maxNumCharacters ), xPosTextLeft, yPosTextLeft - 50);
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText2(), maxNumCharacters ), xPosTextRight, yPosTextRight - 50);
+    }
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------

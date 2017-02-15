@@ -107,6 +107,8 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
     return msg_string;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 void bitcherOSC::startMutant( string txt1, string txt2 )
 {
     ofxOscMessage m;

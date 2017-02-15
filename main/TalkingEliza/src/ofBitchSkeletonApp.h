@@ -30,6 +30,8 @@ public:
     void setupVideo( int &camWidth, int &camHeight );
 
     string tokenizer( string input, int maxChar );
+    void updateCoversation();
+    void copyInputText();
 
     // --- XML
     ofxXmlSettings  xml;
@@ -48,16 +50,17 @@ public:
 
     // --- SOUND
     void speak();
+    void sendSoundNotification( float durationDivision );
     string voice;
     bool    shouldSpeak = false;
 
     // --- VISUALIZER
+    void            setupXML( string settingsPath );
+    void            drawActiveSpeakerRect();
     ofFbo           fboLeft, fboRight;
     ofxQuadWarp     warperLeft, warperRight;
     ofVideoPlayer   vidPlayerLeft, vidPlayerRight;
     bool            isVerbose = true;
-    void drawActiveSpeakerRect();
-    void setupXML( string settingsPath );
     ofxSyphonClient syphonLeft, syphonRight;
     ofTrueTypeFont	verdana14;
 
@@ -70,9 +73,7 @@ public:
     ofxIntSlider yPosCam;
     ofxPanel     gui;
 
-    void sendSoundNotification( float durationDivision );
-    void updateCoversation();
-    void copyInputText();
+
 
     int secondsElapsedCurrent = 0;
     int secondsMarker = 0;

@@ -28,6 +28,9 @@ public:
     bool    isSoundPlayingRight()   { return isSoundPlayingRight_; }
     string  getNameSpeaker()        { return getName( idTalker_ ); }
     string  getName( int id );
+    const string &getPictureRecievedText1() { return pictureRecievedText1_; }
+    const string &getPictureRecievedText2() { return pictureRecievedText2_; }
+
     const string &getAnswerCurrent() { return answerCurrent_; }
     string getAnswerLeft();
     string getAnswerRight();
