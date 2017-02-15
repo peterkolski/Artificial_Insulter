@@ -79,4 +79,7 @@ public:
     int secondsMarker = 0;
     int roundCounter = 0;
     bool isTalking = false;
+    string fileWarperSettingsLeft = "settingsMappingLeft.xml";
+    string fileWarperSettingsRight = "settingsMappingLeft.xml";
+    string fileGuiSettings = "settingsGUI.xml";
 };

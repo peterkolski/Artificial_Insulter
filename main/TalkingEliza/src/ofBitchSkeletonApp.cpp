@@ -11,6 +11,9 @@ void ofBitchSkeletonApp::setup(){
     textCurrent = bitchConversation.getAnswerCurrent();
 
     pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
+    fileWarperSettingsLeft = "settingsMappingLeft.xml";
+    fileWarperSettingsRight = "settingsMappingLeft.xml";
+    fileGuiSettings = "settingsGUI.xml";
 
     setupOSC();
     int camWidth = 1280;
@@ -37,7 +40,7 @@ void ofBitchSkeletonApp::setup(){
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
-    gui.setup( "ElisaApp", "settingsGUI.xml" );
+    gui.setup( "ElisaApp", fileGuiSettings );
     gui.add( xPosTextLeft.setup( "Text Left X", 240, 0, 2000 ) );
     gui.add( yPosTextLeft.setup( "Text Left Y", 900, 0, 2000 ) );
     gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
@@ -56,7 +59,6 @@ void ofBitchSkeletonApp::update(){
     sendSoundNotification( 4 );
 
     updateCoversation();
-
 
 //    speak();
 }
@@ -106,10 +108,8 @@ void ofBitchSkeletonApp::drawVideosWarped()
     ofSetColor( ofColor::white, 255 );
     fboLeft.begin();
     {
-//        ofDisableAlphaBlending();
         syphonLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
 //        vidPlayerLeft.draw( 0, 0, fboLeft.getWidth(), fboLeft.getHeight() );
-//        ofEnableAlphaBlending();
     }
     fboLeft.end();
     fboRight.begin();
@@ -176,6 +176,22 @@ void ofBitchSkeletonApp::keyPressed(int key){
     if ( key == 'S' )
     {
         processImage( pathTargetImage );
+    }
+    
+    // --- save settings
+    if ( key == 's' )
+    {
+        gui.saveToFile( fileGuiSettings );
+        warperLeft.save( fileWarperSettingsLeft );
+        warperRight.save( fileWarperSettingsRight );
+    }
+
+    // --- load settings
+    if ( key == 'L' )
+    {
+        gui.loadFromFile( fileGuiSettings );
+        warperLeft.load( fileWarperSettingsLeft );
+        warperRight.load( fileWarperSettingsRight );
     }
 
     if ( key == 'F' )
