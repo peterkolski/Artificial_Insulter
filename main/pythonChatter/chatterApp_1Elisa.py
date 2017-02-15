@@ -11,8 +11,8 @@ databaseNameShittalk = '../../data/ShitTalkTable_Filtered.csv'
 # databaseName         = "./databasePeter.json"
 databaseName         = "./databaseTest.json"
 host = '127.0.0.1'
-portSender = 22222
-portReciever = 33333
+portSender = 50001
+portReciever = 60001
 
 # =================================
 # =================================

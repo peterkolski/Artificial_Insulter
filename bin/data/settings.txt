@@ -1,4 +1,4 @@
-<CAMEXTERNAL> 0 </CAMEXTERNAL>
+<CAMEXTERNAL> 1 </CAMEXTERNAL>
 <PATH>
     <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
     <VID1> /Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov </VID1>
