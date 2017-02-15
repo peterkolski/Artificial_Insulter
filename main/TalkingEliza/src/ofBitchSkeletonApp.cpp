@@ -37,7 +37,7 @@ void ofBitchSkeletonApp::setup(){
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
-    gui.setup();
+    gui.setup( "ElisaApp", "settingsGUI.xml" );
     gui.add( xPosTextLeft.setup( "Text Left X", 240, 0, 2000 ) );
     gui.add( yPosTextLeft.setup( "Text Left Y", 900, 0, 2000 ) );
     gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
