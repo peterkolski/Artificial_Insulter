@@ -43,7 +43,7 @@ void ofBitchSkeletonApp::setup(){
     gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
     gui.add( yPosTextRight.setup( "Text Right Y", 900, 0, 2000 ) );
     gui.add( xPosCam.setup( "Cam X", 1500, 0, 2000 ) );
-    gui.add( yPosCam.setup( "Cam Y", 1000, 0, 2000 ) );
+    gui.add( yPosCam.setup( "Cam Y", 900, 0, 2000 ) );
 }
 
 //--------------------------------------------------------------
@@ -53,7 +53,7 @@ void ofBitchSkeletonApp::update(){
     vidGrabber.update();
     bitchConversation.recieveMessages();
 
-    sendSoundNotification( 10 );
+    sendSoundNotification( 4 );
 
     updateCoversation();
 
@@ -204,14 +204,24 @@ void ofBitchSkeletonApp::updateCoversation()
 
     if ( ( secondsElapsedCurrent > 3 ) && ( !isTalking ) )
     {
-        isTalking = true;
+        if ( roundCounter > 10 )
+        {
+            isTalking = true;
+            processImage( pathTargetImage );
+            roundCounter = 0;
+        }
+        else
+        {
+            isTalking = true;
 
-        copyInputText();
-        bitchConversation.next();
-        textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
-        bitchConversation.doConversation();
+            copyInputText();
+            bitchConversation.next();
+            textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
+            bitchConversation.doConversation();
 
-        roundCounter++;
+            roundCounter++;
+        }
+
         ofLogVerbose() << "ROUND: " << roundCounter;
     }
 
