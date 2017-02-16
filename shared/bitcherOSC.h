@@ -25,7 +25,6 @@ public:
 private:
     void            sendText( string &text );
     std::string     logInfo_ = "BitcherOSC || ";
-    string getOscMsgAsString( ofxOscMessage m );
     ofxOscSender    sender_;
     ofxOscReceiver  reciever_;
     int             portSender_;

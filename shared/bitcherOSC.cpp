@@ -62,7 +62,7 @@ bool bitcherOSC::recieveOscText()
     {
         ofxOscMessage _message;
         reciever_.getNextMessage( _message );
-        ofLogVerbose() << logInfo_ << " Recieved message " + getOscMsgAsString( _message ) + " from " + _message.getRemoteIp();
+        ofLogVerbose() << logInfo_ << " Recieved message from " + _message.getRemoteIp();
 
         if (    ( _message.getAddress() == adressRecieverText_ )
             &&  ( _message.getNumArgs() > 0 ) )
@@ -80,40 +80,6 @@ bool bitcherOSC::recieveOscText()
 
     return isReceived;
 }
-
-
-
-string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
-{
-    string msg_string;
-    msg_string = m.getAddress();
-    msg_string += ":";
-    for ( int i = 0; i < m.getNumArgs(); i++ )
-    {
-        // get the argument type
-        msg_string += " " + m.getArgTypeName( i );
-        msg_string += ":";
-        // display the argument - make sure we get the right type
-        if ( m.getArgType( i ) == OFXOSC_TYPE_INT32 )
-        {
-            msg_string += ofToString( m.getArgAsInt32( i ) );
-        }
-        else if ( m.getArgType( i ) == OFXOSC_TYPE_FLOAT )
-        {
-            msg_string += ofToString( m.getArgAsFloat( i ) );
-        }
-        else if ( m.getArgType( i ) == OFXOSC_TYPE_STRING )
-        {
-            msg_string += m.getArgAsString( i );
-        }
-        else
-        {
-            msg_string += "unknown";
-        }
-    }
-    return msg_string;
-}
-
 
 
 void bitcherOSC::startMutant( string txt1, string txt2 )
