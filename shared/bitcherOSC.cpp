@@ -33,7 +33,7 @@ string bitcherOSC::ask( string &text )
     textSent_ = text;
     sendText( textSent_ );
 
-    recieveText();
+    recieveOscText();
     textRecieved_ = getAnswer();
     return textRecieved_;
 }
@@ -51,8 +51,12 @@ void bitcherOSC::sendText( string &text )
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void bitcherOSC::recieveText()
+/// Checking OSC if a message in port got recieved.
+/// Containing [string, bool] = [Text, switch ot mutant ]
+/// \return     true if recieved message
+bool bitcherOSC::recieveOscText()
 {
+    bool isReceived = false;
     while ( reciever_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
@@ -63,7 +67,8 @@ void bitcherOSC::recieveText()
             &&  ( _message.getNumArgs() > 0 ) )
          {
              textRecieved_ = _message.getArgAsString( 0 );
-             switchChatbot_ = _message.getArgAsBool( 1 );
+             switchMutantChatbot_ = _message.getArgAsBool( 1 );
+             isReceived = true;
              ofLogVerbose() << logInfo_ << "Message from " << adressRecieverText_ << " | " << textRecieved_;
          }
         else
@@ -71,8 +76,9 @@ void bitcherOSC::recieveText()
             ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
         }
     }
-}
 
+    return isReceived;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 

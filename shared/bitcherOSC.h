@@ -19,8 +19,8 @@ public:
     void            startMutant( string txt1, string txt2 );
 
     const string    &getAnswer() { return textRecieved_; }
-    void            recieveText();
-    bool            switchChatbot() { return switchChatbot_; }
+    bool            recieveOscText();
+    bool            switchMutantChatbot() { return switchMutantChatbot_; }
 
 private:
     void            sendText( string &text );
@@ -33,7 +33,7 @@ private:
     std::string     hostSendSendingTo_;
     std::string     adressRecieverText_;
     std::string     adressSenderText_;
-    bool            switchChatbot_ = false;
+    bool            switchMutantChatbot_ = false;
 
     string  textRecieved_   = "";
     string  textSent_     = "";

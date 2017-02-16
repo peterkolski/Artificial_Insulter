@@ -57,7 +57,7 @@ string ConversationOSC::getName( int id )
 /// Switching the chatter
 void ConversationOSC::nextChatter()
 {
-    if ( chatterVec_[ idTalker_ ]->switchChatbot() )
+    if ( chatterVec_[ idTalker_ ]->switchMutantChatbot() )
     {
         isMutantChatbot_ = !isMutantChatbot_;
         ofLogVerbose() << logInfo_ << "Chatbots switched " << isMutantChatbot_;
@@ -102,15 +102,16 @@ void ConversationOSC::doConversation( string txt, int id )
     answerCurrent_ = chatterVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
-
-
 //----------------------------------------------------------------------------------------------------------------------
-
 
 void ConversationOSC::recieveMessages()
 {
-    chatterVec_[ idTalker_ ]->recieveText();
-    answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer();
+    if (chatterVec_[ idTalker_ ]->recieveOscText() )
+    {
+        answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer();
+    }
+
+//    answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer(); // TODO Maybe here I should not write all the time
 
     recieveSoundFinished();
     recievePictureFinished();
