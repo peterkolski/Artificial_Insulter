@@ -8,12 +8,8 @@ set( ${APP_NAME}_SOURCE_FILES
         src/ofBitchSkeletonApp.cpp
         ../../shared/ConversationOSC.cpp
         ../../shared/bitcherOSC.cpp
+        ../../shared/Tokenizer.cpp
         )
-
-# ------------------------ Shared ------------------------
-#list( APPEND ${APP_NAME}_SOURCE_FILES
-#        ../../shared/XXX.cpp
-#        )
 
 # ------------------------ AddOns ------------
 set( OFX_ADDONS_ACTIVE

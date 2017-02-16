@@ -9,6 +9,7 @@
 #include "ConversationOSC.h"
 #include "bitcherOSC.h"
 
+
 class ofBitchSkeletonApp : public ofBaseApp
 {
 
@@ -29,7 +30,6 @@ public:
     void drawVideosWarped();
     void setupVideo( int &camWidth, int &camHeight );
 
-    string tokenizer( string input, int maxChar );
     void updateCoversation();
     void copyInputText();
 
@@ -64,6 +64,9 @@ public:
     ofxSyphonClient syphonLeft, syphonRight;
     ofTrueTypeFont	verdana14;
 
+
+    // --- GUI
+    void         setupGui();
     bool         drawGui = true;
     ofxIntSlider xPosTextLeft;
     ofxIntSlider xPosTextRight;
@@ -71,6 +74,7 @@ public:
     ofxIntSlider yPosTextRight;
     ofxIntSlider xPosCam;
     ofxIntSlider yPosCam;
+    ofxIntSlider textTokenSize;
     ofxPanel     gui;
 
 

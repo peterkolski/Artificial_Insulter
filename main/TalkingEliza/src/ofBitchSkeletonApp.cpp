@@ -1,4 +1,5 @@
 #include "ofBitchSkeletonApp.h"
+#include "Tokenizer.h"
 
 void ofBitchSkeletonApp::setup(){
     setVoice( );
@@ -27,8 +28,7 @@ void ofBitchSkeletonApp::setup(){
     syphonRight.set( serverName2, appName );
 
     setupVideo( camWidth, camHeight );
-//    setupWarping( camWidth / 3, camHeight / 2, 10, 10, ofGetWidth() / 2, 10 );
-    setupWarping( ofGetWidth() / 2 - 20, ofGetHeight() - 100, 10, 10, ofGetWidth() / 2, 10 );
+    setupWarping( ofGetWidth() / 2 - 20, ofGetHeight() - 100, 50, 50, ofGetWidth() / 2, 50 );
 
     bitchConversation.doConversation( "I hate you all 0 Left", 0 );
     bitchConversation.doConversation( "I hate you all 1 Right", 1 );
@@ -39,15 +39,8 @@ void ofBitchSkeletonApp::setup(){
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
-    gui.setup( "ElisaApp", fileGuiSettings );
-    gui.add( xPosTextLeft.setup( "Text Left X", 240, 0, 2000 ) );
-    gui.add( yPosTextLeft.setup( "Text Left Y", 900, 0, 2000 ) );
-    gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
-    gui.add( yPosTextRight.setup( "Text Right Y", 900, 0, 2000 ) );
-    gui.add( xPosCam.setup( "Cam X", 1500, 0, 2000 ) );
-    gui.add( yPosCam.setup( "Cam Y", 900, 0, 2000 ) );
+    setupGui();
 }
-
 
 
 void ofBitchSkeletonApp::update(){
@@ -394,27 +387,25 @@ void ofBitchSkeletonApp::drawVerboseText()
 
 void ofBitchSkeletonApp::drawText()
 {
-    int maxNumCharacters = 40;
-
     ofSetColor(225);
     if ( bitchConversation.isSoundPlayingLeft() )
     {
 //        verdana14.drawString( bitchConversation.getAnswerLeft() , 100, 250);
-        verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), maxNumCharacters ), xPosTextLeft, yPosTextLeft);
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerLeft(), textTokenSize ), xPosTextLeft, yPosTextLeft);
     }
 
     if ( bitchConversation.isSoundPlayingRight() )
     {
 //        ofDrawBitmapStringHighlight( bitchConversation.getAnswerRight(), 600, 350 );
-        verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), maxNumCharacters ), xPosTextRight, yPosTextRight);
+        verdana14.drawString( tokenizer( bitchConversation.getAnswerRight(), textTokenSize ), xPosTextRight, yPosTextRight);
     }
 
     // --- Drawing the Picture texts
     ofPushStyle();
     {
         ofSetColor( ofColor::red );
-        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText1(), maxNumCharacters ), xPosTextLeft, yPosTextLeft + 50);
-        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText2(), maxNumCharacters ), xPosTextRight, yPosTextRight + 50);
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText1(), textTokenSize ), xPosTextLeft, yPosTextLeft + 50);
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText2(), textTokenSize ), xPosTextRight, yPosTextRight + 50);
     }
     ofPopStyle();
 }
@@ -446,24 +437,22 @@ void ofBitchSkeletonApp::setupXML( string settingsPath )
 }
 
 
-string ofBitchSkeletonApp::tokenizer( string input, int maxChar )
+void ofBitchSkeletonApp::setupGui()
 {
-    if (!input.size()) {
-        return "";
-    }
-    std::stringstream sStream;
-    sStream << input[0];
-    for (int i = 1; i < input.size(); i++)
-    {
-//        if ( ( i > maxChar ) && ( input[i] == ' ' ) )
-        if ( i % maxChar == 0 )
-        {
-            sStream << "\n" << input[i];
-        }
-        else
-        {
-            sStream << input[i];
-        }
-    }
-    return ofToString( sStream.str() );
+    gui.setup( "ElisaApp", fileGuiSettings );
+    gui.add( xPosTextLeft.setup( "Text Left X", 240, 0, 2000 ) );
+    gui.add( yPosTextLeft.setup( "Text Left Y", 900, 0, 2000 ) );
+    gui.add( xPosTextRight.setup( "Text Right X", 1060, 0, 2000 ) );
+    gui.add( yPosTextRight.setup( "Text Right Y", 900, 0, 2000 ) );
+    gui.add( xPosCam.setup( "Cam X", 1500, 0, 2000 ) );
+    gui.add( yPosCam.setup( "Cam Y", 900, 0, 2000 ) );
+    gui.add( textTokenSize.setup( "Text Tokens", 50, 40, 80 ) );
+
+    textTokenSize.setFillColor( ofColor::blue );
+    xPosCam.setTextColor( ofColor::black );
+    yPosCam.setTextColor( ofColor::black );
+    xPosCam.setFillColor( ofColor::green );
+    yPosCam.setFillColor( ofColor::green );
 }
+
+
