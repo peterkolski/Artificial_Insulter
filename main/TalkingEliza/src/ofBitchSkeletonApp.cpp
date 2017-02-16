@@ -232,7 +232,7 @@ void ofBitchSkeletonApp::updateCoversation()
             isTalking = true;
 
             copyInputText();
-            bitchConversation.next();
+            bitchConversation.nextChatter();
             textCurrent = bitchConversation.getAnswerCurrent(); // For checking when new text come in
             bitchConversation.doConversation();
 

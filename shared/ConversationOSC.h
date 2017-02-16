@@ -14,7 +14,7 @@ public:
     ConversationOSC();
     void    setupPicturePath( string host, int portSender, int portReceiver, string adressPath );
     void    setup( int id, string host, int portSender, int portReciever );
-    void    next();
+    void    nextChatter();
     void    setIsMutantChatbot( bool isMutantChatbot ) { ConversationOSC::isMutantChatbot_ = isMutantChatbot; }
     void    doConversation();
     void    doConversation( string txt, int id );
@@ -36,7 +36,7 @@ public:
     string getAnswerRight();
     
 private:
-    void            setTalkerActive( int id );
+    void            setTalkerActive( int id ) { idTalker_ = id; }
     string          logInfo_       = "ConversationOSC | ";
 
     // --- PICTURE

@@ -54,7 +54,8 @@ string ConversationOSC::getName( int id )
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void ConversationOSC::next()
+/// Switching the chatter
+void ConversationOSC::nextChatter()
 {
     if ( chatterVec_[ idTalker_ ]->switchChatbot() )
     {
@@ -82,7 +83,7 @@ void ConversationOSC::next()
             idTalker_   = 0;
         }
     }
-    ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << " Mutant: " << isMutantChatbot_;
+    ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << "  | Is mutant: " << isMutantChatbot_;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -101,16 +102,7 @@ void ConversationOSC::doConversation( string txt, int id )
     answerCurrent_ = chatterVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
-void ConversationOSC::setTalkerActive( int id )
-{
-    idTalker_ = id;
-    if ( idTalker_ == 0 )
-    {
-        //TODO why empty?
-    }
-}
 
 //----------------------------------------------------------------------------------------------------------------------
 
