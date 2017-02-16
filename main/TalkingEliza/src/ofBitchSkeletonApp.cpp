@@ -1,6 +1,5 @@
 #include "ofBitchSkeletonApp.h"
 
-//--------------------------------------------------------------
 void ofBitchSkeletonApp::setup(){
     setVoice( );
     ofSetLogLevel( OF_LOG_VERBOSE );
@@ -49,7 +48,8 @@ void ofBitchSkeletonApp::setup(){
     gui.add( yPosCam.setup( "Cam Y", 900, 0, 2000 ) );
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::update(){
     vidPlayerLeft.update();
     vidPlayerRight.update();
@@ -63,7 +63,8 @@ void ofBitchSkeletonApp::update(){
 //    speak();
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::draw() {
     ofBackground( 0 );
 
@@ -77,6 +78,8 @@ void ofBitchSkeletonApp::draw() {
     if ( isVerbose ) { drawVerboseText(); }
     if ( drawGui ) { gui.draw(); }
 }
+
+
 
 void ofBitchSkeletonApp::drawActiveSpeakerRect()
 {
@@ -101,7 +104,8 @@ void ofBitchSkeletonApp::drawActiveSpeakerRect()
     }
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::drawVideosWarped()
 {
     ofPushStyle();
@@ -150,7 +154,8 @@ void ofBitchSkeletonApp::drawVideosWarped()
     ofPopStyle();
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight )
 {
     fboLeft.allocate( width, height );
@@ -170,7 +175,8 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
     warperRight.setup();
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::keyPressed(int key)
 {
 
@@ -215,6 +221,8 @@ void ofBitchSkeletonApp::keyPressed(int key)
     }
 }
 
+
+
 void ofBitchSkeletonApp::updateCoversation()
 {
     secondsElapsedCurrent = (int)ofGetElapsedTimef() - secondsMarker;
@@ -254,6 +262,8 @@ void ofBitchSkeletonApp::updateCoversation()
     }
 }
 
+
+
 void ofBitchSkeletonApp::copyInputText()
 {
     textFromInput = textInput;
@@ -263,6 +273,8 @@ void ofBitchSkeletonApp::copyInputText()
         ofLogError() << "No Text input";
     }
 }
+
+
 
 void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
 {
@@ -287,7 +299,8 @@ void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
     }
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
@@ -295,7 +308,8 @@ void ofBitchSkeletonApp::processImage( string targetPath )
     ofLogNotice() << "Sent picture";
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::saveImage( string &fileNamePath )
 {
     ofImage img;
@@ -303,7 +317,8 @@ void ofBitchSkeletonApp::saveImage( string &fileNamePath )
     img.save( fileNamePath );
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::setupOSC()
 {
     ofLogNotice() << "send1: " << xml.getValue( "OSC:PORT:SEND1", defaultXMLError );
@@ -328,7 +343,8 @@ void ofBitchSkeletonApp::setupOSC()
     bitchConversation.setupPicturePath( "192.168.1.33", portToPythonPic, portFromPythonPic, "/recognize" );
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::reset()
 {
     textCurrent = bitchConversation.getAnswerCurrent();     //TODO sort this logic out;
@@ -336,8 +352,8 @@ void ofBitchSkeletonApp::reset()
     shouldSpeak = true;
 }
 
-//--------------------------------------------------------------
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::setVoice()
 {
     if ( bitchConversation.getNameSpeaker() == "Elisa" ) { voice = "Allison"; }
@@ -346,7 +362,8 @@ void ofBitchSkeletonApp::setVoice()
     }
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::speak()
 {
     if ( shouldSpeak )
@@ -357,7 +374,8 @@ void ofBitchSkeletonApp::speak()
     }
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::drawVerboseText()
 {
     ofDrawBitmapStringHighlight( bitchConversation.getName( 0 ) , ofGetWidth() / 4 , 100);
@@ -372,6 +390,7 @@ void ofBitchSkeletonApp::drawVerboseText()
     ofDrawBitmapStringHighlight( "voice: " + voice, ofGetWidth() - 180, ofGetHeight() - 20 );
     ofDrawBitmapStringHighlight( "Said to Elisa: " + textFromInput, 10, ofGetHeight() - 20 );
 }
+
 
 void ofBitchSkeletonApp::drawText()
 {
@@ -400,7 +419,8 @@ void ofBitchSkeletonApp::drawText()
     ofPopStyle();
 }
 
-//--------------------------------------------------------------
+
+
 void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
 {
     vidPlayerLeft.load( xml.getValue("PATH:VID1", "Lacuna - AI 1.mov") );
@@ -411,6 +431,7 @@ void ofBitchSkeletonApp::setupVideo( int &camWidth, int &camHeight )
     vidGrabber.setDesiredFrameRate( 15 );
     vidGrabber.initGrabber( camWidth, camHeight);
 }
+
 
 void ofBitchSkeletonApp::setupXML( string settingsPath )
 {//    string settingsPath = ofFilePath1.getCurrentWorkingDirectory() + "../../../data/settings.txt";
@@ -423,6 +444,7 @@ void ofBitchSkeletonApp::setupXML( string settingsPath )
     imageNamePath = xml.getValue( "PATH:SAVEPIC", "../out.jpg" );
     ofLogNotice() << "Path to write file" << imageNamePath;
 }
+
 
 string ofBitchSkeletonApp::tokenizer( string input, int maxChar )
 {
