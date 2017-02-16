@@ -26,7 +26,7 @@ void bitcherOSC::setup( string &hostSendingTo, int portSender, int portReciever 
     reciever_.setup( portReciever_ );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
 
 string bitcherOSC::ask( string &text )
 {
@@ -38,7 +38,8 @@ string bitcherOSC::ask( string &text )
     return textRecieved_;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
+
 void bitcherOSC::sendText( string &text )
 {
     ofLogVerbose() << logInfo_ << "Sending port " << portSender_ << " | adr " << adressSenderText_;
@@ -49,7 +50,7 @@ void bitcherOSC::sendText( string &text )
     sender_.sendMessage( m, false );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
 
 /// Checking OSC if a message in port got recieved.
 /// Containing [string, bool] = [Text, switch ot mutant ]
@@ -80,7 +81,7 @@ bool bitcherOSC::recieveOscText()
     return isReceived;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
 
 string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
 {
@@ -113,7 +114,7 @@ string bitcherOSC::getOscMsgAsString( ofxOscMessage m )
     return msg_string;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
 
 void bitcherOSC::startMutant( string txt1, string txt2 )
 {
@@ -124,5 +125,5 @@ void bitcherOSC::startMutant( string txt1, string txt2 )
     sender_.sendMessage( m, false );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+
 
