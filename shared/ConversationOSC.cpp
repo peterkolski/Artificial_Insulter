@@ -25,7 +25,6 @@ ConversationOSC::ConversationOSC() {
     recieverSoundConfirmation_.setup( portSoundReciever_ );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::setup( int id, string host, int portSender, int portReciever )
 {
@@ -38,7 +37,6 @@ void ConversationOSC::setup( int id, string host, int portSender, int portReciev
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getName( int id )
 {
@@ -52,7 +50,6 @@ string ConversationOSC::getName( int id )
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 /// Switching the chatter
 void ConversationOSC::nextChatter()
@@ -86,7 +83,6 @@ void ConversationOSC::nextChatter()
     ofLogVerbose() << logInfo_ << "Next chatbot " << idTalker_ << "  | Is mutant: " << isMutantChatbot_;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::doConversation()
 {
@@ -94,7 +90,6 @@ void ConversationOSC::doConversation()
     doConversation( answerBefore_, idTalker_ );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::doConversation( string txt, int id )
 {
@@ -102,7 +97,6 @@ void ConversationOSC::doConversation( string txt, int id )
     answerCurrent_ = chatterVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::recieveOscMessages()
 {
@@ -115,7 +109,6 @@ void ConversationOSC::recieveOscMessages()
     recievePictureFinished();
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::setupPicturePath( string host, int portSender, int portReceiver, string adressPath )
 {
@@ -125,7 +118,6 @@ void ConversationOSC::setupPicturePath( string host, int portSender, int portRec
     adressPicSent_ = adressPath;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 /// Sending the path onthe target computer, were he should find the picture to analyse
 /// \param filePathPicSent absolute path on target computer
@@ -141,8 +133,9 @@ void ConversationOSC::sendPictureAnalyserFilePath( string &filePathPicSent )
     ofLogVerbose() << logInfo_ << "sent message: " << m.getArgAsString( 0 );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
+/// Start playing the sound on target.
+/// \param length Length of the sound to play [arbritary unit]
 void ConversationOSC::sendSoundStartLeft( float length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound LEFT | port " << portSoundSender_ << " | adr " << adressSoundLeft_;
@@ -156,7 +149,6 @@ void ConversationOSC::sendSoundStartLeft( float length )
     senderSoundConfirmation_.sendMessage( m, false );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::sendSoundStartRight( float length )
 {
@@ -171,7 +163,6 @@ void ConversationOSC::sendSoundStartRight( float length )
     senderSoundConfirmation_.sendMessage( m, false );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 
 void ConversationOSC::recieveSoundFinished()
@@ -202,7 +193,6 @@ void ConversationOSC::recieveSoundFinished()
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::recievePictureFinished()
 {
@@ -232,7 +222,6 @@ void ConversationOSC::recievePictureFinished()
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 {
@@ -240,7 +229,6 @@ void ConversationOSC::sendStartMutant( string txt1, string txt2 )
     chatterVec_.at( idTalker_ )->startMutant( txt1, txt2 );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getAnswerLeft()
 {
@@ -253,7 +241,6 @@ string ConversationOSC::getAnswerLeft()
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
 
 string ConversationOSC::getAnswerRight()
 {
