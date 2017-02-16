@@ -18,8 +18,8 @@ public:
     void    setIsMutantChatbot( bool isMutantChatbot ) { ConversationOSC::isMutantChatbot_ = isMutantChatbot; }
     void    doConversation();
     void    doConversation( string txt, int id );
-    void    recieveMessages();
-    void    sendPicturePath( string &filePathPicSent );
+    void    recieveOscMessages();
+    void    sendPictureAnalyserFilePath( string &filePathPicSent );
     void    sendSoundStartLeft( float length );
     void    sendSoundStartRight( float length );
     void    sendStartMutant( string txt1, string txt2 );

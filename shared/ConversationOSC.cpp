@@ -104,14 +104,12 @@ void ConversationOSC::doConversation( string txt, int id )
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void ConversationOSC::recieveMessages()
+void ConversationOSC::recieveOscMessages()
 {
     if (chatterVec_[ idTalker_ ]->recieveOscText() )
     {
         answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer();
     }
-
-//    answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer(); // TODO Maybe here I should not write all the time
 
     recieveSoundFinished();
     recievePictureFinished();
@@ -129,7 +127,9 @@ void ConversationOSC::setupPicturePath( string host, int portSender, int portRec
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void ConversationOSC::sendPicturePath( string &filePathPicSent )
+/// Sending the path onthe target computer, were he should find the picture to analyse
+/// \param filePathPicSent absolute path on target computer
+void ConversationOSC::sendPictureAnalyserFilePath( string &filePathPicSent )
 {
     ofxOscMessage m;
 

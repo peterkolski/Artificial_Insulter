@@ -10,7 +10,7 @@ void ofBitchSkeletonApp::setup(){
 
     textCurrent = bitchConversation.getAnswerCurrent();
 
-    pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
+    pathTargetImage = xml.getValue( "PATH:OSCPIC", "" );
     fileWarperSettingsLeft = "settingsMappingLeft.xml";
     fileWarperSettingsRight = "settingsMappingRight.xml";
     fileGuiSettings = "settingsGUI.xml";
@@ -54,7 +54,7 @@ void ofBitchSkeletonApp::update(){
     vidPlayerLeft.update();
     vidPlayerRight.update();
     vidGrabber.update();
-    bitchConversation.recieveMessages();
+    bitchConversation.recieveOscMessages();
 
     sendSoundNotification( 4 );
 
@@ -291,7 +291,7 @@ void ofBitchSkeletonApp::sendSoundNotification( float durationDivision )
 void ofBitchSkeletonApp::processImage( string targetPath )
 {
     saveImage( imageNamePath );
-    bitchConversation.sendPicturePath( targetPath );
+    bitchConversation.sendPictureAnalyserFilePath( targetPath );
     ofLogNotice() << "Sent picture";
 }
 
