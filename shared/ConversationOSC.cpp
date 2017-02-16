@@ -150,6 +150,9 @@ void ConversationOSC::sendSoundStartLeft( float length )
 }
 
 
+
+/// Start playing the sound on target.
+/// \param length Length of the sound to play [arbritary unit]
 void ConversationOSC::sendSoundStartRight( float length )
 {
     ofLogVerbose() << logInfo_ << "Sending Sound RIGHT | port " << portSoundSender_ << " | adr " << adressSoundRight_;
@@ -164,8 +167,9 @@ void ConversationOSC::sendSoundStartRight( float length )
 }
 
 
-
-void ConversationOSC::recieveSoundFinished()
+/// Sets, if LEFT or RIGHT is finished (internally)
+/// \return Is any sound player finished
+bool ConversationOSC::recieveSoundFinished()
 {
     while ( recieverSoundConfirmation_.hasWaitingMessages() )
     {
@@ -191,6 +195,8 @@ void ConversationOSC::recieveSoundFinished()
             ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
         }
     }
+
+    return isSoundPlayingLeft_ || isSoundPlayingRight_;
 }
 
 

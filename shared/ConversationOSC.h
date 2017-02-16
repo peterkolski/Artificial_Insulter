@@ -48,7 +48,7 @@ private:
     string          pictureRecievedText2_ = "empty";
 
     // --- SOUND
-    void            recieveSoundFinished();
+    bool            recieveSoundFinished();
     void            recievePictureFinished();
     bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
