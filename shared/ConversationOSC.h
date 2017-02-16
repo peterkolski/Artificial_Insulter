@@ -49,7 +49,7 @@ private:
 
     // --- SOUND
     bool            recieveSoundFinished();
-    void            recievePictureFinished();
+    bool            recievePictureAnalysisFinished();
     bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
     ofxOscSender    senderSoundConfirmation_;

@@ -47,6 +47,7 @@ string ConversationOSC::getName( int id )
     else
     {
         ofLogError() << logInfo_ << "Wrong name id";
+        return "";
     }
 }
 
@@ -106,7 +107,7 @@ void ConversationOSC::recieveOscMessages()
     }
 
     recieveSoundFinished();
-    recievePictureFinished();
+    recievePictureAnalysisFinished();
 }
 
 
@@ -200,8 +201,11 @@ bool ConversationOSC::recieveSoundFinished()
 }
 
 
-void ConversationOSC::recievePictureFinished()
+///  Receiving the texts from the picture analyser
+/// \return If got any message
+bool ConversationOSC::recievePictureAnalysisFinished()
 {
+    auto gotMessage = false;
     while ( receiverPictureAnalysis_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
@@ -211,6 +215,7 @@ void ConversationOSC::recievePictureFinished()
         {
             if ( ( _message.getAddress() == adressPicRecieved_ ) )
             {
+                gotMessage = true;
                 pictureRecievedText1_ = _message.getArgAsString( 0 );
                 pictureRecievedText2_ = _message.getArgAsString( 1 );
                 ofLogVerbose() << logInfo_ << "Picture message from " << adressPicRecieved_;
@@ -226,9 +231,12 @@ void ConversationOSC::recievePictureFinished()
             ofLogWarning() << logInfo_ << "Message did't contain anything: " << _message.getAddress();
         }
     }
+    return gotMessage;
 }
 
-
+/// Starts the mutant chatbot by sending a OSC message
+/// \param txt1 Text from the picture analyser
+/// \param txt2 Text from the picture analyser
 void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 {
     idTalker_ = 2;
