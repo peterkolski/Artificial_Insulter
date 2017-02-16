@@ -51,7 +51,7 @@ void ofBitchSkeletonApp::update(){
 
     sendSoundNotification( 4 );
 
-    updateCoversation();
+    updateConversation();
 
 //    speak();
 }
@@ -210,19 +210,19 @@ void ofBitchSkeletonApp::keyPressed(int key)
 
     if ( key == OF_KEY_RETURN )
     {
-        updateCoversation();
+        updateConversation();
     }
 }
 
 
 
-void ofBitchSkeletonApp::updateCoversation()
+void ofBitchSkeletonApp::updateConversation()
 {
     secondsElapsedCurrent = (int)ofGetElapsedTimef() - secondsMarker;
 
     if ( ( secondsElapsedCurrent > 3 ) && ( !isTalking ) )
     {
-        if ( roundCounter > 10 )
+        if ( roundCounter > roundsAmount )
         {
             isTalking = true;
             processImage( pathTargetImage );
@@ -447,12 +447,14 @@ void ofBitchSkeletonApp::setupGui()
     gui.add( xPosCam.setup( "Cam X", 1500, 0, 2000 ) );
     gui.add( yPosCam.setup( "Cam Y", 900, 0, 2000 ) );
     gui.add( textTokenSize.setup( "Text Tokens", 50, 40, 80 ) );
+    gui.add( roundsAmount.setup( "Rounds Amount", 10, 1, 20 ) );
 
     textTokenSize.setFillColor( ofColor::blue );
     xPosCam.setTextColor( ofColor::black );
     yPosCam.setTextColor( ofColor::black );
     xPosCam.setFillColor( ofColor::green );
     yPosCam.setFillColor( ofColor::green );
+    roundsAmount.setFillColor( ofColor::indianRed );
 }
 
 

@@ -30,7 +30,7 @@ public:
     void drawVideosWarped();
     void setupVideo( int &camWidth, int &camHeight );
 
-    void updateCoversation();
+    void updateConversation();
     void copyInputText();
 
     // --- XML
@@ -75,6 +75,7 @@ public:
     ofxIntSlider xPosCam;
     ofxIntSlider yPosCam;
     ofxIntSlider textTokenSize;
+    ofxIntSlider roundsAmount;
     ofxPanel     gui;
 
 
