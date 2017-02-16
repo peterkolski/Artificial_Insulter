@@ -1,9 +1,9 @@
 <group>
-	<Text_Left_X>240</Text_Left_X>
-	<Text_Left_Y>590</Text_Left_Y>
-	<Text_Right_X>920</Text_Right_X>
-	<Text_Right_Y>630</Text_Right_Y>
-	<Cam_X>590</Cam_X>
-	<Cam_Y>550</Cam_Y>
+	<Text_Left_X>350</Text_Left_X>
+	<Text_Left_Y>910</Text_Left_Y>
+	<Text_Right_X>1010</Text_Right_X>
+	<Text_Right_Y>910</Text_Right_Y>
+	<Cam_X>1330</Cam_X>
+	<Cam_Y>920</Cam_Y>
 <group/>
 </group>

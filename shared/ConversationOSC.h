@@ -34,7 +34,7 @@ public:
     const string &getAnswerCurrent() { return answerCurrent_; }
     string getAnswerLeft();
     string getAnswerRight();
-
+    
 private:
     void            setTalkerActive( int id );
     string          logInfo_       = "ConversationOSC | ";

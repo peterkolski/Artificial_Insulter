@@ -12,7 +12,7 @@ void ofBitchSkeletonApp::setup(){
 
     pathTargetImage = "/Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg"; //TODO from XML
     fileWarperSettingsLeft = "settingsMappingLeft.xml";
-    fileWarperSettingsRight = "settingsMappingLeft.xml";
+    fileWarperSettingsRight = "settingsMappingRight.xml";
     fileGuiSettings = "settingsGUI.xml";
 
     setupOSC();
@@ -171,13 +171,14 @@ void ofBitchSkeletonApp::setupWarping( int width, int height, int xPosLeft, int 
 }
 
 //--------------------------------------------------------------
-void ofBitchSkeletonApp::keyPressed(int key){
+void ofBitchSkeletonApp::keyPressed(int key)
+{
 
     if ( key == 'S' )
     {
         processImage( pathTargetImage );
     }
-    
+
     // --- save settings
     if ( key == 's' )
     {
@@ -393,8 +394,8 @@ void ofBitchSkeletonApp::drawText()
     ofPushStyle();
     {
         ofSetColor( ofColor::red );
-        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText1(), maxNumCharacters ), xPosTextLeft, yPosTextLeft - 50);
-        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText2(), maxNumCharacters ), xPosTextRight, yPosTextRight - 50);
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText1(), maxNumCharacters ), xPosTextLeft, yPosTextLeft + 50);
+        verdana14.drawString( tokenizer( bitchConversation.getPictureRecievedText2(), maxNumCharacters ), xPosTextRight, yPosTextRight + 50);
     }
     ofPopStyle();
 }
