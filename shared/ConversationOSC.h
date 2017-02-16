@@ -52,8 +52,8 @@ private:
     void            recievePictureFinished();
     bool            isSoundPlayingLeft_   = false;
     bool            isSoundPlayingRight_  = false;
-    ofxOscSender    senderSound_;
-    ofxOscReceiver  recieverSound_;
+    ofxOscSender    senderSoundConfirmation_;
+    ofxOscReceiver  recieverSoundConfirmation_;
     string          hostSound_ = "127.0.0.1";
     int             portSoundSender_ = 40000;
     int             portSoundReciever_ = 40001;
@@ -67,8 +67,8 @@ private:
     string  answerBefore_       = "";
     bool    isMutantChatbot_    = false;
 
-    vector< std::unique_ptr< bitcherOSC > >       talkerVec_;
-    vector< string >            talkerNames_;
+    vector< std::unique_ptr< bitcherOSC > >       chatterVec_;
+    vector< string >            chatterNames_;
 };
 
 

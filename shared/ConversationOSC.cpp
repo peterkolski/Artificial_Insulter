@@ -4,25 +4,25 @@
 
 #include "bitcherOSC.h"
 #include "ConversationOSC.h"
-
+/// Init of instances of the chatter, names and sound communication
 ConversationOSC::ConversationOSC() {
-    talkerVec_.resize( talkerMaxAmount_ );
-    talkerVec_[ 0 ] = make_unique< bitcherOSC >();
-    talkerVec_[ 1 ] = make_unique< bitcherOSC >();
-    talkerVec_[ 2 ] = make_unique< bitcherOSC >();
-    talkerVec_[ 3 ] = make_unique< bitcherOSC >();
+    chatterVec_.resize( talkerMaxAmount_ );
+    chatterVec_[ 0 ] = make_unique< bitcherOSC >();
+    chatterVec_[ 1 ] = make_unique< bitcherOSC >();
+    chatterVec_[ 2 ] = make_unique< bitcherOSC >();
+    chatterVec_[ 3 ] = make_unique< bitcherOSC >();
 
-    talkerNames_.resize( talkerMaxAmount_ );
-    talkerNames_[ 0 ] = "Left";
-    talkerNames_[ 1 ] = "Right";
-    talkerNames_[ 2 ] = "Left";
-    talkerNames_[ 3 ] = "Right";
+    chatterNames_.resize( talkerMaxAmount_ );
+    chatterNames_[ 0 ] = "Left";
+    chatterNames_[ 1 ] = "Right";
+    chatterNames_[ 2 ] = "Left";
+    chatterNames_[ 3 ] = "Right";
 
-    answerCurrent_ = talkerVec_[ 0 ]->getAnswer();
+    answerCurrent_ = chatterVec_[ 0 ]->getAnswer();
 
     // --- SETUP Sound control
-    senderSound_.setup( hostSound_, portSoundSender_ );
-    recieverSound_.setup( portSoundReciever_ );
+    senderSoundConfirmation_.setup( hostSound_, portSoundSender_ );
+    recieverSoundConfirmation_.setup( portSoundReciever_ );
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ void ConversationOSC::setup( int id, string host, int portSender, int portReciev
 {
     if ( id < talkerMaxAmount_)
     {
-        talkerVec_[ id ]->setup( host, portSender, portReciever );
+        chatterVec_[ id ]->setup( host, portSender, portReciever );
     }
     else {
         ofLogError() << logInfo_ << "Setup: ID invalid";
@@ -44,7 +44,7 @@ string ConversationOSC::getName( int id )
 {
     if ( id < talkerMaxAmount_)
     {
-        return talkerNames_[ id ];
+        return chatterNames_[ id ];
     }
     else
     {
@@ -56,7 +56,7 @@ string ConversationOSC::getName( int id )
 
 void ConversationOSC::next()
 {
-    if ( talkerVec_[ idTalker_ ]->switchChatbot() )
+    if ( chatterVec_[ idTalker_ ]->switchChatbot() )
     {
         isMutantChatbot_ = !isMutantChatbot_;
         ofLogVerbose() << logInfo_ << "Chatbots switched " << isMutantChatbot_;
@@ -98,7 +98,7 @@ void ConversationOSC::doConversation()
 void ConversationOSC::doConversation( string txt, int id )
 {
     setTalkerActive( id );
-    answerCurrent_ = talkerVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
+    answerCurrent_ = chatterVec_[ idTalker_ ]->ask( txt );   //TODO is this correct? Passing
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -117,8 +117,8 @@ void ConversationOSC::setTalkerActive( int id )
 
 void ConversationOSC::recieveMessages()
 {
-    talkerVec_[ idTalker_ ]->recieveText();
-    answerCurrent_ = talkerVec_[ idTalker_ ]->getAnswer();
+    chatterVec_[ idTalker_ ]->recieveText();
+    answerCurrent_ = chatterVec_[ idTalker_ ]->getAnswer();
 
     recieveSoundFinished();
     recievePictureFinished();
@@ -160,7 +160,7 @@ void ConversationOSC::sendSoundStartLeft( float length )
     m.setAddress( adressSoundLeft_ );
     m.addStringArg( "start" );
     m.addFloatArg( length );
-    senderSound_.sendMessage( m, false );
+    senderSoundConfirmation_.sendMessage( m, false );
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ void ConversationOSC::sendSoundStartRight( float length )
     m.setAddress( adressSoundRight_ );
     m.addStringArg( "start" );
     m.addFloatArg( length );
-    senderSound_.sendMessage( m, false );
+    senderSoundConfirmation_.sendMessage( m, false );
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -183,10 +183,10 @@ void ConversationOSC::sendSoundStartRight( float length )
 
 void ConversationOSC::recieveSoundFinished()
 {
-    while ( recieverSound_.hasWaitingMessages() )
+    while ( recieverSoundConfirmation_.hasWaitingMessages() )
     {
         ofxOscMessage _message;
-        recieverSound_.getNextMessage( _message );
+        recieverSoundConfirmation_.getNextMessage( _message );
 
         // check the address of the incoming message
         if ( _message.getNumArgs() > 0 )
@@ -244,7 +244,7 @@ void ConversationOSC::recievePictureFinished()
 void ConversationOSC::sendStartMutant( string txt1, string txt2 )
 {
     idTalker_ = 2;
-    talkerVec_.at( idTalker_ )->startMutant( txt1, txt2 );
+    chatterVec_.at( idTalker_ )->startMutant( txt1, txt2 );
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -253,10 +253,10 @@ string ConversationOSC::getAnswerLeft()
 {
     if ( isMutantChatbot_ )
     {
-        return talkerVec_[ 2 ]->getAnswer();
+        return chatterVec_[ 2 ]->getAnswer();
     }
     else {
-        return talkerVec_[ 0 ]->getAnswer();
+        return chatterVec_[ 0 ]->getAnswer();
     }
 }
 
@@ -266,10 +266,10 @@ string ConversationOSC::getAnswerRight()
 {
     if ( isMutantChatbot_ )
     {
-        return talkerVec_[ 3 ]->getAnswer();
+        return chatterVec_[ 3 ]->getAnswer();
     }
     else {
-        return talkerVec_[ 1 ]->getAnswer();
+        return chatterVec_[ 1 ]->getAnswer();
     }
 }
 
