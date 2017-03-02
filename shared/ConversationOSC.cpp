@@ -59,6 +59,7 @@ void ConversationOSC::nextChatter()
     {
         isMutantChatbot_ = !isMutantChatbot_;
         ofLogVerbose() << logInfo_ << "Chatbots switched " << isMutantChatbot_;
+        chatterVec_[ idTalker_ ]->disableSwitching();
     }
 
     if ( isMutantChatbot_ )

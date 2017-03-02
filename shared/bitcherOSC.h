@@ -21,6 +21,7 @@ public:
     const string    &getAnswer() { return textRecieved_; }
     bool            recieveOscText();
     bool            switchMutantChatbot() { return switchMutantChatbot_; }
+    void            disableSwitching() { switchMutantChatbot_ = false; }
 
 private:
     void            sendText( string &text );

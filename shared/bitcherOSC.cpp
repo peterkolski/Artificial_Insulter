@@ -68,9 +68,10 @@ bool bitcherOSC::recieveOscText()
             &&  ( _message.getNumArgs() > 0 ) )
          {
              textRecieved_ = _message.getArgAsString( 0 );
-             switchMutantChatbot_ = _message.getArgAsBool( 1 );
+             switchMutantChatbot_ = _message.getArgAsBool( 1 ); // If the chatbot system should be switched, it's true
              isReceived = true;
              ofLogVerbose() << logInfo_ << "Message from " << adressRecieverText_ << " | " << textRecieved_;
+             if ( switchMutantChatbot_ ) { ofLogVerbose() << logInfo_ << "Chatbot switch"; }
          }
         else
         {
