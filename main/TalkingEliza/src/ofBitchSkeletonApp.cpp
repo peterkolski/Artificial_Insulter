@@ -319,7 +319,8 @@ void ofBitchSkeletonApp::setupOSC()
     ofLogNotice() << "sendPic: " << xml.getValue( "OSC:PORT:SENDPIC", defaultXMLError );
     ofLogNotice() << "recieve1: " << xml.getValue( "OSC:PORT:RECIEVE1", defaultXMLError );
     ofLogNotice() << "recieve2: " << xml.getValue( "OSC:PORT:RECIEVE2", defaultXMLError );
-    ofLogNotice() << "Host: " << xml.getValue( "OSC:HOST", defaultXMLError );
+    ofLogNotice() << "Host Chat: " << xml.getValue( "OSC:HOSTCHAT", defaultXMLError );
+    ofLogNotice() << "Host Pic: " << xml.getValue( "OSC:HOSTPIC", defaultXMLError );
 
     string hostChatters      = xml.getValue( "OSC:HOSTCHAT", defaultXMLError );
     string hostPic           = xml.getValue( "OSC:HOSTPIC", defaultXMLError );
