@@ -1,11 +1,13 @@
 <CAMEXTERNAL> 1 </CAMEXTERNAL>
 <PATH>
     <SAVEPIC> /Volumes/bloke/pictureOutput/picFromNetwork.jpg </SAVEPIC>
+    <OSCPIC> /Users/nesa/Documents/Developer/bloke/pictureOutput/picFromNetwork.jpg </OSCPIC>
     <VID1> /Users/sonneundasche/Movies/Render/Lacuna - AI 1.mov </VID1>
     <VID2> /Users/sonneundasche/Movies/Render/Lacuna - AI 2.mov </VID2>
 </PATH>
 <OSC>
-    <HOST> 127.0.0.1 </HOST>
+    <HOSTCHAT> 127.0.0.1 </HOSTCHAT>
+    <HOSTPIC> 192.168.1.33 </HOSTPIC>
     <PORT>
         <SEND1>      60000 </SEND1>
         <SEND2>      60001 </SEND2>
